@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yuxin.platform.subpublic.mapper.BaryxxMapper">
+    <resultMap id="BaseResultMap" type="com.yuxin.platform.subpublic.pojo.Baryxx">
+        <id column="QYID" property="qyid" jdbcType="INTEGER"/>
+        <result column="BARYID" property="baryid" jdbcType="INTEGER"/>
+        <result column="XM" property="xm" jdbcType="VARCHAR"/>
+        <result column="XBDM" property="xbdm" jdbcType="VARCHAR"/>
+        <result column="XB" property="xb" jdbcType="VARCHAR"/>
+        <result column="CSRQ" property="csrq" jdbcType="TIMESTAMP"/>
+        <result column="GMSFHM" property="gmsfhm" jdbcType="VARCHAR"/>
+        <result column="HJDXZQHDM" property="hjdxzqhdm" jdbcType="VARCHAR"/>
+        <result column="HJDXZQH" property="hjdxzqh" jdbcType="VARCHAR"/>
+        <result column="HJDXZ" property="hjdxz" jdbcType="VARCHAR"/>
+        <result column="BALXBM" property="balxbm" jdbcType="VARCHAR"/>
+        <result column="BALX" property="balx" jdbcType="VARCHAR"/>
+        <result column="FZJG" property="fzjg" jdbcType="VARCHAR"/>
+        <result column="SGRQ" property="sgrq" jdbcType="TIMESTAMP"/>
+        <result column="LZYY" property="lzyy" jdbcType="VARCHAR"/>
+        <result column="LZRQ" property="lzrq" jdbcType="TIMESTAMP"/>
+        <result column="BZ" property="bz" jdbcType="VARCHAR"/>
+        <result column="ZT" property="zt" jdbcType="VARCHAR"/>
+        <result column="LRR" property="lrr" jdbcType="VARCHAR"/>
+        <result column="LRSJ" property="lrsj" jdbcType="TIMESTAMP"/>
+        <result column="JG" property="jg" jdbcType="VARCHAR"/>
+        <result column="LXFS" property="lxfs" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        QYID, BARYID, XM, XBDM, XB, CSRQ, GMSFHM, HJDXZQHDM, HJDXZQH, HJDXZ, BALXBM, BALX,
+        FZJG, SGRQ, LZYY, LZRQ, BZ, ZT, LRR, LRSJ,JG,LXFS
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from pub_baryxx
+        where QYID = #{qyid,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectByQyid" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from pub_baryxx
+        where QYID = #{qyid,jdbcType=INTEGER} and ZT = '0'
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from pub_baryxx
+        where QYID = #{qyid,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.yuxin.platform.subpublic.pojo.Baryxx">
+        <selectKey  keyProperty="qyid" resultType="int" order="BEFORE">
+            select nvl(max(qyid),0)+1 from pub_baryxx
+        </selectKey>
+        insert into pub_baryxx (QYID, BARYID, XM,
+        XBDM, XB, CSRQ, GMSFHM,
+        HJDXZQHDM, HJDXZQH, HJDXZ,
+        BALXBM, BALX, FZJG,
+        SGRQ, LZYY, LZRQ,
+        BZ, ZT, LRR, LRSJ,JG,LXFS
+        )
+        values (#{qyid,jdbcType=INTEGER}, #{baryid,jdbcType=INTEGER}, #{xm,jdbcType=VARCHAR},
+        #{xbdm,jdbcType=VARCHAR}, #{xb,jdbcType=VARCHAR}, #{csrq,jdbcType=TIMESTAMP}, #{gmsfhm,jdbcType=VARCHAR},
+        #{hjdxzqhdm,jdbcType=VARCHAR}, #{hjdxzqh,jdbcType=VARCHAR}, #{hjdxz,jdbcType=VARCHAR},
+        #{balxbm,jdbcType=VARCHAR}, #{balx,jdbcType=VARCHAR}, #{fzjg,jdbcType=VARCHAR},
+        #{sgrq,jdbcType=TIMESTAMP}, #{lzyy,jdbcType=VARCHAR}, #{lzrq,jdbcType=TIMESTAMP},
+        #{bz,jdbcType=VARCHAR}, #{zt,jdbcType=VARCHAR}, #{lrr,jdbcType=VARCHAR}, #{lrsj,jdbcType=TIMESTAMP},
+        #{jg,jdbcType=VARCHAR}, #{lxfs,jdbcType=VARCHAR}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.yuxin.platform.subpublic.pojo.Baryxx">
+        <selectKey  keyProperty="baryid" resultType="int" order="BEFORE">
+            select nvl(max(baryid),0)+1 from pub_baryxx
+        </selectKey>
+        insert into pub_baryxx
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="qyid != null">
+                QYID,
+            </if>
+            <if test="baryid != null">
+                BARYID,
+            </if>
+            <if test="xm != null">
+                XM,
+            </if>
+            <if test="xbdm != null">
+                XBDM,
+            </if>
+            <if test="xb != null">
+                XB,
+            </if>
+            <if test="csrq != null">
+                CSRQ,
+            </if>
+            <if test="gmsfhm != null">
+                GMSFHM,
+            </if>
+            <if test="hjdxzqhdm != null">
+                HJDXZQHDM,
+            </if>
+            <if test="hjdxzqh != null">
+                HJDXZQH,
+            </if>
+            <if test="hjdxz != null">
+                HJDXZ,
+            </if>
+            <if test="balxbm != null">
+                BALXBM,
+            </if>
+            <if test="balx != null">
+                BALX,
+            </if>
+            <if test="fzjg != null">
+                FZJG,
+            </if>
+            <if test="sgrq != null">
+                SGRQ,
+            </if>
+            <if test="lzyy != null">
+                LZYY,
+            </if>
+            <if test="lzrq != null">
+                LZRQ,
+            </if>
+            <if test="bz != null">
+                BZ,
+            </if>
+            <if test="zt != null">
+                ZT,
+            </if>
+            <if test="lrr != null">
+                LRR,
+            </if>
+            <if test="lrsj != null">
+                LRSJ,
+            </if>
+            <if test="lxfs != null">
+                LXFS,
+            </if>
+            <if test="jg != null">
+                JG
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="qyid != null">
+                #{qyid,jdbcType=INTEGER},
+            </if>
+            <if test="baryid != null">
+                #{baryid,jdbcType=INTEGER},
+            </if>
+            <if test="xm != null">
+                #{xm,jdbcType=VARCHAR},
+            </if>
+            <if test="xbdm != null">
+                #{xbdm,jdbcType=VARCHAR},
+            </if>
+            <if test="xb != null">
+                #{xb,jdbcType=VARCHAR},
+            </if>
+            <if test="csrq != null">
+                #{csrq,jdbcType=TIMESTAMP},
+            </if>
+            <if test="gmsfhm != null">
+                #{gmsfhm,jdbcType=VARCHAR},
+            </if>
+            <if test="hjdxzqhdm != null">
+                #{hjdxzqhdm,jdbcType=VARCHAR},
+            </if>
+            <if test="hjdxzqh != null">
+                #{hjdxzqh,jdbcType=VARCHAR},
+            </if>
+            <if test="hjdxz != null">
+                #{hjdxz,jdbcType=VARCHAR},
+            </if>
+            <if test="balxbm != null">
+                #{balxbm,jdbcType=VARCHAR},
+            </if>
+            <if test="balx != null">
+                #{balx,jdbcType=VARCHAR},
+            </if>
+            <if test="fzjg != null">
+                #{fzjg,jdbcType=VARCHAR},
+            </if>
+            <if test="sgrq != null">
+                #{sgrq,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lzyy != null">
+                #{lzyy,jdbcType=VARCHAR},
+            </if>
+            <if test="lzrq != null">
+                #{lzrq,jdbcType=TIMESTAMP},
+            </if>
+            <if test="bz != null">
+                #{bz,jdbcType=VARCHAR},
+            </if>
+            <if test="zt != null">
+                #{zt,jdbcType=VARCHAR},
+            </if>
+            <if test="lrr != null">
+                #{lrr,jdbcType=VARCHAR},
+            </if>
+            <if test="lrsj != null">
+                #{lrsj,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lxfs != null">
+                #{lxfs,jdbcType=VARCHAR},
+            </if>
+            <if test="jg != null">
+                #{jg,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.yuxin.platform.subpublic.pojo.Baryxx">
+        update pub_baryxx
+        <set>
+            <if test="xm != null">
+                XM = #{xm,jdbcType=VARCHAR},
+            </if>
+            <if test="xbdm != null">
+                XBDM = #{xbdm,jdbcType=VARCHAR},
+            </if>
+            <if test="xb != null">
+                XB = #{xb,jdbcType=VARCHAR},
+            </if>
+            <if test="csrq != null">
+                CSRQ = #{csrq,jdbcType=TIMESTAMP},
+            </if>
+            <if test="gmsfhm != null">
+                GMSFHM = #{gmsfhm,jdbcType=VARCHAR},
+            </if>
+            <if test="hjdxzqhdm != null">
+                HJDXZQHDM = #{hjdxzqhdm,jdbcType=VARCHAR},
+            </if>
+            <if test="hjdxzqh != null">
+                HJDXZQH = #{hjdxzqh,jdbcType=VARCHAR},
+            </if>
+            <if test="hjdxz != null">
+                HJDXZ = #{hjdxz,jdbcType=VARCHAR},
+            </if>
+            <if test="balxbm != null">
+                BALXBM = #{balxbm,jdbcType=VARCHAR},
+            </if>
+            <if test="balx != null">
+                BALX = #{balx,jdbcType=VARCHAR},
+            </if>
+            <if test="fzjg != null">
+                FZJG = #{fzjg,jdbcType=VARCHAR},
+            </if>
+            <if test="sgrq != null">
+                SGRQ = #{sgrq,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lzyy != null">
+                LZYY = #{lzyy,jdbcType=VARCHAR},
+            </if>
+            <if test="lzrq != null">
+                LZRQ = #{lzrq,jdbcType=TIMESTAMP},
+            </if>
+            <if test="bz != null">
+                BZ = #{bz,jdbcType=VARCHAR},
+            </if>
+            <if test="zt != null">
+                ZT = #{zt,jdbcType=VARCHAR},
+            </if>
+            <if test="lrr != null">
+                LRR = #{lrr,jdbcType=VARCHAR},
+            </if>
+            <if test="lrsj != null">
+                LRSJ = #{lrsj,jdbcType=TIMESTAMP},
+            </if>
+            <if test="jg != null">
+                JG = #{jg,jdbcType=VARCHAR},
+            </if>
+            <if test="lxfs != null">
+                LXFS = #{lxfs,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where BARYID = #{baryid,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.yuxin.platform.subpublic.pojo.Baryxx">
+        update pub_baryxx
+        set
+        XM = #{xm,jdbcType=VARCHAR},
+        XBDM = #{xbdm,jdbcType=VARCHAR},
+        XB = #{xb,jdbcType=VARCHAR},
+        CSRQ = #{csrq,jdbcType=TIMESTAMP},
+        GMSFHM = #{gmsfhm,jdbcType=VARCHAR},
+        HJDXZQHDM = #{hjdxzqhdm,jdbcType=VARCHAR},
+        HJDXZQH = #{hjdxzqh,jdbcType=VARCHAR},
+        HJDXZ = #{hjdxz,jdbcType=VARCHAR},
+        BALXBM = #{balxbm,jdbcType=VARCHAR},
+        BALX = #{balx,jdbcType=VARCHAR},
+        FZJG = #{fzjg,jdbcType=VARCHAR},
+        SGRQ = #{sgrq,jdbcType=TIMESTAMP},
+        LZYY = #{lzyy,jdbcType=VARCHAR},
+        LZRQ = #{lzrq,jdbcType=TIMESTAMP},
+        BZ = #{bz,jdbcType=VARCHAR},
+        ZT = #{zt,jdbcType=VARCHAR},
+        LRR = #{lrr,jdbcType=VARCHAR},
+        LRSJ = #{lrsj,jdbcType=TIMESTAMP},
+        LXFS = #{lxfs,jdbcType=VARCHAR},
+        JG = #{jg,jdbcType=VARCHAR}
+        where BARYID = #{baryid,jdbcType=INTEGER}
+    </update>
+</mapper>

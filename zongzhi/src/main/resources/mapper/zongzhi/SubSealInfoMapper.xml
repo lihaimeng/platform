@@ -1,0 +1,709 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yuxin.platform.zongzhi.mapper.SubSealInfoMapper">
+    <resultMap id="BaseResultMap" type="com.yuxin.platform.zongzhi.pojo.SubSealInfo">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="company" property="company" jdbcType="VARCHAR"/>
+        <result column="company_address" property="companyAddress" jdbcType="VARCHAR"/>
+        <result column="company_id" property="companyId" jdbcType="VARCHAR"/>
+        <result column="company_type" property="companyType" jdbcType="VARCHAR"/>
+        <result column="dominion" property="dominion" jdbcType="VARCHAR"/>
+        <result column="dominionCode" property="dominionCode" jdbcType="VARCHAR"/>
+        <result column="get_mark_law_card" property="getMarkLawCard" jdbcType="VARCHAR"/>
+        <result column="law_person" property="lawPerson" jdbcType="VARCHAR"/>
+        <result column="law_person_card" property="lawPersonCard" jdbcType="VARCHAR"/>
+        <result column="law_person_card_type" property="lawPersonCardType" jdbcType="VARCHAR"/>
+        <result column="law_person_phone" property="lawPersonPhone" jdbcType="VARCHAR"/>
+        <result column="mark_company" property="markCompany" jdbcType="VARCHAR"/>
+        <result column="mark_company_address" property="markCompanyAddress" jdbcType="VARCHAR"/>
+        <result column="mark_company_id" property="markCompanyId" jdbcType="VARCHAR"/>
+        <result column="mark_law_card_type" property="markLawCardType" jdbcType="VARCHAR"/>
+        <result column="mark_law_person" property="markLawPerson" jdbcType="VARCHAR"/>
+        <result column="mark_phone" property="markPhone" jdbcType="VARCHAR"/>
+        <result column="operator" property="operator" jdbcType="VARCHAR"/>
+        <result column="operator_card" property="operatorCard" jdbcType="VARCHAR"/>
+        <result column="operator_card_type" property="operatorCardType" jdbcType="VARCHAR"/>
+        <result column="operator_phone" property="operatorPhone" jdbcType="VARCHAR"/>
+        <result column="register_date" property="registerDate" jdbcType="VARCHAR"/>
+        <result column="company_add_date" property="companyAddDate" jdbcType="VARCHAR"/>
+        <result column="seal_id" property="sealId" jdbcType="VARCHAR"/>
+        <result column="seal_material" property="sealMaterial" jdbcType="VARCHAR"/>
+        <result column="seal_model" property="sealModel" jdbcType="VARCHAR"/>
+        <result column="seal_name" property="sealName" jdbcType="VARCHAR"/>
+        <result column="seal_pattern" property="sealPattern" jdbcType="VARCHAR"/>
+        <result column="seal_shape" property="sealShape" jdbcType="VARCHAR"/>
+        <result column="seal_type" property="sealType" jdbcType="VARCHAR"/>
+        <result column="state" property="state" jdbcType="VARCHAR"/>
+    </resultMap>
+    <resultMap id="SealVoMap" type="com.yuxin.platform.zongzhi.vo.SealVo">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="sealNum" property="sealNum" jdbcType="INTEGER"/>
+        <result column="sealMarkNum" property="sealMarkNum" jdbcType="INTEGER"/>
+        <result column="sealTypeNum" property="sealTypeNum" jdbcType="INTEGER"/>
+        <result column="sealUseNum" property="sealUseNum" jdbcType="INTEGER"/>
+        <result column="sealDate" property="sealDate" jdbcType="VARCHAR"/>
+        <result column="dominionName" property="dominionName" jdbcType="VARCHAR"/>
+        <result column="sealType" property="sealType" jdbcType="VARCHAR"/>
+        <result column="companyAddDate" property="companyAddDate" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, company, company_address, company_id, company_type,company_add_date, dominion, dominionCode,
+        get_mark_law_card,
+        law_person, law_person_card, law_person_card_type, law_person_phone, mark_company,
+        mark_company_address, mark_company_id, mark_law_card_type, mark_law_person, mark_phone,
+        operator, operator_card, operator_card_type, operator_phone, register_date, seal_id,
+        seal_material, seal_model, seal_name, seal_pattern, seal_shape, seal_type, state
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from sub_seal_info
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="selectByCompanyName" resultType="int">
+        select count(company) from sub_seal_info
+    </select>
+    <select id="selectByMarkCompanyName" resultType="int">
+        select count(mark_company) from sub_seal_info
+    </select>
+    <select id="selectBySealMaterial" resultType="int">
+        select count(seal_material) from sub_seal_info
+    </select>
+    <select id="selectBySealShape" resultType="int">
+        select count(seal_shape) from sub_seal_info
+    </select>
+    <select id="selectBySealPattern" resultType="int">
+        select count(seal_pattern) from sub_seal_info
+    </select>
+
+    <select id="countSealCompanyByMonth" resultType="int">
+        select count(distinct company) FROM sub_seal_info group by to_char(to_date(substr(register_date,1,7),'yyyy-mm'),'yyyy-mm')
+    </select>
+
+    <select id="countSealMarkCompanyByMonth" resultType="int">
+        select count(mark_company) FROM sub_seal_info group by to_char(to_date(substr(register_date,1,7),'yyyy-mm'),'yyyy-mm')
+    </select>
+
+    <select id="countSealByMonth" resultType="int">
+        select count(seal_id) FROM sub_seal_info group by to_char(to_date(substr(register_date,1,7),'yyyy-mm'),'yyyy-mm')
+    </select>
+
+    <select id="countSeal" resultType="int">
+        select count(seal_id) FROM sub_seal_info
+    </select>
+
+    <select id="countSealByDay" resultType="int">
+        select COUNT(*) FROM sub_seal_info where FLOOR(to_date(register_date,'yyyy-mm-dd hh24:mi:ss')-to_date('1990-01-01 00:00:00','yyyy-mm-dd hh24:mi:ss')) = FLOOR(sysdate -to_date('1990/01/01 00:00:00','yyyy/mm/dd hh24:mi:ss'))
+    </select>
+
+    <select id="selectSealDate" resultType="string">
+        select distinct to_char(to_date(substr(register_date,1,7),'yyyy-mm'),'yyyy-mm')  from sub_seal_info ORDER BY register_date ASC
+    </select>
+
+    <select id="selectSealByDominion" resultMap="SealVoMap" parameterType="com.yuxin.platform.zongzhi.dto.SealDto">
+        select s.name dominionName,(select count(*) from sub_seal_info
+        where dominionCode like concat(brevitycode,'%') AND
+        <![CDATA[  to_char(SYSDATE-7,'yyyy-mm-dd') <= to_char(register_date)]]>) AS "sealNum"
+        from sys_organization s where s.pid=#{organizationId,jdbcType=INTEGER}
+    </select>
+
+    <!--区域统计一周的印章信息-->
+    <select id="countSealMsgByDominionWeek" resultMap="SealVoMap"
+            parameterType="com.yuxin.platform.zongzhi.dto.SealDto">
+        select o.name dominionName,count((select count(*) from sub_seal_info
+        where dominionCode like concat(brevitycode,'%')
+        AND <![CDATA[ to_char(SYSDATE-7,'yyyy-mm-dd') <= to_char(register_date)]]>)) AS "sealNum"
+        from sys_organization o,sub_seal_info s
+        <where>
+            <if test="registerDateStart!=null">
+                <![CDATA[ AND to_date(s.register_date,'yyyy-mm-dd hh24:mi:ss')>=#{registerDateStart,jdbcType=TIMESTAMP} ]]>
+            </if>
+            <if test="registerDateEnd!=null">
+                <![CDATA[ AND  to_date(s.register_date,'yyyy-mm-dd hh24:mi:ss') <= #{registerDateEnd,jdbcType=TIMESTAMP} ]]>
+            </if>
+            <if test="organizationId!=null">
+                and o.pid=#{organizationId,jdbcType=INTEGER}
+            </if>
+        </where>
+        GROUP BY o.name
+    </select>
+
+    <!--区域统计一月的印章信息-->
+    <select id="countSealMsgByDominionMonth" resultMap="SealVoMap"
+            parameterType="com.yuxin.platform.zongzhi.dto.SealDto">
+        select o.name dominionName,count((select count(*) from sub_seal_info
+        where dominionCode like concat(brevitycode,'%')
+        AND <![CDATA[ to_char(add_months(SYSDATE,-1),'yyyy-mm-dd') <= to_char(register_date)]]>)) AS "sealNum"
+        from sys_organization o,sub_seal_info s
+        <where>
+            <if test="registerDateStart!=null">
+                <![CDATA[ AND to_date(s.register_date,'yyyy-mm-dd hh24:mi:ss')>=#{registerDateStart,jdbcType=TIMESTAMP} ]]>
+            </if>
+            <if test="registerDateEnd!=null">
+                <![CDATA[ AND  to_date(s.register_date,'yyyy-mm-dd hh24:mi:ss') <= #{registerDateEnd,jdbcType=TIMESTAMP} ]]>
+            </if>
+            <if test="organizationId!=null">
+                and o.pid=#{organizationId,jdbcType=INTEGER}
+            </if>
+        </where>
+        GROUP BY o.name
+    </select>
+    <!--区域统计一年的印章信息-->
+    <select id="countSealMsgByDominionYear" resultMap="SealVoMap"
+            parameterType="com.yuxin.platform.zongzhi.dto.SealDto">
+        select o.name dominionName,count((select count(*) from sub_seal_info
+        where dominionCode like concat(brevitycode,'%')
+        AND <![CDATA[ to_char(add_months(SYSDATE,-12),'yyyy-mm-dd') <= to_char(register_date)]]>)) AS "sealNum"
+        from sys_organization o,sub_seal_info s
+        <where>
+            <if test="registerDateStart!=null">
+                <![CDATA[ AND to_date(s.register_date,'yyyy-mm-dd hh24:mi:ss')>=#{registerDateStart,jdbcType=TIMESTAMP} ]]>
+            </if>
+            <if test="registerDateEnd!=null">
+                <![CDATA[ AND  to_date(s.register_date,'yyyy-mm-dd hh24:mi:ss')<= #{registerDateEnd,jdbcType=TIMESTAMP} ]]>
+            </if>
+            <if test="organizationId!=null">
+                and o.pid=#{organizationId,jdbcType=INTEGER}
+            </if>
+        </where>
+        GROUP BY o.name
+    </select>
+
+    <select id="selectSealByType" resultMap="SealVoMap" parameterType="string">
+        select (select p.DIC_NAME from pub_dictionary p where p.DIC_CODE=s.seal_type) sealType,count(seal_type) AS
+        "sealTypeNum" from sub_seal_info s
+        where <![CDATA[  to_char(SYSDATE-7,'yyyy-mm-dd') <= to_char(register_date) ]]> AND dominionCode like
+        concat(#{brevitycode,jdbcType=VARCHAR},'%') GROUP BY seal_type
+    </select>
+
+    <select id="sealCompanyByWeek" resultMap="SealVoMap" parameterType="string">
+        select distinct to_char(to_date(substr(company_add_date,1,10),'yyyy-mm-dd'),'yyyy-mm-dd')  AS "companyAddDate",count(company) AS "sealUseNum" from
+        sub_seal_info where <![CDATA[  to_char(SYSDATE-7,'yyyy-mm-dd') <= to_char(company_add_date)]]> AND dominionCode
+        like CONCAT(#{brevitycode,jdbcType=VARCHAR},'%') GROUP BY to_char(to_date(substr(company_add_date,1,10),'yyyy-mm-dd'),'yyyy-mm-dd')
+    </select>
+
+    <select id="sealCompanyByDateWeek" resultMap="SealVoMap"
+            parameterType="com.yuxin.platform.zongzhi.dto.SealDto">
+        select distinct to_char(to_date(substr(company_add_date,1,10),'yyyy-mm-dd'),'yyyy-mm-dd') AS "companyAddDate",count(company) AS "sealUseNum" from
+        sub_seal_info
+        <where>
+            <![CDATA[ to_char(SYSDATE-7,'yyyy-mm-dd')  <= to_char(company_add_date)]]>
+            <if test="dominionCode!=null and dominionCode!=''">
+                AND dominionCode like concat(#{dominionCode,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="registerDateStart!=null">
+                <![CDATA[ AND company_add_date>=#{registerDateStart,jdbcType=TIMESTAMP} ]]>
+            </if>
+            <if test="registerDateEnd!=null">
+                <![CDATA[ AND  company_add_date <= #{registerDateEnd,jdbcType=TIMESTAMP} ]]>
+            </if>
+        </where>
+        GROUP BY to_char(to_date(substr(company_add_date,1,10),'yyyy-mm-dd'),'yyyy-mm-dd')
+    </select>
+
+    <select id="sealCompanyByDateMonth" resultMap="SealVoMap"
+            parameterType="com.yuxin.platform.zongzhi.dto.SealDto">
+        select distinct to_char(to_date(substr(company_add_date,1,7),'yyyy-mm'),'yyyy-mm') AS "companyAddDate",count(company) AS "sealUseNum" from
+        sub_seal_info
+        <where>
+            <![CDATA[ DATE_SUB(CURDATE(), INTERVAL 1 MONTH ) <= date(company_add_date)]]>
+            <if test="dominionCode!=null and dominionCode!=''">
+                AND dominionCode like concat(#{dominionCode,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="registerDateStart!=null">
+                <![CDATA[ AND company_add_date>=#{registerDateStart,jdbcType=TIMESTAMP} ]]>
+            </if>
+            <if test="registerDateEnd!=null">
+                <![CDATA[ AND  company_add_date <= #{registerDateEnd,jdbcType=TIMESTAMP} ]]>
+            </if>
+        </where>
+        GROUP BY to_char(to_date(substr(company_add_date,1,7),'yyyy-mm'),'yyyy-mm')
+    </select>
+
+    <select id="sealCompanyByDateYear" resultMap="SealVoMap"
+            parameterType="com.yuxin.platform.zongzhi.dto.SealDto">
+        select distinct to_char(to_date(substr(company_add_date,1,7),'yyyy-mm'),'yyyy-mm')  AS "companyAddDate",count(company) AS "sealUseNum" from
+        sub_seal_info
+        <where>
+            <![CDATA[ DATE_SUB(CURDATE(), INTERVAL 1 YEAR ) <= date(company_add_date)]]>
+            <if test="dominionCode!=null and dominionCode!=''">
+                AND dominionCode like concat(#{dominionCode,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="registerDateStart!=null">
+                <![CDATA[ AND company_add_date>=#{registerDateStart,jdbcType=TIMESTAMP} ]]>
+            </if>
+            <if test="registerDateEnd!=null">
+                <![CDATA[ AND  company_add_date <= #{registerDateEnd,jdbcType=TIMESTAMP} ]]>
+            </if>
+        </where>
+        GROUP BY to_char(to_date(substr(company_add_date,1,7),'yyyy-mm'),'yyyy-mm')
+    </select>
+
+    <select id="selectSealByDateYear" resultMap="SealVoMap"
+            parameterType="com.yuxin.platform.zongzhi.dto.SealDto">
+        select
+        distinct to_char(to_date(substr(s.register_date,1,4),'yyyy'),'yyyy') as "sealDate",count(s.seal_type) AS"sealTypeNum",
+        (select p.DIC_NAME from pub_dictionary p where p.DIC_CODE=s.seal_type) sealType
+        from sub_seal_info s
+        <where>
+            <if test="registerDateStart!=null">
+                <![CDATA[ AND to_date(s.register_date,'yyyy-mm-dd hh24:mi:ss')>=#{registerDateStart,jdbcType=TIMESTAMP} ]]>
+            </if>
+            <if test="registerDateEnd!=null">
+                <![CDATA[ AND  to_date(s.register_date,'yyyy-mm-dd hh24:mi:ss') <= #{registerDateEnd,jdbcType=TIMESTAMP} ]]>
+            </if>
+        </where>
+        GROUP BY s.seal_type,s.register_date
+    </select>
+
+    <select id="selectSealByDateMonth" resultMap="SealVoMap"
+            parameterType="com.yuxin.platform.zongzhi.dto.SealDto">
+        select
+        distinct to_char(to_date(substr(s.register_date,1,7),'yyyy-mm'),'yyyy-mm') as "sealDate",count(s.seal_type) AS "sealTypeNum",
+        (select p.DIC_NAME from pub_dictionary p where p.DIC_CODE=s.seal_type) sealType
+        from sub_seal_info s
+        <where>
+            <![CDATA[ to_char(add_months(SYSDATE,1),'yyyy-mm-dd') <= to_char(register_date)]]>
+            <if test="registerDateStart!=null">
+                <![CDATA[ AND s.register_date>=#{registerDateStart,jdbcType=TIMESTAMP} ]]>
+            </if>
+            <if test="registerDateEnd!=null">
+                <![CDATA[ AND  s.register_date <= #{registerDateEnd,jdbcType=TIMESTAMP} ]]>
+            </if>
+        </where>
+        GROUP BY s.seal_type,s.register_date
+    </select>
+    <select id="selectSealByDateWeek" resultMap="SealVoMap"
+            parameterType="com.yuxin.platform.zongzhi.dto.SealDto">
+        select
+        distinct to_char(to_date(substr(s.register_date,1,10),'yyyy-mm-dd'),'yyyy-mm-dd') as "sealDate",count(s.seal_type) AS "sealTypeNum",
+        (select p.DIC_NAME from pub_dictionary p where p.DIC_CODE=s.seal_type) sealType
+        from sub_seal_info s
+        <where>
+            <![CDATA[ to_char(SYSDATE-7,'yyyy-mm-dd') <= to_char(register_date)]]>
+            <if test="registerDateStart!=null">
+                <![CDATA[ AND s.register_date>=#{registerDateStart,jdbcType=TIMESTAMP} ]]>
+            </if>
+            <if test="registerDateEnd!=null">
+                <![CDATA[ AND  s.register_date <= #{registerDateEnd,jdbcType=TIMESTAMP} ]]>
+            </if>
+        </where>
+        GROUP BY s.seal_type,s.register_date
+    </select>
+    <select id="selectSealInfo" resultMap="BaseResultMap" parameterType="com.yuxin.platform.zongzhi.pojo.SubSealInfo">
+        select
+        <include refid="Base_Column_List"/>
+        from sub_seal_info
+        where dominionCode like CONCAT(CONCAT('%',#{dominionCode,jdbcType=VARCHAR}), '%')
+    </select>
+
+    <select id="selectSealInfoByParams" resultMap="BaseResultMap"
+            parameterType="com.yuxin.platform.zongzhi.dto.SubSealInfoDto">
+        select
+        <include refid="Base_Column_List"/>
+        from sub_seal_info
+        <where>
+            <if test="companyId != null and companyId!=''">
+                company_id like CONCAT(CONCAT('%',#{companyId,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="company != null and company!=''">
+                AND company like CONCAT(CONCAT('%',#{company,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="dominion != null and dominion!=''">
+                AND dominion like CONCAT(CONCAT('%',#{dominion,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="dominionCode != null and dominionCode!=''">
+                AND dominionCode like CONCAT(CONCAT('%',#{dominionCode,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="markCompany != null and markCompany!=''">
+                AND mark_company like CONCAT(CONCAT('%',#{markCompany,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="lawPerson != null and lawPerson!=''">
+                AND law_person like CONCAT(CONCAT('%',#{lawPerson,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="lawPersonCard != null and lawPersonCard!=''">
+                AND law_person_card like CONCAT(CONCAT('%',#{lawPersonCard,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="sealId != null and sealId!=''">
+                AND seal_id like CONCAT(CONCAT('%',#{sealId,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="sealType != null and sealType!=''">
+                AND seal_type like CONCAT(CONCAT('%',#{sealType,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="sealModel != null and sealModel!=''">
+                AND seal_model like CONCAT(CONCAT('%',#{sealModel,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="sealMaterial != null and sealMaterial!=''">
+                AND seal_material like CONCAT(CONCAT('%',#{sealMaterial,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="sealType != null and sealType!=''">
+                AND seal_type like CONCAT(CONCAT('%',#{sealType,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="registerDateStart!=null">
+                <![CDATA[ AND to_date(register_date,'yyyy-mm-dd hh24:mi:ss')>=#{registerDateStart,jdbcType=TIMESTAMP} ]]>
+            </if>
+            <if test="registerDateEnd!=null">
+                <![CDATA[ AND  to_date(register_date,'yyyy-mm-dd hh24:mi:ss') <= #{registerDateEnd,jdbcType=TIMESTAMP} ]]>
+            </if>
+        </where>
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from sub_seal_info
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.yuxin.platform.zongzhi.pojo.SubSealInfo">
+        <selectKey  keyProperty="id" resultType="int" order="BEFORE">
+            select nvl(max(id),0)+1 from sub_seal_info
+        </selectKey>
+        insert into sub_seal_info (id, company, company_address,
+        company_id, company_type,company_add_date, dominion, dominionCode,
+        get_mark_law_card, law_person, law_person_card,
+        law_person_card_type, law_person_phone, mark_company,
+        mark_company_address, mark_company_id, mark_law_card_type,
+        mark_law_person, mark_phone, operator,
+        operator_card, operator_card_type, operator_phone,
+        register_date, seal_id, seal_material,
+        seal_model, seal_name, seal_pattern,
+        seal_shape, seal_type, state
+        )
+        values (#{id,jdbcType=INTEGER}, #{company,jdbcType=VARCHAR}, #{companyAddress,jdbcType=VARCHAR},
+        #{companyAddDate,jdbcType=VARCHAR},
+        #{companyId,jdbcType=VARCHAR}, #{companyType,jdbcType=VARCHAR}, #{dominion,jdbcType=VARCHAR},
+        #{dominionCode,jdbcType=VARCHAR},
+        #{getMarkLawCard,jdbcType=VARCHAR}, #{lawPerson,jdbcType=VARCHAR}, #{lawPersonCard,jdbcType=VARCHAR},
+        #{lawPersonCardType,jdbcType=VARCHAR}, #{lawPersonPhone,jdbcType=VARCHAR}, #{markCompany,jdbcType=VARCHAR},
+        #{markCompanyAddress,jdbcType=VARCHAR}, #{markCompanyId,jdbcType=VARCHAR}, #{markLawCardType,jdbcType=VARCHAR},
+        #{markLawPerson,jdbcType=VARCHAR}, #{markPhone,jdbcType=VARCHAR}, #{operator,jdbcType=VARCHAR},
+        #{operatorCard,jdbcType=VARCHAR}, #{operatorCardType,jdbcType=VARCHAR}, #{operatorPhone,jdbcType=VARCHAR},
+        #{registerDate,jdbcType=VARCHAR}, #{sealId,jdbcType=VARCHAR}, #{sealMaterial,jdbcType=VARCHAR},
+        #{sealModel,jdbcType=VARCHAR}, #{sealName,jdbcType=VARCHAR}, #{sealPattern,jdbcType=VARCHAR},
+        #{sealShape,jdbcType=VARCHAR}, #{sealType,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.yuxin.platform.zongzhi.pojo.SubSealInfo">
+        <selectKey  keyProperty="id" resultType="int" order="BEFORE">
+            select nvl(max(id),0)+1 from sub_seal_info
+        </selectKey>
+        insert into sub_seal_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="company != null">
+                company,
+            </if>
+            <if test="companyAddress != null">
+                company_address,
+            </if>
+            <if test="companyId != null">
+                company_id,
+            </if>
+            <if test="companyType != null">
+                company_type,
+            </if>
+            <if test="dominion != null">
+                dominion,
+            </if>
+            <if test="dominionCode != null">
+                dominionCode,
+            </if>
+            <if test="getMarkLawCard != null">
+                get_mark_law_card,
+            </if>
+            <if test="lawPerson != null">
+                law_person,
+            </if>
+            <if test="lawPersonCard != null">
+                law_person_card,
+            </if>
+            <if test="lawPersonCardType != null">
+                law_person_card_type,
+            </if>
+            <if test="lawPersonPhone != null">
+                law_person_phone,
+            </if>
+            <if test="markCompany != null">
+                mark_company,
+            </if>
+            <if test="markCompanyAddress != null">
+                mark_company_address,
+            </if>
+            <if test="markCompanyId != null">
+                mark_company_id,
+            </if>
+            <if test="markLawCardType != null">
+                mark_law_card_type,
+            </if>
+            <if test="markLawPerson != null">
+                mark_law_person,
+            </if>
+            <if test="markPhone != null">
+                mark_phone,
+            </if>
+            <if test="operator != null">
+                operator,
+            </if>
+            <if test="operatorCard != null">
+                operator_card,
+            </if>
+            <if test="operatorCardType != null">
+                operator_card_type,
+            </if>
+            <if test="operatorPhone != null">
+                operator_phone,
+            </if>
+            <if test="registerDate != null">
+                register_date,
+            </if>
+            <if test="sealId != null">
+                seal_id,
+            </if>
+            <if test="sealMaterial != null">
+                seal_material,
+            </if>
+            <if test="sealModel != null">
+                seal_model,
+            </if>
+            <if test="sealName != null">
+                seal_name,
+            </if>
+            <if test="sealPattern != null">
+                seal_pattern,
+            </if>
+            <if test="sealShape != null">
+                seal_shape,
+            </if>
+            <if test="sealType != null">
+                seal_type,
+            </if>
+            <if test="state != null">
+                state,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="company != null">
+                #{company,jdbcType=VARCHAR},
+            </if>
+            <if test="companyAddress != null">
+                #{companyAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="companyId != null">
+                #{companyId,jdbcType=VARCHAR},
+            </if>
+            <if test="companyType != null">
+                #{companyType,jdbcType=VARCHAR},
+            </if>
+            <if test="dominion != null">
+                #{dominion,jdbcType=VARCHAR},
+            </if>
+            <if test="dominionCode != null">
+                #{dominionCode,jdbcType=VARCHAR},
+            </if>
+            <if test="getMarkLawCard != null">
+                #{getMarkLawCard,jdbcType=VARCHAR},
+            </if>
+            <if test="lawPerson != null">
+                #{lawPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="lawPersonCard != null">
+                #{lawPersonCard,jdbcType=VARCHAR},
+            </if>
+            <if test="lawPersonCardType != null">
+                #{lawPersonCardType,jdbcType=VARCHAR},
+            </if>
+            <if test="lawPersonPhone != null">
+                #{lawPersonPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="markCompany != null">
+                #{markCompany,jdbcType=VARCHAR},
+            </if>
+            <if test="markCompanyAddress != null">
+                #{markCompanyAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="markCompanyId != null">
+                #{markCompanyId,jdbcType=VARCHAR},
+            </if>
+            <if test="markLawCardType != null">
+                #{markLawCardType,jdbcType=VARCHAR},
+            </if>
+            <if test="markLawPerson != null">
+                #{markLawPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="markPhone != null">
+                #{markPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="operator != null">
+                #{operator,jdbcType=VARCHAR},
+            </if>
+            <if test="operatorCard != null">
+                #{operatorCard,jdbcType=VARCHAR},
+            </if>
+            <if test="operatorCardType != null">
+                #{operatorCardType,jdbcType=VARCHAR},
+            </if>
+            <if test="operatorPhone != null">
+                #{operatorPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="registerDate != null">
+                #{registerDate,jdbcType=VARCHAR},
+            </if>
+            <if test="sealId != null">
+                #{sealId,jdbcType=VARCHAR},
+            </if>
+            <if test="sealMaterial != null">
+                #{sealMaterial,jdbcType=VARCHAR},
+            </if>
+            <if test="sealModel != null">
+                #{sealModel,jdbcType=VARCHAR},
+            </if>
+            <if test="sealName != null">
+                #{sealName,jdbcType=VARCHAR},
+            </if>
+            <if test="sealPattern != null">
+                #{sealPattern,jdbcType=VARCHAR},
+            </if>
+            <if test="sealShape != null">
+                #{sealShape,jdbcType=VARCHAR},
+            </if>
+            <if test="sealType != null">
+                #{sealType,jdbcType=VARCHAR},
+            </if>
+            <if test="state != null">
+                #{state,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.yuxin.platform.zongzhi.pojo.SubSealInfo">
+        update sub_seal_info
+        <set>
+            <if test="company != null">
+                company = #{company,jdbcType=VARCHAR},
+            </if>
+            <if test="companyAddress != null">
+                company_address = #{companyAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="companyId != null">
+                company_id = #{companyId,jdbcType=VARCHAR},
+            </if>
+            <if test="companyType != null">
+                company_type = #{companyType,jdbcType=VARCHAR},
+            </if>
+            <if test="dominion != null">
+                dominion = #{dominion,jdbcType=VARCHAR},
+            </if>
+            <if test="dominionCode != null">
+                dominionCode = #{dominionCode,jdbcType=VARCHAR},
+            </if>
+            <if test="getMarkLawCard != null">
+                get_mark_law_card = #{getMarkLawCard,jdbcType=VARCHAR},
+            </if>
+            <if test="lawPerson != null">
+                law_person = #{lawPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="lawPersonCard != null">
+                law_person_card = #{lawPersonCard,jdbcType=VARCHAR},
+            </if>
+            <if test="lawPersonCardType != null">
+                law_person_card_type = #{lawPersonCardType,jdbcType=VARCHAR},
+            </if>
+            <if test="lawPersonPhone != null">
+                law_person_phone = #{lawPersonPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="markCompany != null">
+                mark_company = #{markCompany,jdbcType=VARCHAR},
+            </if>
+            <if test="markCompanyAddress != null">
+                mark_company_address = #{markCompanyAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="markCompanyId != null">
+                mark_company_id = #{markCompanyId,jdbcType=VARCHAR},
+            </if>
+            <if test="markLawCardType != null">
+                mark_law_card_type = #{markLawCardType,jdbcType=VARCHAR},
+            </if>
+            <if test="markLawPerson != null">
+                mark_law_person = #{markLawPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="markPhone != null">
+                mark_phone = #{markPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="operator != null">
+                operator = #{operator,jdbcType=VARCHAR},
+            </if>
+            <if test="operatorCard != null">
+                operator_card = #{operatorCard,jdbcType=VARCHAR},
+            </if>
+            <if test="operatorCardType != null">
+                operator_card_type = #{operatorCardType,jdbcType=VARCHAR},
+            </if>
+            <if test="operatorPhone != null">
+                operator_phone = #{operatorPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="registerDate != null">
+                register_date = #{registerDate,jdbcType=VARCHAR},
+            </if>
+            <if test="sealId != null">
+                seal_id = #{sealId,jdbcType=VARCHAR},
+            </if>
+            <if test="sealMaterial != null">
+                seal_material = #{sealMaterial,jdbcType=VARCHAR},
+            </if>
+            <if test="sealModel != null">
+                seal_model = #{sealModel,jdbcType=VARCHAR},
+            </if>
+            <if test="sealName != null">
+                seal_name = #{sealName,jdbcType=VARCHAR},
+            </if>
+            <if test="sealPattern != null">
+                seal_pattern = #{sealPattern,jdbcType=VARCHAR},
+            </if>
+            <if test="sealShape != null">
+                seal_shape = #{sealShape,jdbcType=VARCHAR},
+            </if>
+            <if test="sealType != null">
+                seal_type = #{sealType,jdbcType=VARCHAR},
+            </if>
+            <if test="state != null">
+                state = #{state,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.yuxin.platform.zongzhi.pojo.SubSealInfo">
+        update sub_seal_info
+        set company = #{company,jdbcType=VARCHAR},
+        company_address = #{companyAddress,jdbcType=VARCHAR},
+        company_id = #{companyId,jdbcType=VARCHAR},
+        company_type = #{companyType,jdbcType=VARCHAR},
+        dominion = #{dominion,jdbcType=VARCHAR},
+        dominionCode = #{dominionCode,jdbcType=VARCHAR},
+        get_mark_law_card = #{getMarkLawCard,jdbcType=VARCHAR},
+        law_person = #{lawPerson,jdbcType=VARCHAR},
+        law_person_card = #{lawPersonCard,jdbcType=VARCHAR},
+        law_person_card_type = #{lawPersonCardType,jdbcType=VARCHAR},
+        law_person_phone = #{lawPersonPhone,jdbcType=VARCHAR},
+        mark_company = #{markCompany,jdbcType=VARCHAR},
+        mark_company_address = #{markCompanyAddress,jdbcType=VARCHAR},
+        mark_company_id = #{markCompanyId,jdbcType=VARCHAR},
+        mark_law_card_type = #{markLawCardType,jdbcType=VARCHAR},
+        mark_law_person = #{markLawPerson,jdbcType=VARCHAR},
+        mark_phone = #{markPhone,jdbcType=VARCHAR},
+        operator = #{operator,jdbcType=VARCHAR},
+        operator_card = #{operatorCard,jdbcType=VARCHAR},
+        operator_card_type = #{operatorCardType,jdbcType=VARCHAR},
+        operator_phone = #{operatorPhone,jdbcType=VARCHAR},
+        register_date = #{registerDate,jdbcType=VARCHAR},
+        seal_id = #{sealId,jdbcType=VARCHAR},
+        seal_material = #{sealMaterial,jdbcType=VARCHAR},
+        seal_model = #{sealModel,jdbcType=VARCHAR},
+        seal_name = #{sealName,jdbcType=VARCHAR},
+        seal_pattern = #{sealPattern,jdbcType=VARCHAR},
+        seal_shape = #{sealShape,jdbcType=VARCHAR},
+        seal_type = #{sealType,jdbcType=VARCHAR},
+        state = #{state,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div class="modal-dialog modal-lg">
+    <div class="modal-content thumbnail">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                    class="sr-only">Close</span></button>
+            <br>
+            <button id="btn_tabMsg7" type="button" class="btn btn-default" data-toggle="modal" onclick="changeMsg7()"
+                    style="width: 32.4%">
+                <span class="" aria-hidden="true">基本信息</span>
+            </button>
+            <button id="btn_tabMsg8" type="button" class="btn btn-default" data-toggle="modal" onclick="changeMsg8()"
+                    style="margin-left: -7px;width: 32.4%">
+                <span class="" aria-hidden="true">安保信息</span>
+            </button>
+            <button id="btn_tabMsg9" type="button" class="btn btn-default" data-toggle="modal" onclick="changeMsg9()"
+                    style="margin-left: -7px;width: 32.4%">
+                <span class="" aria-hidden="true">资料下载</span>
+            </button>
+        </div>
+        <div class="modal-body" id="tab7">
+            <div class="ibox float-e-margins">
+                <form role="form" class="form-horizontal m-t">
+                    <div class="col-md-6">
+                        <div class="form-group draggable ui-draggable">
+                            <label class="col-sm-3 control-label">企业编码：</label>
+                            <div class="col-sm-8">
+                                <p class="form-control-static" id="companyIdMsg"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group draggable ui-draggable">
+                            <label class="col-sm-3 control-label">单位名称：</label>
+                            <div class="col-sm-8">
+                                <p class="form-control-static" id="companyNameMsg"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group draggable ui-draggable">
+                            <label class="col-sm-3 control-label">管辖单位：</label>
+                            <div class="col-sm-8">
+                                <p class="form-control-static" id="dominionMsg"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="col-md-6">
+                         <div class="form-group draggable ui-draggable">
+                             <label class="col-sm-3 control-label">行业类型：</label>
+                             <div class="col-sm-8">
+                                 <p class="form-control-static" id="companyTypeMsg"></p>
+                             </div>
+                         </div>
+                     </div>-->
+                    <div class="col-md-6">
+                        <div class="form-group draggable ui-draggable">
+                            <label class="col-sm-3 control-label">法人名称：</label>
+                            <div class="col-sm-8">
+                                <p class="form-control-static" id="lawPersonNameMsg"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group draggable ui-draggable">
+                            <label class="col-sm-3 control-label">法人身份证号：</label>
+                            <div class="col-sm-8">
+                                <p class="form-control-static" id="lawPersonIdMsg"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group draggable ui-draggable">
+                            <label class="col-sm-3 control-label">营业执照编号：</label>
+                            <div class="col-sm-8">
+                                <p class="form-control-static" id="businessNumberMsg"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group draggable ui-draggable">
+                            <label class="col-sm-3 control-label">联系电话：</label>
+                            <div class="col-sm-8">
+                                <p class="form-control-static" id="phoneMsg"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group draggable ui-draggable">
+                            <label class="col-sm-3 control-label">单位地址：</label>
+                            <div class="col-sm-8">
+                                <p class="form-control-static" id="companyAddressMsg"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group draggable ui-draggable">
+                            <label class="col-sm-3 control-label">经营范围：</label>
+                            <div class="col-sm-8">
+                                <p class="form-control-static" id="businessScopeMsg"></p>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <!-- 安保人员信息-->
+        <div class="modal-body" id="tab8">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>安保人员信息</h5>
+                </div>
+                <div class="ibox-content">
+                    <form role="form" class="form-horizontal m-t">
+                        <table id="securityTableMsg" class="table table-bordered" data-mobile-responsive="true">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th style="background-color:#f9f9f9;">姓名</th>
+                                <th style="background-color:#f9f9f9;">证件号</th>
+                                <th style="background-color:#f9f9f9;">户籍所在地</th>
+                                <th style="background-color:#f9f9f9;">上岗日期</th>
+                                <th style="background-color:#f9f9f9;">保安类型</th>
+                            </tr>
+                            </thead>
+                        </table>
+                    </form>
+                </div>
+            </div>
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>监控设备信息</h5>
+                </div>
+                <div class="ibox-content">
+                    <form role="form" class="form-horizontal m-t">
+                        <table id="monitoringTableMsg" class="table table-bordered" data-mobile-responsive="true">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th style="background-color:#f9f9f9;">设备名称</th>
+                                <th style="background-color:#f9f9f9;">生产厂商</th>
+                                <th style="background-color:#f9f9f9;">规格型号</th>
+                                <th style="background-color:#f9f9f9;">检测机构名称</th>
+                                <th style="background-color:#f9f9f9;">网络传输类型</th>
+                            </tr>
+                            </thead>
+                        </table>
+                    </form>
+                </div>
+            </div>
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>技防设备信息</h5>
+                </div>
+                <div class="ibox-content">
+                    <form role="form" class="form-horizontal m-t">
+                        <table id="technicalTableMsg" class="table table-bordered" data-mobile-responsive="true">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th style="background-color:#f9f9f9;">设备名称</th>
+                                <th style="background-color:#f9f9f9;">生产厂商</th>
+                                <th style="background-color:#f9f9f9;">规格型号</th>
+                                <th style="background-color:#f9f9f9;">机房设备种类</th>
+                                <th style="background-color:#f9f9f9;">数量</th>
+                            </tr>
+                            </thead>
+                        </table>
+                    </form>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-body" id="tab9">
+            <div class="ibox float-e-margins">
+                <form role="form" class="form-horizontal m-t col-md-10" id="downloadForm" method="post"
+                      enctype="multipart/form-data" action="../../common/attachmentDownload">
+                    <input type="hidden" id="tableId" name="tableId">
+                    <input type="hidden" id="tableName" name="tableName" value="qyglmk">
+                    <input type="hidden" id="mark" name="mark">
+                    <div class="col-md-6">
+                        <label class="myLabel-conten">营业执照：</label>
+                        <div class="myText-content">
+                            <input type="hidden" id="downloadFilePath1">
+                            <input type="hidden" id="downloadFileName1">
+                            <span id="downloadFile1"></span>
+                            <a id="download1">下载</a>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="myLabel-conten">法人身份证：</label>
+                        <div class="myText-content">
+                            <input type="hidden" id="downloadFilePath2">
+                            <input type="hidden" id="downloadFileName2">
+                            <span id="downloadFile2"></span>
+                            <a id="download2">下载</a>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="myLabel-conten">营业许可证：</label>
+                        <div class="myText-content">
+                            <input type="hidden" id="downloadFilePath3">
+                            <input type="hidden" id="downloadFileName3">
+                            <span id="downloadFile3"></span>
+                            <a id="download3">下载</a>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="myLabel-conten">企业外观：</label>
+                        <div class="myText-content">
+                            <input type="hidden" id="downloadFilePath4">
+                            <input type="hidden" id="downloadFileName4">
+                            <span id="downloadFile4"></span>
+                            <a id="download4">下载</a>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="myLabel-conten">场所使用权证明：</label>
+                        <div class="myText-content">
+                            <input type="hidden" id="downloadFilePath5">
+                            <input type="hidden" id="downloadFileName5">
+                            <span id="downloadFile5"></span>
+                            <a id="download5">下载</a>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="myLabel-conten">其他材料：</label>
+                        <div class="myText-content">
+                            <input type="hidden" id="downloadFilePath6">
+                            <input type="hidden" id="downloadFileName6">
+                            <span id="downloadFile6"></span>
+                            <a id="download6">下载</a>
+                        </div>
+                    </div>
+                </form>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="businessManager-msg.js"></script>
+<script src="upload.js"></script>
+</body>
+</html>

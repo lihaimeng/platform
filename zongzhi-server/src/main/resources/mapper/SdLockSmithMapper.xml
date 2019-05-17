@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yuxin.platform.zongzhiserver.lock.mapper.SdLockSmithMapper">
+  <resultMap id="BaseResultMap" type="com.yuxin.platform.zongzhiserver.lock.model.SdLockSmith">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="lid" jdbcType="INTEGER" property="lid" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="idcard" jdbcType="VARCHAR" property="idcard" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="licensenumber" jdbcType="VARCHAR" property="licensenumber" />
+    <result column="licenseendtime" jdbcType="TIMESTAMP" property="licenseendtime" />
+    <result column="addtime" jdbcType="TIMESTAMP" property="addtime" />
+
+    <result column="locksmithphoto" jdbcType="VARCHAR" property="locksmithphoto" />
+
+    <result column="idcardphoto" jdbcType="VARCHAR" property="idcardphoto" />
+    <result column="workphoto" jdbcType="VARCHAR" property="workphoto" />
+    <result column="businessphoto" jdbcType="VARCHAR" property="businessphoto" />
+    <result column="handcardphoto" jdbcType="VARCHAR" property="handcardphoto" />
+    <result column="ip" jdbcType="VARCHAR" property="ip" />
+    <result column="gxdw" jdbcType="VARCHAR" property="gxdw" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    lid,name,idcard,address,mobile,licensenumber,licenseendtime,addtime,locksmithphoto,idcardphoto,workphoto,businessphoto,handcardphoto,ip,gxdw
+  </sql>
+
+  <select id="findSdLocksmithByIdcard" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List"/>
+    from sd_locksmith
+    where idcard = #{idcard,jdbcType=VARCHAR}
+  </select>
+
+  <select id="findSdLockSmithById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List"/>
+    from sd_locksmith
+    where lid = #{lid,jdbcType=INTEGER}
+  </select>
+
+
+  <insert id="insertSelective" parameterType="com.yuxin.platform.zongzhiserver.lock.model.SdLockSmith">
+    <selectKey keyProperty="lid" order="BEFORE" resultType="int">
+      select nvl(max(lid),0)+1 from sd_locksmith
+    </selectKey>
+    insert into sd_locksmith
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="lid != null">
+        lid,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="idcard != null">
+        idcard,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="licensenumber != null">
+        licensenumber,
+      </if>
+      <if test="licenseendtime != null">
+        licenseendtime,
+      </if>
+      <if test="addtime != null">
+        addtime,
+      </if>
+      <if test="locksmithphoto != null">
+        locksmithphoto,
+      </if>
+      <if test="idcardphoto != null">
+        idcardphoto,
+      </if>
+      <if test="workphoto != null">
+        workphoto,
+      </if>
+      <if test="businessphoto != null">
+        businessphoto,
+      </if>
+      <if test="handcardphoto != null">
+        handcardphoto,
+      </if>
+      <if test="ip != null">
+        ip,
+      </if>
+      <if test="gxdw != null">
+        gxdw,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="lid != null">
+        #{lid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null">
+        #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="licensenumber != null">
+        #{licensenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="licenseendtime != null">
+        #{licenseendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="addtime != null">
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="locksmithphoto != null">
+        #{locksmithphoto,jdbcType=VARCHAR},
+      </if>
+      <if test="idcardphoto != null">
+        #{idcardphoto,jdbcType=VARCHAR},
+      </if>
+      <if test="workphoto != null">
+        #{workphoto,jdbcType=VARCHAR},
+      </if>
+      <if test="businessphoto != null">
+        #{businessphoto,jdbcType=VARCHAR},
+      </if>
+      <if test="handcardphoto != null">
+        #{handcardphoto,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null">
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="gxdw != null">
+        #{gxdw,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <select id="findSdLockSmithList" resultMap="BaseResultMap"
+          parameterType="com.yuxin.platform.zongzhiserver.lock.dto.SdLockSmithDto">
+    select
+    <include refid="Base_Column_List"/>
+    from sd_locksmith
+    <where>
+      <if test="name != null and name!=''">
+        AND name like CONCAT(CONCAT('%',#{name,jdbcType=VARCHAR}), '%')
+      </if>
+      <if test="idcard != null and idcard!=''">
+        AND idcard like CONCAT(CONCAT('%',#{idcard,jdbcType=VARCHAR}), '%')
+      </if>
+      <if test="gxdw != null and gxdw!=''">
+        AND gxdw like CONCAT(CONCAT('%',#{gxdw,jdbcType=VARCHAR}), '%')
+      </if>
+      <if test="licensenumber != null and licensenumber!=''">
+        AND licensenumber like CONCAT(CONCAT('%',#{licensenumber,jdbcType=VARCHAR}), '%')
+      </if>
+      <if test="registerTimeStart!=null">
+        <![CDATA[ AND addtime>=#{registerTimeStart,jdbcType=TIMESTAMP} ]]>
+      </if>
+      <if test="registerTimeEnd!=null">
+        <![CDATA[ AND  addtime <= #{registerTimeEnd,jdbcType=TIMESTAMP} ]]>
+      </if>
+    </where>
+    order by addtime desc
+  </select>
+</mapper>

@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--select chosen-->
+    <link href="../../css/plugins/chosen/chosen.css" rel="stylesheet">
+    <style type="text/css">
+        .form-add {
+            margin-left: 95px;
+        }
+
+        .abryBody {
+            height: 735px;
+            overflow: auto;
+        }
+
+        .col-md-4 {
+            width: 400px;
+            margin-left: -100px;
+        }
+
+        .editCol4 {
+            margin-left: 40px;
+        }
+
+        .editCol7 {
+            width: 290px;
+        }
+
+        .fileUpload1 {
+            position: absolute;
+            overflow: hidden;
+            top: 36px;
+            right: 121px;
+            height: 34px;
+            width: 54px;
+            opacity: 0;
+        }
+
+        .fileUpload2 {
+            position: absolute;
+            overflow: hidden;
+            top: 90px;
+            right: 121px;
+            height: 34px;
+            width: 54px;
+            opacity: 0;
+        }
+
+        .fileUpload3 {
+            position: absolute;
+            overflow: hidden;
+            top: 144px;
+            right: 121px;
+            height: 34px;
+            width: 54px;
+            opacity: 0;
+        }
+
+        .fileUpload4 {
+            position: absolute;
+            overflow: hidden;
+            top: 195px;
+            right: 121px;
+            height: 34px;
+            width: 54px;
+            opacity: 0;
+        }
+
+        .fileUpload5 {
+            position: absolute;
+            overflow: hidden;
+            top: 250px;
+            right: 121px;
+            height: 34px;
+            width: 54px;
+            opacity: 0;
+        }
+
+        .fileUpload6 {
+            position: absolute;
+            overflow: hidden;
+            top: 305px;
+            right: 121px;
+            height: 34px;
+            width: 54px;
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+<div class="modal-dialog modal-lg">
+    <div class="modal-content thumbnail">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" id="closeEdit"><span
+                    aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <br>
+            <button id="btn_tabMsg4" type="button" class="btn btn-default" data-toggle="modal" onclick="changeMsg4()"
+                    style="width: 32.4%">
+                <span class="" aria-hidden="true">基本信息</span>
+            </button>
+            <button id="btn_tabMsg5" type="button" class="btn btn-default" data-toggle="modal" onclick="changeMsg5()"
+                    style="margin-left: -7px;width: 32.4%">
+                <span class="" aria-hidden="true">安保信息</span>
+            </button>
+            <button id="btn_tabMsg6" type="button" class="btn btn-default" data-toggle="modal" onclick="changeMsg6()"
+                    style="margin-left: -7px;width: 32.4%">
+                <span class="" aria-hidden="true">资料上传</span>
+            </button>
+        </div>
+        <div class="modal-body" id="tab4">
+            <div class="ibox float-e-margins">
+                <form class="form-horizontal m-t form-add" id="companyFormForEdit">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group draggable ui-draggable">
+                                <label class="col-sm-3 control-label">单位名称<span style="color: #ED5565;">*</span></label>
+                                <div class="col-sm-7 editCol7">
+                                    <input id="companyNameEdit" name="companyNameEdit" type="text" class="form-control"
+                                           placeholder="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 editCol4">
+                            <div class="form-group draggable ui-draggable">
+                                <label class="col-sm-3 control-label">管辖单位<span style="color: #ED5565;">*</span></label>
+                                <div class="col-sm-7 editCol7">
+                                    <select class="chosen-select form-control" name="dominionEdit" id="dominionEdit">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <!--<div class="col-md-4" >
+                            <div class="form-group draggable ui-draggable">
+                                <label class="col-sm-3 control-label">企业类型<span style="color: #ED5565;">*</span></label>
+                                <div class="col-sm-7 editCol7">
+                                    &lt;!&ndash;<input class="form-control" name="companyTypeEdit" id="companyTypeEdit">&ndash;&gt;
+                                    <select class="form-control" name="companyTypeEdit" id="companyTypeEdit">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>-->
+                        <div class="col-md-4  ">
+                            <div class="form-group draggable ui-draggable">
+                                <label class="col-sm-3 control-label">法人名称<span style="color: #ED5565;">*</span></label>
+                                <div class="col-sm-7 editCol7">
+                                    <input id="lawPersonNameEdit" name="lawPersonNameEdit" type="text"
+                                           class="form-control" placeholder="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 editCol4">
+                            <div class="form-group draggable ui-draggable">
+                                <label class="col-sm-3 control-label">法人身份证号<span
+                                        style="color: #ED5565;">*</span></label>
+                                <div class="col-sm-7 editCol7">
+                                    <input id="lawPersonIDEdit" name="lawPersonIDEdit" type="text" class="form-control"
+                                           placeholder="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4  ">
+                            <div class="form-group draggable ui-draggable">
+                                <label class="col-sm-3 control-label">营业执照编号<span
+                                        style="color: #ED5565;">*</span></label>
+                                <div class="col-sm-7 editCol7">
+                                    <input id="businessNumberEdit" name="businessNumberEdit" type="text"
+                                           class="form-control" placeholder="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 editCol4">
+                            <div class="form-group draggable ui-draggable">
+                                <label class="col-sm-3 control-label">联系电话<span style="color: #ED5565;">*</span></label>
+                                <div class="col-sm-7 editCol7">
+                                    <input id="phoneEdit" name="phoneEdit" type="text" class="form-control"
+                                           placeholder="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4  ">
+                            <div class="form-group draggable ui-draggable">
+                                <label class="col-sm-3 control-label">单位地址<span style="color: #ED5565;">*</span></label>
+                                <div class="col-sm-7 editCol7">
+                                    <input id="companyAddressEdit" name="companyAddressEdit" type="text"
+                                           class="form-control" placeholder="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-left: -100px;">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">经营范围</label>
+                            <div class="col-sm-8" style="width: 730px">
+                                <textarea class="form-control" rows="3" id="businessScopeEdit"
+                                          name="businessScopeEdit"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-8 col-sm-offset-10" style="margin-left: 84%;">
+                                <button class="btn btn-primary" type="button" id="editCompanySubmit">保&nbsp;&nbsp;&nbsp;&nbsp;存</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <input type="hidden" id="qyidEdit">
+                <input type="hidden" id="mkmcEdit" value="qyglmk">
+            </div>
+        </div>
+        <div class="modal-body abryBody" id="tab5">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>安保人员信息</h5>
+                    <div class="ibox-tools">
+                        <a style="float:right;color:rgb(26, 179, 148);" data-toggle="modal"
+                           data-target="#myModalForAbDelest" id="deleteAbryxx">删除</a>
+                        <a style="float:right;color:rgb(26, 179, 148);" data-toggle="modal"
+                           data-target="#myModalForAbEditMsg" id="editAbryxx">修改</a>
+                        <a style="float:right;color:rgb(26, 179, 148);" data-toggle="modal"
+                           data-target="#myModalForAbEdit" id="addAbryxx">新增</a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <form role="form" class="form-horizontal m-t">
+                        <table id="securityTableEdit" class="table table-bordered" data-mobile-responsive="true">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th style="background-color:#f9f9f9;">姓名</th>
+                                <th style="background-color:#f9f9f9;">证件号</th>
+                                <th style="background-color:#f9f9f9;">户籍所在地</th>
+                                <th style="background-color:#f9f9f9;">上岗日期</th>
+                                <th style="background-color:#f9f9f9;">保安类型</th>
+                            </tr>
+                            </thead>
+                        </table>
+                    </form>
+                </div>
+            </div>
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>监控设备信息</h5>
+                    <div class="ibox-tools">
+                        <a style="float:right;color:rgb(26, 179, 148)" data-toggle="modal"
+                           data-target="#myModalForJkDelete2" id="deleteJksbxx">删除</a>
+                        <a style="float:right;color:rgb(26, 179, 148)" data-toggle="modal"
+                           data-target="#myModalForJkEditMsg2" id="editJksbxx">修改</a>
+                        <a style="float:right;color:rgb(26, 179, 148)" data-toggle="modal"
+                           data-target="#myModalForJkEdit2" id="addJksbxx">新增</a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <form role="form" class="form-horizontal m-t">
+                        <table id="monitoringTableEdit" class="table table-bordered" data-mobile-responsive="true">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th style="background-color:#f9f9f9;">设备名称</th>
+                                <th style="background-color:#f9f9f9;">生产厂商</th>
+                                <th style="background-color:#f9f9f9;">规格型号</th>
+                                <th style="background-color:#f9f9f9;">检测机构名称</th>
+                                <th style="background-color:#f9f9f9;">网络传输类型</th>
+                            </tr>
+                            </thead>
+                        </table>
+                    </form>
+                </div>
+            </div>
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>技防设备信息</h5>
+                    <div class="ibox-tools">
+                        <a style="float:right;color:rgb(26, 179, 148)" data-toggle="modal"
+                           data-target="#myModalForJfDelete3" id="deleteJfsbxx">删除</a>
+                        <a style="float:right;color:rgb(26, 179, 148)" data-toggle="modal"
+                           data-target="#myModalForJfEditMsg3" id="editJfsbxx">修改</a>
+                        <a style="float:right;color:rgb(26, 179, 148)" data-toggle="modal"
+                           data-target="#myModalForJfEdit3" id="addJfsbxx">新增</a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <form role="form" class="form-horizontal m-t">
+                        <table id="technicalTableEdit" class="table table-bordered" data-mobile-responsive="true">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th style="background-color:#f9f9f9;">设备名称</th>
+                                <th style="background-color:#f9f9f9;">规格型号</th>
+                                <th style="background-color:#f9f9f9;">技防设备种类</th>
+                                <th style="background-color:#f9f9f9;">数量</th>
+                            </tr>
+                            </thead>
+                        </table>
+                    </form>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-body" id="tab6">
+            <div class="ibox float-e-margins">
+                <form class="form-horizontal m-t" id="roleFormForEdit">
+                    <div class="form-group" style="padding-left: 10px;">
+                        <label class="col-sm-2 control-label">营业执照<span style="color: #ED5565;">*</span></label>
+                        <div class="col-sm-8">
+                            <input id="businessLicenseEdit" name="businessLicenseEdit" class="form-control" type="text">
+                        </div>
+                        <div style="float:right;">
+                            <button id="uploadEdit1" type="button" class="btn btn-primary" style="margin-right: 102px;">
+                                上传
+                                <input type="file" name="FileUploadEdit1" class="fileUpload1" id="FileUploadEdit1"/>
+                                <input type="text" id="filenameEdit1" name="filenameEdit1" hidden/>
+                                <input type="text" id="filetypeEdit1" name="filetypeEdit1" hidden/>
+                                <input type="text" id="realpathEdit1" name="realpathEdit1" hidden/>
+                            </button>
+                            <button id="deleteEdit1" type="button" class="btn btn-danger" style="margin-left: -100px">删除
+                            </button>
+                        </div>
+                    </div>
+                    <div class="form-group" style="padding-left: 10px;">
+                        <label class="col-sm-2 control-label">法人身份证<span style="color: #ED5565;">*</span></label>
+                        <div class="col-sm-8">
+                            <input id="lawPersonNumIdEdit" name="lawPersonNumIdEdit" class="form-control" type="text">
+                        </div>
+                        <div style="float:right;">
+                            <button id="uploadEdit2" type="button" class="btn btn-primary" style="margin-right: 102px;">
+                                上传
+                                <input type="file" name="FileUploadEdit2" class="fileUpload2" id="FileUploadEdit2"/>
+                                <input type="text" id="filenameEdit2" name="filenameEdit2" hidden/>
+                                <input type="text" id="filetypeEdit2" name="filetypeEdit2" hidden/>
+                                <input type="text" id="realpathEdit2" name="realpathEdit2" hidden/>
+                            </button>
+                            <button id="deleteEdit2" type="button" class="btn btn-danger" style="margin-left: -100px">删除
+                            </button>
+                        </div>
+                    </div>
+                    <div class="form-group" style="padding-left: 10px;">
+                        <label class="col-sm-2 control-label">营业许可证</label>
+                        <div class="col-sm-8">
+                            <input id="businessPermitsEdit" name="businessPermitsEdit" class="form-control" type="text">
+                        </div>
+                        <div style="float:right;">
+                            <button id="uploadEdit3" type="button" class="btn btn-primary" style="margin-right: 102px;">
+                                上传
+                                <input type="file" name="FileUploadEdit3" class="fileUpload3" id="FileUploadEdit3"/>
+                                <input type="text" id="filenameEdit3" name="filenameEdit3" hidden/>
+                                <input type="text" id="filetypeEdit3" name="filetypeEdit3" hidden/>
+                                <input type="text" id="realpathEdit3" name="realpathEdit3" hidden/>
+                            </button>
+                            <button id="deleteEdit3" type="button" class="btn btn-danger" style="margin-left: -100px">删除
+                            </button>
+                        </div>
+                    </div>
+                    <div class="form-group" style="padding-left: 10px;">
+                        <label class="col-sm-2 control-label">企业外观</label>
+                        <div class="col-sm-8">
+                            <input id="companyShapeEdit" name="companyShapeEdit" class="form-control" type="text">
+                        </div>
+                        <div style="float:right;">
+                            <button id="uploadEdit4" type="button" class="btn btn-primary" style="margin-right: 102px;">
+                                上传
+                                <input type="file" name="FileUploadEdit4" class="fileUpload4" id="FileUploadEdit4"/>
+                                <input type="text" id="filenameEdit4" name="filenameEdit4" hidden/>
+                                <input type="text" id="filetypeEdit4" name="filetypeEdit4" hidden/>
+                                <input type="text" id="realpathEdit4" name="realpathEdit4" hidden/>
+                            </button>
+                            <button id="deleteEdit4" type="button" class="btn btn-danger" style="margin-left: -100px">删除
+                            </button>
+                        </div>
+                    </div>
+                    <div class="form-group" style="padding-left: 10px;">
+                        <label class="col-sm-3 control-label">场所使用权证明</label>
+                        <div class="col-sm-8">
+                            <input id="placeProveEdit" name="placeProveEdit" class="form-control" type="text">
+                        </div>
+                        <div style="float:right;">
+                            <button id="uploadEdit5" type="button" class="btn btn-primary" style="margin-right: 102px;">
+                                上传
+                                <input type="file" name="FileUploadEdit5" class="fileUpload5" id="FileUploadEdit5"/>
+                                <input type="text" id="filenameEdit5" name="filenameEdit5" hidden/>
+                                <input type="text" id="filetypeEdit5" name="filetypeEdit5" hidden/>
+                                <input type="text" id="realpathEdit5" name="realpathEdit5" hidden/>
+                            </button>
+                            <button id="deleteEdit5" type="button" class="btn btn-danger" style="margin-left: -100px">删除
+                            </button>
+                        </div>
+                    </div>
+                    <div class="form-group" style="padding-left: 10px;">
+                        <label class="col-sm-2 control-label">其他材料</label>
+                        <div class="col-sm-8">
+                            <input id="othersEdit" name="othersEdit" class="form-control" type="text">
+                        </div>
+                        <div style="float:right;">
+                            <button id="uploadEdit6" type="button" class="btn btn-primary" style="margin-right: 102px;">
+                                上传
+                                <input type="file" name="FileUploadEdit6" class="fileUpload6" id="FileUploadEdit6"/>
+                                <input type="text" id="filenameEdit6" name="filenameEdit6" hidden/>
+                                <input type="text" id="filetypeEdit6" name="filetypeEdit6" hidden/>
+                                <input type="text" id="realpathEdit6" name="realpathEdit6" hidden/>
+                            </button>
+                            <button id="deleteEdit6" type="button" class="btn btn-danger" style="margin-left: -100px">删除
+                            </button>
+                        </div>
+                    </div>
+                    <div class="form-group" style="padding-left: 10px;">
+                        <div style="float:right;">
+                            <button id="saveFileEdit" type="button" class="btn btn-primary" style="margin-left: -100px">
+                                保存
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="businessManager-edit.js"></script>
+<script src="upload.js"></script>
+<!-- jQuery Validation plugin javascript-->
+<script src="../../js/plugins/validate/jquery.validate.min.js"></script>
+<script src="../../js/plugins/validate/messages_zh.min.js"></script>
+<script src="businessManager-updateForm-valid.js"></script>
+<!-- select Chosen -->
+<script src="../../js/plugins/chosen/chosen.jquery.js"></script>
+<script src="../../js/demo/form-advanced-demo.js"></script>
+</body>
+</html>

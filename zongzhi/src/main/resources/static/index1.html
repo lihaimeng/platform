@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=ie8">
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link href="../css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="../css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="../css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="../css/animate.css" rel="stylesheet">
+    <link href="../css/style.css?v=4.1.0" rel="stylesheet">
+    <link href="../css/search-criteria.css" rel="stylesheet">
+
+    <title>综合治安管理系统</title>
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font-family: "Microsoft YaHei";
+            border: none;
+        }
+
+        ol, ul, li {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .department_info {
+            height: 60px;
+            line-height: 60px;
+            font-size: 16px;
+            font-size: 20px;
+            color: rgb(26, 26, 26);
+            background-image: url(./img/user_photo.png);
+            overflow: hidden;
+        }
+
+        .department_info div {
+            float: left;
+            margin-right: 81px;
+        }
+
+        .department_info .user_photo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            float: left;
+            margin: 5px 20px;
+        }
+
+        /*eacher图*/
+        #content-main {
+
+            /*width: 100%;*/
+            height: 964px;
+
+            padding: 16px 18px 18px 18px;
+            box-sizing: border-box;
+        }
+
+        .eacher_main {
+            /*width: 1277px;*/
+
+            /*margin-right: 16px;*/
+            /*float: left;*/
+            height: 100%;
+        }
+
+        .notice {
+
+            /*width: 354px;*/
+            height: 100%;
+            /*float: left;*/
+
+            background-image: url(./img/notice_bg.png);
+
+            background-repeat: no-repeat;
+        }
+
+        .notice_content {
+
+            box-sizing: border-box;
+        }
+
+        .notice_title {
+            height: 43px;
+            line-height: 43px;
+            text-align: center;
+            width: 100%;
+            font-size: 22px;
+            color: #fff;
+
+            border-radius: 3px;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+        .notice_content h2 {
+            width: 100%;
+            height: 53px;
+            line-height: 46px;
+            font-size: 20px;
+            font-weight: 400;
+            color: #1a1a1a;
+        }
+
+        .notice_info span {
+            font-size: 16px;
+            color: #1a1a1a;
+        }
+
+        .notice_info a {
+            font-size: 16px;
+            color: #1a1a1a;
+        }
+
+        .notice_top {
+            padding-bottom: 25px;
+            border-bottom: 1px solid #dceeff;
+            box-sizing: border-box;
+            padding-left: 22px;
+        }
+
+        .notice_top li {
+            margin-bottom: 15px;
+        }
+
+        .eacher_pie {
+            overflow: hidden;
+        }
+
+        .eacher_content {
+            /*width: 628px;*/
+            height: 364px;
+            /*background-image: url(./img/eacher-bg.png);*/
+            background: #f7fbff;
+            float: left;
+
+        }
+
+        .eacher1 {
+            /*margin-right: 17px;*/
+        }
+
+        .eacher2 {
+            float: right;
+        }
+
+        .eacher_title {
+            width: 100%;
+            text-align: center;
+            font-size: 24px;
+            color: rgb(26, 26, 26);
+            height: 30px;
+            line-height: 68px;
+        }
+
+        #main, #main1 {
+            /* position: absolute !important; */
+            top: 48px;
+        }
+
+        .bar-graph {
+            /*background-image: url(./img/bar-graph.png);*/
+            background: #f7fbff;
+            width: 100%;
+            height: 448px;
+            margin-top: 16px;
+        }
+
+        .kong {
+            width: 100%;
+            height: 189px;
+        }
+    </style>
+</head>
+
+<body>
+<!--<div class="department_info">-->
+
+<!--<div>-->
+<!--<span>所属行政区域:</span>-->
+<!--<span class="xzqy">陕西省雁塔区</span>-->
+<!--</div>-->
+<!--<div>-->
+<!--<span>机构:</span>-->
+<!--<span class="bm-name">雁塔分局</span>-->
+<!--</div>-->
+<!--<div>-->
+<!--<span>角色:</span>-->
+<!--<span class="zagl">治安管理</span>-->
+<!--</div>-->
+
+<!--</div>-->
+<div id="content-main">
+    <div class="eacher_main col-sm-9">
+        <div class="eacher_pie">
+            <div class="eacher_content eacher1 col-sm-5 col-lg-5">
+                <div class="eacher_title">企业数量占比</div>
+                <div id="main" style="height:232px"></div>
+            </div>
+            <div class="eacher_content eacher2 col-sm-6 col-lg-6">
+                <div class="eacher_title">人员数量占比</div>
+                <div id="main1" style="height:232px"></div>
+            </div>
+        </div>
+        <div class="bar-graph">
+            <!--<div class="kong"></div>-->
+            <div id="main3" style="height:402px"></div>
+        </div>
+    </div>
+    <div class="notice col-sm-3">
+        <div class="notice_title">通知公告</div>
+        <div class="notice_content">
+            <div class="notice_top">
+                <h2>协查通告</h2>
+                <div class="notice_info">
+                    <ul class="lists_item">
+                        <li>
+                            <span>协查通告:</span>
+                            <a href="">王小明警员发布的协查通告</a>
+                        </li>
+                        <li>
+                            <span>协查通告:</span>
+                            <a href="">王小明警员发布的协查通告</a>
+                        </li>
+                        <li>
+                            <span>协查通告:</span>
+                            <a href="">王小明警员发布的协查通告</a>
+                        </li>
+                        <li>
+                            <span>协查通告:</span>
+                            <a href="">王小明警员发布的协查通告</a>
+                        </li>
+                        <li>
+                            <span>协查通告:</span>
+                            <a href="">王小明警员发布的协查通告</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="notice_top">
+                <h2>可疑情况上报</h2>
+                <div class="notice_info kyqk-notice">
+                    <ul>
+                        <li>
+                            <span>协查通告:</span>
+                            <a href="">王小明警员发布的协查通告</a>
+                        </li>
+                        <li>
+                            <span>协查通告:</span>
+                            <a href="">王小明警员发布的协查通告</a>
+                        </li>
+                        <li>
+                            <span>协查通告:</span>
+                            <a href="">王小明警员发布的协查通告</a>
+                        </li>
+                        <li>
+                            <span>协查通告:</span>
+                            <a href="">王小明警员发布的协查通告</a>
+                        </li>
+                        <li>
+                            <span>协查通告:</span>
+                            <a href="">王小明警员发布的协查通告</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!--<div class="notice_top">-->
+            <!--<h2>协查通告</h2>-->
+            <!--<div class="notice_info">-->
+            <!--<ul>-->
+            <!--<li>-->
+            <!--<span>协查通告:</span>-->
+            <!--<a href="">王小明警员发布的协查通告</a>-->
+            <!--</li>-->
+            <!--<li>-->
+            <!--<span>协查通告:</span>-->
+            <!--<a href="">王小明警员发布的协查通告</a>-->
+            <!--</li>-->
+            <!--<li>-->
+            <!--<span>协查通告:</span>-->
+            <!--<a href="">王小明警员发布的协查通告</a>-->
+            <!--</li>-->
+            <!--<li>-->
+            <!--<span>协查通告:</span>-->
+            <!--<a href="">王小明警员发布的协查通告</a>-->
+            <!--</li>-->
+            <!--<li>-->
+            <!--<span>协查通告:</span>-->
+            <!--<a href="">王小明警员发布的协查通告</a>-->
+            <!--</li>-->
+            <!--</ul>-->
+            <!--</div>-->
+            <!--</div>-->
+        </div>
+    </div>
+</div>
+</div>
+</div>
+
+</body>
+
+</html>
+
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script src="./js/echarts.common.min.js"></script>
+<script src="./js/home-echart.js"></script>

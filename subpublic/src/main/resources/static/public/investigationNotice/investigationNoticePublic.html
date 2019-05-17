@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table</title>
+    <meta name="keywords" content="Table">
+    <meta name="description" content="Table">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="../../css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="../../css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="../../css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="../../css/style.css?v=4.1.0" rel="stylesheet">
+    <!-- 模态框 -->
+    <link href="../../css/animate.css" rel="stylesheet">
+    <!-- 输入框、弹出框css（自定义） -->
+    <link href="../../css/search-criteria.css" rel="stylesheet">
+    <link href="../../smoke-v3.1.1/css/smoke.css" rel="stylesheet">
+    <link href="../../smoke-v3.1.1/css/smoke.min.css" rel="stylesheet">
+    <style type="text/css">
+        .my-container {
+            display: inline-block;
+            margin-right: 30px;
+        }
+
+        .myLabel-content, .myText-content, .myBtn-content {
+            display: inline-block;
+            margin-left: 10px;
+        }
+
+        .myLabel-content, .myText-content input[type='text'], .myBtn-content .btn {
+            height: 30px;
+            font-size: 12px;
+        }
+
+        .myBtn-content .btn {
+            margin-bottom: 10px;
+        }
+
+        .modal {
+            width: 100%;
+            height: 100%;
+        }
+
+        .modal-header {
+            width: 100%;
+            height: 10%;
+        }
+
+        .modal-body {
+            width: 100%;
+            height: 685px;
+        }
+
+        .modalSend {
+            height: 950px;
+        }
+
+        .pawnMsg1 .col-md-12 {
+            width: 100%;
+            height: 30%;
+        }
+
+        .modal-header .btn {
+            width: 47%;
+        }
+
+        .modal-header .btn span {
+            text-align: center;
+            font-size: 16px;
+            width: 100%;
+            height: 46px;
+            margin-top: -16px;
+        }
+
+        .dataMsg {
+            width: 14.2%;
+        }
+
+        .col5 {
+            margin-left: -59px;
+            width: 34.666667%;
+            text-align: right;
+            margin-top: 12px;
+        }
+
+        .col-sm-7 {
+            margin-top: 5px;
+            margin-left: -10px;
+        }
+    </style>
+
+</head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <!-- Panel Other -->
+    <div class="ibox float-e-margins">
+        <div class="ibox-title">
+            <h5>日常管理>协查通告</h5>
+        </div>
+        <div class="ibox-content">
+            <div class="row row-lg">
+                <div class="col-sm-12">
+                    <!-- Example Events -->
+                    <div class="example-wrap">
+                        <div class="example">
+
+                            <div class="my-container">
+                                <label class="myLabel-content">发布时间</label>
+                                <div class="myText-content">
+                                    <input id="fbsjslect" style="vertical-align:middle;" class="form-control layer-date"
+                                           placeholder=""
+                                           onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+                                </div>
+                                <label class="myLabel-content" style="width:0px;">至</label>
+                                <div class="myText-content">
+                                    &nbsp;&nbsp;&nbsp;
+                                    <input style="vertical-align:middle;" id="jzsjselect"
+                                           class="form-control layer-date" placeholder="	"
+                                           onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+                                </div>
+                            </div>
+                            <div class="my-container">
+                                <label class="myLabel-content">标题</label>
+                                <div class="myText-content">
+                                    <input id="btselect" type="text" class="form-control">
+                                </div>
+                            </div>
+
+                            <div style="display:block;" class="btn-group">
+                                <div style="float:left;">
+                                    <button id="btn_detail" type="button" class="btn btn-default glyphicon "
+                                            data-toggle="modal" style="padding: 3px 13px 8px 14px;">
+                                        <span class="glyphicon glyphicon-search" style="margin-right: 3px;"></span>详情
+                                    </button>
+                                </div>
+                                <div style="float:right;">
+                                    <button id="btn_search" type="button" class="btn btn-primary">查&nbsp;&nbsp;&nbsp;&nbsp;询</button>
+                                </div>
+                            </div>
+
+                            <table id="table" class="table table-bordered" data-height="624"
+                                   data-mobile-responsive="true">
+
+                            </table>
+                        </div>
+                    </div>
+                    <!-- End Example Events -->
+
+
+                    <!-- 弹出框内容 协查通告详情 -->
+                    <!-- 弹出框内容 协查通告详情 -->
+                    <div class="modal inmodal fade" id="myModalMsg" tabindex="-1" role="dialog" aria-hidden="true"
+                         data-backdrop="static">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                                            class="sr-only">Close</span></button>
+                                    <br>
+                                    <h4 class="modal-title">协查通告详情</h4>
+                                </div>
+                                <div class="modal-body" style="height:537px">
+                                    <div class="col-md-12">
+                                        <div class="ibox float-e-margins">
+                                            <div class="col-md-12 ibox-content">
+                                                <form role="form" class="form-horizontal m-t col-md-12">
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group draggable ui-draggable">
+                                                            <label style="padding-top: 0px;"
+                                                                   class="col-sm-5 control-label col5">发布人:</label>
+
+                                                            <div class="col-sm-7">
+                                                                <p id="fbr" class="form-control-static">测试数据</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group draggable ui-draggable">
+                                                            <label style="padding-top: 0px;width:130px"
+                                                                   class="col-sm-5 control-label col5">发布时间:</label>
+                                                            <div class="col-sm-7">
+                                                                <p id="fbsj" class="form-control-static">测试数据</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6" style="display:none;">
+                                                        <div class="form-group draggable ui-draggable">
+                                                            <label style="padding-top: 0px;width:130px"
+                                                                   class="col-sm-5 control-label col5">截止时间:</label>
+                                                            <div class="col-sm-7">
+                                                                <p id="jzrq" class="form-control-static">测试数据</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group draggable ui-draggable">
+                                                            <label style="padding-top: 0px;"
+                                                                   class="col-sm-5 control-label col5">发布单位:</label>
+
+                                                            <div class="col-sm-7">
+                                                                <p id="fbdw" class="form-control-static">测试数据</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group draggable ui-draggable">
+                                                            <label class="col-sm-5 control-label col5"
+                                                                   style="padding-top: 0px;width:130px">标题:</label>
+                                                            <div class="col-sm-7">
+                                                                <p id="bt" class="form-control-static">测试数据</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12" style="margin-top: 10px;">
+                                                        <label class="myLabel-content"
+                                                               style="padding-top: 0px;margin-left: -30px;width: 70px;">内容:</label>
+                                                        <div class="myText-content">
+                                                            <textarea readonly="readonly" id="fbnr" class="form-control"
+                                                                      rows="8" cols="90"
+                                                                      style="width:90%;resize: none;margin-left: 50px;margin-top: -40px"></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-1 control-label"
+                                                               style="width: 88px">上传附件:</label>
+                                                        <div class="col-sm-2" style="padding-left: 2px;">
+                                                            <input readonly="readonly" id="msgfilename"
+                                                                   style="width:174px ;margin-top: 5px" id="username2"
+                                                                   name="username2" class="form-control" type="text">
+                                                        </div>
+                                                        <div class="col-sm-1">
+                                                            <a id="download"
+                                                               style="color:rgb(24,166,137);width:40px;float:left;margin-left:50px;margin-top: 13px"
+                                                               data-toggle="modal" data-target="#myModal">下载</a>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- 弹出框内容 协查通告详情结束 -->
+
+                </div>
+            </div>
+        </div>
+        <!-- End Panel Other -->
+    </div>
+</div>
+<!-- 全局js -->
+<script src="../../js/jquery.min.js?v=2.1.4"></script>
+<script src="../../js/bootstrap.min.js?v=3.3.6"></script>
+<!-- 自定义js -->
+<script src="../../js/content.js?v=1.0.0"></script>
+<script src="investigationNoticePublic.js"></script>
+<!-- Bootstrap table -->
+<script src="../../js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="../../js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+<script src="../../js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+<!-- jQuery Validation plugin javascript-->
+<script src="../../js/plugins/validate/jquery.validate.min.js"></script>
+<script src="../../js/plugins/validate/messages_zh.min.js"></script>
+<script src="../../js/demo/form-validate-demo.js"></script>
+<!-- layerDate plugin javascript -->
+<script src="../../js/plugins/layer/laydate/laydate.js"></script>
+<script src="../../smoke-v3.1.1/js/smoke.js"></script>
+<script src="../../smoke-v3.1.1/js/smoke.min.js"></script>
+</body>
+</html>

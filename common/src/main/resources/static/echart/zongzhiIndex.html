@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="../css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="../css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="../css/animate.css" rel="stylesheet">
+    <link href="../css/style.css?v=4.1.0" rel="stylesheet">
+    <style type="text/css">
+        html, body {
+            height: 100%;
+            width: 100%;
+        }
+
+        .spanTitle {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .spanBody {
+            font-size: 16px;
+        }
+
+        .ibox-content {
+            height: 50px;
+        }
+
+        .sidebard-panel {
+            width: 20%;
+            background: #FFFFFF;
+            /*padding: 10px 20px;*/
+            position: absolute;
+            /*right: 0;*/
+            right: 10px;
+            top: 20px;
+            height: 835px;
+            z-index: 9;
+        }
+
+        .modal-dialog {
+            width: 55%;
+        }
+
+        /*.row{padding:1rem 3rem;}*/
+        .list {
+            padding: 0;
+        }
+
+        .list li {
+            list-style: none;
+            width: 25%;
+            float: Left;
+            text-align: left;
+        }
+
+        .the_row {
+            margin-bottom: 2rem;
+        }
+
+        .name_title {
+            text-align: justify;
+            text-align-last: justify;
+        }
+
+        .title {
+            display: inline-block;
+            width: 100%;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+
+        #xctgMsg a, #kyqkMsg a {
+            line-height: 17px;
+            padding-left: 41px;
+            box-sizing: border-box;
+        }
+        .openCloseBtn{
+            display: none;
+        }
+        .openCloseBtn span{
+            display: inline-block;
+            width: 60px;
+            height: 30px;
+            line-height: 30px;
+            cursor: pointer;
+        }
+        @media screen and (max-width: 1366px){
+            .openCloseBtn{
+                display: block;
+            }
+            .paddingNone{
+                padding: 0px;
+            }
+        }
+    </style>
+</head>
+<body class="gray-bg" style="width: 87%">
+<div class="sidebard-panel">
+    <div class="openCloseBtn"><span>展开</span></div>
+    <div style="margin-top: 30px;">
+        <h3>可疑情况</h3>
+        <div class="feed-element">
+            <div class="media-body">
+                <div id="kyqkMsg" style="font-size: 15px;line-height:30px;position: relative;z-index: 2;">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="margin-top: 30px;">
+        <h3>协查通告</h3>
+        <div class="feed-element">
+            <div class="media-body">
+                <div id="xctgMsg" style="font-size: 15px;line-height:30px;position: relative;z-index: 2;">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <!--<div class="row">-->
+    <!--<div class="col-sm-11">-->
+    <!--<div class="ibox">-->
+    <!--<div class="ibox-content">-->
+    <!--<div class="col-sm-3">-->
+    <!--<span class="spanTitle">所属行政区域:</span>-->
+    <!--<span class="spanBody" id="organizationParentName"></span>-->
+    <!--</div>-->
+    <!--<div class="col-sm-3">-->
+    <!--<span class="spanTitle">机构:</span>-->
+    <!--<span class="spanBody" id="organizationName"></span>-->
+    <!--</div>-->
+    <!--<div class="col-sm-3">-->
+    <!--<span class="spanTitle">角色:</span>-->
+    <!--<span class="spanBody" id="roleName"></span>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <div class="row">
+        <div class="col-sm-11">
+            <div class="col-md-6 col-sm-12 paddingNone" style="float: left;padding-left: 0px;">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>各行业企业数量占比</h5>
+                    </div>
+                    <div class="ibox-content" style="height: 277px">
+                        <div id="pie1" style="width:100%;height: 241px;"></div><!--width: 737px;-->
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12 paddingNone" style="float: left;padding-right: 0px;">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>各行业从业人员占比</h5>
+                    </div>
+                    <div class="ibox-content" style="height: 277px">
+                        <div id="pie2" style="width:100%;height:241px;"></div><!--width: 737px;-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-11" style="float: left;">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content" style="height: 485px;">
+                    <div id="bar" style="margin-top:20px;vertical-align: middle;width: 100%;height:100%;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--弹窗-->
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel" style='text-align: center;'>
+                    <b>协查通告</b>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <form action="">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 the_row" style="display: none">
+                            <div class="col-lg-2 col-md-2 name_title">
+                                发送给
+                            </div>
+                            <div class="col-lg-10 col-md-10">
+                                <ul class='list'>
+                                    <li><input type="checkbox"><span>公安机关</span></li>
+                                    <li><input type="checkbox"><span>公安机关</span></li>
+                                    <li><input type="checkbox"><span>公安机关</span></li>
+                                    <li><input type="checkbox"><span>公安机关</span></li>
+                                    <li><input type="checkbox"><span>公安机关</span></li>
+                                    <li><input type="checkbox"><span>公安机关</span></li>
+                                    <li><input type="checkbox"><span>公安机关</span></li>
+                                    <li><input type="checkbox"><span>公安机关</span></li>
+                                    <li><input type="checkbox"><span>公安机关</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12 the_row" style="margin-bottom:5px;">
+                            <div class="col-lg-2 col-md-2 col-sm-3 name_title">
+                                发布人:
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-9" id="fbr">
+                                这是一个发布人
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-3 name_title">
+                                发布时间:
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-9" id="fbsj">
+                                这是一个发布时间
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12 the_row">
+                            <div class="col-lg-2 col-md-2 col-sm-3 name_title">
+                                发布单位:
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-9" id="fbdw">
+                                这是一个发布单位
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-3 name_title">
+                                标题:
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-9" id="bt">
+                                这是一个发布标题
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12 the_row">
+                            <div class="col-lg-2 col-md-2 col-sm-3 name_title">
+                                内容:
+                            </div>
+                            <div class="col-lg-10 col-md-10 col-sm-9" id="fbnr">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur nulla vel, inventore
+                                dolores repudiandae eligendi? Maiores asperiores unde culpa repellendus nemo similique
+                                magnam, alias facere hic iste, reiciendis debitis, consequuntur.
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12 the_row" style="display: none">
+                            <div class="col-lg-2 col-md-2 name_title">
+                                附件
+                            </div>
+                            <div class="col-lg-10 col-md-10">
+                                <input type="text">
+                                <button class='btn btn-xs btn-primary'>上传</button>
+                                <button class='btn btn-xs btn-danger'>删除</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">关闭
+                </button>
+                <!--<button type="button" class="btn btn-primary">-->
+                <!--提交更改-->
+                <!--</button>-->
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+
+<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel1" style='text-align: center;'>
+                    <b>可疑情况处理</b>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <form action="">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 the_row" style="display: none">
+                            <div class="col-lg-2 col-md-2 name_title">
+                                发送给
+                            </div>
+                            <div class="col-lg-10 col-md-10">
+                                <ul class='list'>
+                                    <li><input type="checkbox"><span>公安机关</span></li>
+                                    <li><input type="checkbox"><span>公安机关</span></li>
+                                    <li><input type="checkbox"><span>公安机关</span></li>
+                                    <li><input type="checkbox"><span>公安机关</span></li>
+                                    <li><input type="checkbox"><span>公安机关</span></li>
+                                    <li><input type="checkbox"><span>公安机关</span></li>
+                                    <li><input type="checkbox"><span>公安机关</span></li>
+                                    <li><input type="checkbox"><span>公安机关</span></li>
+                                    <li><input type="checkbox"><span>公安机关</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12 the_row">
+                            <div class="col-lg-2 col-md-2 col-sm-4 name_title">
+                                登记编号:
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-8" id="hylb">
+                                112342
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-4 name_title">
+                                可疑情况类型:
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-8" id="qymc">
+                                通报协查人员
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12 the_row">
+                            <div class="col-lg-2 col-md-2 col-sm-4 name_title">
+                                填报人员编号:
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-8" id="dwmc">
+                                JoAFC
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-4 name_title">
+                                填报人员姓名:
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-8" id="kyqklx">
+                                人名
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12 the_row">
+                            <div class="col-lg-2 col-md-2 col-sm-4 name_title">
+                                详情描述:
+                            </div>
+                            <div class="col-lg-10 col-md-10 col-sm-8" id="xqms">
+                                JoAFC
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12 the_row">
+                            <div class="col-lg-2 col-md-2 col-sm-4 name_title">
+                                填报时间:
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-8" id="tbsj">
+                                2018-03-08
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-4 name_title">
+                                处理状态:
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-8" id="cljg">
+                                未处理
+                            </div>
+
+                        </div>
+
+                        <!--<div class="col-lg-12 col-md-12 the_row">-->
+                        <!--<div class="col-lg-2 col-md-2 name_title">-->
+                        <!--填报人员姓名:-->
+                        <!--</div>-->
+                        <!--<div class="col-lg-4 col-md-4" id="tbry">-->
+                        <!--情况类型-->
+                        <!--</div>-->
+                        <!--<div class="col-lg-2 col-md-2 name_title">-->
+                        <!--接警人姓名:-->
+                        <!--</div>-->
+                        <!--<div class="col-lg-4 col-md-4" id="jjxm">-->
+                        <!--JoAFC-->
+                        <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="col-lg-12 col-md-12 the_row">-->
+
+                        <!--<div class="col-lg-2 col-md-2 name_title">-->
+                        <!--接警时间:-->
+                        <!--</div>-->
+                        <!--<div class="col-lg-4 col-md-4" id="jjsj">-->
+                        <!--时间-->
+                        <!--</div>-->
+                        <!--</div>-->
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">关闭
+                </button>
+                <!--<button type="button" class="btn btn-primary">-->
+                <!--提交更改-->
+                <!--</button>-->
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+<!-- 全局js -->
+<script src="../js/jquery.min.js?v=2.1.4"></script>
+<script src="../js/bootstrap.min.js?v=3.3.6"></script>
+
+<!-- ECharts -->
+<script src="echarts.min.js"></script>
+<script src="zongzhiIndex.js"></script>
+</body>
+</html>
+<script>
+    function centerModals() {
+        $('.modal').each(function (i) {
+            var $clone = $(this).clone().css('display', 'block').appendTo('body');
+            var top = Math.round(($clone.height() - $clone.find('.modal-content').height()) / 2);
+            top = top > 50 ? top : 0;
+            $clone.remove();
+            $(this).find('.modal-content').css("margin-top", top);
+        });
+    }
+
+    // 在模态框出现的时候调用垂直居中函数
+    $('.modal').on('show.bs.modal', centerModals);
+    // 在窗口大小改变的时候调用垂直居中函数
+    $(window).on('resize', centerModals);
+
+    function kxqkDetile(kyqkVal) {
+        var kyqkValArr = [];
+        kyqkValArr = kyqkVal.split(',');
+        for (var i = 0; i < kyqkValArr.length; i++) {
+            $('#hylb').html(kyqkValArr[0]);
+            $('#qymc').html(kyqkValArr[1]);
+            $('#dwmc').html(kyqkValArr[2]);
+            $('#kyqklx').html(kyqkValArr[3]);
+            $('#xqms').html(kyqkValArr[4]);
+            $('#cljg').html(kyqkValArr[5]);
+            $('#tbsj').html(kyqkValArr[6]);
+
+        }
+    }
+
+    function detile(val) {
+        var valArr = val.split(',');
+        for (var i = 0; i < valArr.length; i++) {
+            $('#fbr').html(valArr[0]);
+            var time = new Date(Number(valArr[1])).toLocaleString();
+            $('#fbsj').html(time);
+            $('#fbdw').html(valArr[2]);
+            $('#bt').html(valArr[3]);
+            console.log(valArr[3]);
+            $("#fbnr").html(valArr[4]);
+        }
+    }
+
+    //    +data[i].fbr+','+data[i].fbsj+','+data[i].fbdw+','+data[i].bt+','+data[i].fbnr+
+    $('.openCloseBtn span').on('click',function(){
+
+        $('.wrapper-content').toggle();
+        console.log($('.openCloseBtn span').html())
+        if($('.openCloseBtn span').html() === '展开'){
+            $('.sidebard-panel').css('width',"100%");
+            $('.openCloseBtn span').html("收起");
+        } else{
+            $('.sidebard-panel').css('width',"20%");
+            $('.openCloseBtn span').html("展开");
+        }
+
+    })
+
+</script>

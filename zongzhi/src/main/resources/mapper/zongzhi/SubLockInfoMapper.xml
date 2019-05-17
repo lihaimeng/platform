@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yuxin.platform.zongzhi.mapper.SubLockInfoMapper">
+    <resultMap id="BaseResultMap" type="com.yuxin.platform.zongzhi.pojo.SubLockInfo">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="bksrdh" property="bksrdh" jdbcType="VARCHAR"/>
+        <result column="bksrsfzh" property="bksrsfzh" jdbcType="VARCHAR"/>
+        <result column="bksrxm" property="bksrxm" jdbcType="VARCHAR"/>
+        <result column="ksdz" property="ksdz" jdbcType="VARCHAR"/>
+        <result column="kslx" property="kslx" jdbcType="VARCHAR"/>
+        <result column="ksjgdz" property="ksjgdz" jdbcType="VARCHAR"/>
+        <result column="ksjgmc" property="ksjgmc" jdbcType="VARCHAR"/>
+        <result column="ksrdh" property="ksrdh" jdbcType="VARCHAR"/>
+        <result column="ksrsfzh" property="ksrsfzh" jdbcType="VARCHAR"/>
+        <result column="ksrxm" property="ksrxm" jdbcType="VARCHAR"/>
+        <result column="gxdwbm" property="gxdwbm" jdbcType="VARCHAR"/>
+        <result column="addtime" property="addtime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <resultMap id="BaseResultMap1" type="com.yuxin.platform.zongzhi.vo.SubLockInfoVo">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="bksrdh" property="bksrdh" jdbcType="VARCHAR"/>
+        <result column="bksrsfzh" property="bksrsfzh" jdbcType="VARCHAR"/>
+        <result column="bksrxm" property="bksrxm" jdbcType="VARCHAR"/>
+        <result column="ksdz" property="ksdz" jdbcType="VARCHAR"/>
+        <result column="kslx" property="kslx" jdbcType="VARCHAR"/>
+        <result column="kslxmc" property="kslxmc" jdbcType="VARCHAR"/>
+        <result column="ksjgdz" property="ksjgdz" jdbcType="VARCHAR"/>
+        <result column="ksjgmc" property="ksjgmc" jdbcType="VARCHAR"/>
+        <result column="ksrdh" property="ksrdh" jdbcType="VARCHAR"/>
+        <result column="ksrsfzh" property="ksrsfzh" jdbcType="VARCHAR"/>
+        <result column="ksrxm" property="ksrxm" jdbcType="VARCHAR"/>
+        <result column="gxdwbm" property="gxdwbm" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="hjdz" property="hjdz" jdbcType="VARCHAR"/>
+        <result column="addtime" property="addtime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id,bksrdh,bksrsfzh,bksrxm,ksdz,kslx,ksjgdz,ksjgmc,ksrdh,ksrsfzh,ksrxm,gxdwbm,addtime
+    </sql>
+    <sql id="Base_Column_List1">
+        sub_lock_info.id,sub_lock_info.bksrdh,sub_lock_info.bksrsfzh,sub_lock_info.bksrxm,sub_lock_info.ksdz,
+        sub_lock_info.kslx,sub_lock_info.kslxmc,sub_lock_info.ksjgdz,sub_lock_info.ksjgmc,sub_lock_info.ksrdh,
+        sub_lock_info.ksrsfzh,sub_lock_info.ksrxm,sub_lock_info.gxdwbm,sub_lock_info.addtime,sys_organization.name,
+        sub_lock_info.hjdz,sub_lock_info.price
+    </sql>
+
+    <select id="selectByCompanyName" resultType="int">
+        select count(distinct ksjgmc) from sub_lock_info
+    </select>
+
+    <select id="selectByGxdwbm" parameterType="java.util.Map" resultType="java.util.HashMap">
+        select s.description as "name" ,(select count(*) from sub_lock_info
+        <where>
+            <if test="beginStr!=null and beginStr!=''">
+                <![CDATA[ to_char(addtime,'yyyy-MM-dd HH24:mi:ss')>=#{beginStr,jdbcType=TIMESTAMP} ]]>
+            </if>
+            <if test="endStr!=null and endStr!=''">
+                <![CDATA[ AND  to_char(addtime,'yyyy-MM-dd HH24:mi:ss') <= #{endStr,jdbcType=TIMESTAMP} ]]>
+            </if>
+        </where>
+        AND gxdwbm like concat(brevitycode,'%') ) as "value"
+        from sys_organization s
+        where s.organization_id= #{organizationid,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectByGxdwbm1" parameterType="java.util.Map" resultType="java.util.HashMap">
+        select s.description as "name",(select count(distinct ksjgmc) from sub_lock_info
+        <where>
+            <if test="beginStr!=null and beginStr!=''">
+                <![CDATA[ to_char(addtime,'yyyy-MM-dd HH24:mi:ss')>=#{beginStr,jdbcType=TIMESTAMP} ]]>
+            </if>
+            <if test="endStr!=null and endStr!=''">
+                <![CDATA[ AND  to_char(addtime,'yyyy-MM-dd HH24:mi:ss') <= #{endStr,jdbcType=TIMESTAMP} ]]>
+            </if>
+        </where>
+        AND gxdwbm like concat(brevitycode,'%')) as "value"
+        from sys_organization s
+        where s.organization_id= #{organizationid,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectLastSevenDay" parameterType="java.util.Map" resultType="java.util.HashMap">
+        select to_char(a.click_date,'yyyy-mm-dd')  "name",nvl(b.count,0)  "value"
+        from (
+        SELECT
+            SYSDATE  AS click_date from dual
+          UNION
+          ALL
+          SELECT
+            (SYSDATE- 1) AS click_date from dual
+          UNION
+          ALL
+          SELECT
+            (SYSDATE- 2) AS click_date from dual
+          UNION
+          ALL
+          SELECT
+             (SYSDATE- 3) AS click_date from dual
+          UNION
+          ALL
+          SELECT
+             (SYSDATE- 4) AS click_date from dual
+          UNION
+          ALL
+          SELECT
+             (SYSDATE- 5) AS click_date from dual
+          UNION
+          ALL
+          SELECT
+        (SYSDATE- 6) AS click_date from dual) a left join (
+        select addtime as datetime, count(*) as count
+        from sub_lock_info where gxdwbm like CONCAT(CONCAT('', #{gxdwbm,jdbcType=VARCHAR}),'%')
+        group by addtime
+        ) b on a.click_date = b.datetime
+        order by "name"
+    </select>
+
+    <select id="selectOfyear" parameterType="java.util.Map" resultType="java.util.HashMap">
+        SELECT to_char(addtime,'yyyy-mm')  as "name",count(Distinct addtime) as "value" FROM sub_lock_info where
+        to_char(addtime,'yyyy-mm')>
+        to_char(add_months(to_date(sysdate,'yyyy-mm'),-2),'yyyy-mm')
+        AND gxdwbm like CONCAT(CONCAT('', #{gxdwbm,jdbcType=VARCHAR}),'%')
+        GROUP BY to_number(to_char(addtime,'mm')),to_char(addtime,'yyyy-mm')
+        ORDER BY to_char(addtime,'yyyy-mm')
+    </select>
+    <select id="selectGroupByGxdwbm" parameterType="java.util.Map" resultType="java.util.HashMap">
+        <!-- select COUNT(*) as value ,kslxmc as name
+         from sub_lock_info
+         <where>
+             <if test="beginStr!=null and beginStr!=''">
+                 <![CDATA[ addtime>=#{beginStr,jdbcType=TIMESTAMP} ]]>
+             </if>
+             <if test="endStr!=null and endStr!=''">
+                 <![CDATA[ AND  addtime <= #{endStr,jdbcType=TIMESTAMP} ]]>
+             </if>
+         </where>
+         AND gxdwbm like CONCAT('', #{gxdwbm,jdbcType=VARCHAR},'%')
+         group BY kslx-->
+        select p.DIC_NAME "name", nvl((select COUNT(*)
+        from sub_lock_info
+        <where>
+            <if test="beginStr!=null and beginStr!=''">
+                <![CDATA[ to_char(addtime,'yyyy/MM/dd HH24:mi:ss')>=#{beginStr,jdbcType=TIMESTAMP} ]]>
+            </if>
+            <if test="endStr!=null and endStr!=''">
+                <![CDATA[ AND  to_char(addtime,'yyyy/MM/dd HH24:mi:ss') <= #{endStr,jdbcType=TIMESTAMP} ]]>
+            </if>
+        </where>
+        AND gxdwbm like CONCAT(CONCAT('', #{gxdwbm,jdbcType=VARCHAR}),'%')
+        and sub_lock_info.kslx=p.DIC_CODE) ,0) "value"
+        from pub_dictionary p where p.PDICTID=127
+    </select>
+    <select id="countCompanyStaff" resultType="int">
+        select count(distinct ksrxm) from sub_lock_info
+    </select>
+    <select id="countLock" resultType="int">
+        select count(distinct id) from sub_lock_info
+    </select>
+
+    <select id="countLockByDay" resultType="int">
+        select count(id) from sub_lock_info where  FLOOR(addtime-to_date('1990-01-01 00:00:00','yyyy-mm-dd hh24:mi:ss')) = FLOOR(sysdate -to_date('1990/01/01 00:00:00','yyyy/mm/dd hh24:mi:ss'))
+    </select>
+
+    <select id="selectLockByParams" resultMap="BaseResultMap1" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List1"/>
+        from sub_lock_info left join sys_organization on sub_lock_info.gxdwbm=sys_organization.code
+        <where>
+            <if test="bksrdh != null and bksrdh!=''">
+                sub_lock_info.bksrdh like CONCAT(CONCAT('%', #{bksrdh,jdbcType=VARCHAR}),'%')
+            </if>
+            <if test="bksrsfzh != null and bksrsfzh!=''">
+                AND sub_lock_info.bksrsfzh like CONCAT(CONCAT('%',#{bksrsfzh,jdbcType=VARCHAR}),'%')
+            </if>
+            <if test="bksrxm != null and bksrxm!=''">
+                AND sub_lock_info.bksrxm like CONCAT(CONCAT('%',#{bksrxm,jdbcType=VARCHAR}),'%')
+            </if>
+            <if test="ksrxm != null and ksrxm!=''">
+                AND sub_lock_info.ksrxm like CONCAT(CONCAT('%', #{ksrxm,jdbcType=VARCHAR}),'%')
+            </if>
+            <if test="ksrdh != null and ksrdh!=''">
+                AND sub_lock_info.ksrdh like CONCAT(CONCAT('%', #{ksrdh,jdbcType=VARCHAR}),'%')
+            </if>
+            <if test="ksrsfzh != null and ksrsfzh!=''">
+                AND sub_lock_info.ksrsfzh like CONCAT(CONCAT('%', #{ksrsfzh,jdbcType=VARCHAR}),'%')
+            </if>
+            <if test="kslx != null and kslx!=''">
+                AND sub_lock_info.kslx = #{kslx,jdbcType=VARCHAR}
+            </if>
+            <if test="qymc != null and qymc!=''">
+                AND sub_lock_info.qymc like CONCAT(CONCAT('%', #{qymc,jdbcType=VARCHAR}),'%')
+            </if>
+            <if test="gxdwbm != null and gxdwbm!=''">
+                AND sub_lock_info.gxdwbm like CONCAT(CONCAT('', #{gxdwbm,jdbcType=VARCHAR}),'%')
+            </if>
+            <if test="ksdz != null and ksdz!=''">
+                AND sub_lock_info.ksdz like CONCAT(CONCAT('%', #{ksdz,jdbcType=VARCHAR}),'%')
+            </if>
+            <if test="ksjgdz != null and ksjgdz!=''">
+                AND sub_lock_info.ksjgdz like CONCAT(CONCAT('%', #{ksjgdz,jdbcType=VARCHAR}),'%')
+            </if>
+            <if test="ksjgmc != null and ksjgmc!=''">
+                AND sub_lock_info.ksjgmc like CONCAT(CONCAT('%', #{ksjgmc,jdbcType=VARCHAR}),'%')
+            </if>
+            <if test="unlockedBeginTime!=null and unlockedBeginTime!='' ">
+                <![CDATA[ AND sub_lock_info.addtime>=#{unlockedBeginTime,jdbcType=TIMESTAMP} ]]>
+            </if>
+            <if test="unlockedEndTime!=null and unlockedEndTime!=''">
+                <![CDATA[ AND  sub_lock_info.addtime <= #{unlockedEndTime,jdbcType=TIMESTAMP} ]]>
+            </if>
+            <!--<if test="registerDateStart!=null">
+              <![CDATA[ AND register_date>=#{registerDateStart,jdbcType=TIMESTAMP} ]]>
+            </if>
+            <if test="registerDateEnd!=null">
+              <![CDATA[ AND  register_date <= #{registerDateEnd,jdbcType=TIMESTAMP} ]]>
+            </if>-->
+        </where>
+        ORDER BY sub_lock_info.addtime DESC
+    </select>
+
+</mapper>

@@ -1,0 +1,9 @@
+.modal-content {
+    width: 700px;
+}
+
+.save {
+    float: right;
+    padding-right: 21.4%;
+    margin-top: -1px;
+}

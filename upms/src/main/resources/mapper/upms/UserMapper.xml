@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yuxin.platform.upms.mapper.UserMapper">
+    <resultMap id="BaseResultMap" type="com.yuxin.platform.upms.pojo.User">
+        <id column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="organization_id" property="organizationId"
+                jdbcType="INTEGER"/>
+        <result column="username" property="username" jdbcType="VARCHAR"/>
+        <result column="password" property="password" jdbcType="VARCHAR"/>
+        <result column="realname" property="realname" jdbcType="VARCHAR"/>
+        <result column="sex" property="sex" jdbcType="TINYINT"/>
+        <result column="status" property="status" jdbcType="TINYINT"/>
+        <result column="email" property="email" jdbcType="VARCHAR"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
+        <result column="addtime" property="addtime" jdbcType="DATE"/>
+        <result column="organizationName" property="organizationName"
+                jdbcType="VARCHAR"/>
+        <result column="roleName" property="roleName" jdbcType="VARCHAR"/>
+        <result column="qyrybm" property="qyrybm" jdbcType="VARCHAR"/>
+    </resultMap>
+    <select id="selectUserList" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select
+        <!-- <include refid="Base_Column_List"/>-->
+        *
+        from sys_user
+        <where>
+            <if test="username != null and username!=''">
+                username LIKE CONCAT(CONCAT('%',#{username,jdbcType=VARCHAR}),'%')
+            </if>
+            <if test="realname != null and realname!=''">
+                AND realname LIKE CONCAT(CONCAT('%',#{realname,jdbcType=VARCHAR}),'%')
+            </if>
+            <if test="phone != null and phone!=''">
+                AND phone LIKE CONCAT(CONCAT('%',#{phone,jdbcType=VARCHAR}),'%')
+            </if>
+            <if test="organizationId != null and organizationId!=''">
+                AND organization_id =#{organizationId,jdbcType=INTEGER}
+            </if>
+        </where>
+        order by user_id DESC
+    </select>
+    <sql id="Base_Column_List">
+        user_id, organization_id, username, password, realname,
+        sex, status, email,
+        phone,qyrybm,
+        addtime
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap"
+            parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_user
+        where user_id = #{userId,jdbcType=INTEGER} ORDER BY user_id DESC
+    </select>
+
+    <select id="userLogin" resultMap="BaseResultMap"
+            parameterType="com.yuxin.platform.upms.pojo.User">
+        select
+        user_id, organization_id, username, password,
+        realname,
+        sex, status, email,
+        phone,
+        addtime ,qyrybm,
+        (select name from
+        sys_organization o where
+        u.organization_id=o.organization_id) as
+        organizationName,
+        (select name from sys_role r WHERE r.role_id=(select
+        role_id from
+        sys_user_role ur where ur.user_id=u.user_id )) roleName
+        from sys_user u
+        where username = #{username,jdbcType=VARCHAR} and
+        password=
+        #{password,jdbcType=VARCHAR}
+        AND status!= 0 ORDER BY user_id DESC
+    </select>
+
+    <select id="selectByOrganizationId" resultMap="BaseResultMap"
+            parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_user
+        where organization_id =#{organizationId,jdbcType=INTEGER}
+        <!--in ((SELECT organization_id FROM sys_organization WHERE pid = #{organizationId,jdbcType=INTEGER}))
+		OR organization_id in (SELECT organization_id FROM sys_organization WHERE pid in(SELECT organization_id FROM sys_organization WHERE pid = #{organizationId,jdbcType=INTEGER}))
+		OR organization_id = #{organizationId,jdbcType=INTEGER}-->
+        ORDER BY user_id DESC
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from
+        sys_user
+        where user_id = #{userId,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.yuxin.platform.upms.pojo.User">
+        <selectKey  keyProperty="userId" resultType="int" order="BEFORE">
+            select nvl(max(user_id),0)+1 from sys_user
+        </selectKey>
+        insert into sys_user (user_id,
+        organization_id, username,
+        password, realname, sex,
+        status, email,
+        phone,qyrybm,
+        addtime)
+        values (#{userId,jdbcType=INTEGER},
+        #{organizationId,jdbcType=INTEGER},
+        #{username,jdbcType=VARCHAR},
+        #{password,jdbcType=VARCHAR}, #{realname,jdbcType=VARCHAR},
+        #{sex,jdbcType=TINYINT},
+        #{status,jdbcType=TINYINT},
+        #{email,jdbcType=VARCHAR},
+        #{phone,jdbcType=VARCHAR},
+        #{qyrybm,jdbcType=VARCHAR},
+        #{addtime,jdbcType=DATE})
+    </insert>
+    <insert id="insertSelective" parameterType="com.yuxin.platform.upms.pojo.User" useGeneratedKeys="true"
+            keyProperty="userId" keyColumn="user_id">
+        <selectKey  keyProperty="userId" resultType="int" order="BEFORE">
+            select nvl(max(user_id),0)+1 from sys_user
+        </selectKey>
+        insert into sys_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="organizationId != null">
+                organization_id,
+            </if>
+            <if test="username != null">
+                username,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+            <if test="realname != null">
+                realname,
+            </if>
+            <if test="sex != null">
+                sex,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="email != null">
+                email,
+            </if>
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="addtime != null">
+                addtime,
+            </if>
+            <if test="qyrybm != null">
+                qyrybm,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="organizationId != null">
+                #{organizationId,jdbcType=INTEGER},
+            </if>
+            <if test="username != null">
+                #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="realname != null">
+                #{realname,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                #{sex,jdbcType=TINYINT},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=TINYINT},
+            </if>
+            <if test="email != null">
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="addtime != null">
+                #{addtime,jdbcType=DATE},
+            </if>
+            <if test="qyrybm != null">
+                #{qyrybm,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.yuxin.platform.upms.pojo.User">
+        update sys_user
+        <set>
+            <if test="organizationId != null">
+                organization_id = #{organizationId,jdbcType=INTEGER},
+            </if>
+            <if test="username != null">
+                username = #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="realname != null">
+                realname = #{realname,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                sex = #{sex,jdbcType=TINYINT},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=TINYINT},
+            </if>
+            <if test="email != null">
+                email = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                phone = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="addtime != null">
+                addtime = #{addtime,jdbcType=DATE},
+            </if>
+            <if test="qyrybm != null">
+                #{qyrybm,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where user_id = #{userId,jdbcType=INTEGER}
+    </update>
+
+    <update id="updatePwd" parameterType="com.yuxin.platform.upms.pojo.User">
+        update sys_user
+        <set>
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where user_id = #{userId,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.yuxin.platform.upms.pojo.User">
+        update sys_user
+        set organization_id = #{organizationId,jdbcType=INTEGER},
+        username =
+        #{username,jdbcType=VARCHAR},
+        password = #{password,jdbcType=VARCHAR},
+        realname = #{realname,jdbcType=VARCHAR},
+        sex = #{sex,jdbcType=TINYINT},
+        status = #{status,jdbcType=TINYINT},
+        email = #{email,jdbcType=VARCHAR},
+        phone = #{phone,jdbcType=VARCHAR},
+        qyrybm = #{qyrybm,jdbcType=VARCHAR},
+        addtime = #{addtime,jdbcType=DATE},
+        where user_id = #{userId,jdbcType=INTEGER}
+    </update>
+    <select id="findByUserName" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        user_id, organization_id, username, password,
+        realname,
+        sex, status, email,
+        phone,
+        addtime ,qyrybm,
+        (select name from
+        sys_organization o where
+        u.organization_id=o.organization_id) as
+        organizationName,
+        (select name from sys_role r WHERE r.role_id=(select
+        role_id from
+        sys_user_role ur where ur.user_id=u.user_id )) roleName
+        from sys_user u
+        where username = #{userName} ORDER BY user_id DESC
+    </select>
+
+    <select id="selectByUserName" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        user_id, organization_id, username, password,
+        realname,sex, status, email,phone,addtime ,qyrybm
+        from sys_user
+        where username = #{userName}
+    </select>
+</mapper>

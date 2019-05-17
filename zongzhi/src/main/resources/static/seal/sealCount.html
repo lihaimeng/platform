@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>印章行业</title>
+    <meta name="keywords" content="Table">
+    <meta name="description" content="Table">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="../css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="../css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="../css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="../css/search-criteria.css" rel="stylesheet">
+    <link href="../css/animate.css" rel="stylesheet">
+    <link href="../css/style.css?v=4.1.0" rel="stylesheet">
+    <link href="../smoke-v3.1.1/css/smoke.css" rel="stylesheet">
+    <link href="../smoke-v3.1.1/css/smoke.min.css" rel="stylesheet">
+    <!--select chosen-->
+    <link href="../css/plugins/chosen/chosen.css" rel="stylesheet">
+    <style type="text/css">
+        .wrapper {
+            width: 100%;
+            height: 100%;
+        }
+
+        .my-container {
+            display: inline-block;
+            margin-right: 30px;
+        }
+
+        .myLabel-content, .myText-content, .myBtn-content {
+            display: inline-block;
+            margin-left: 10px;
+        }
+
+        .myLabel-content, .myText-content input[type='text'], .myBtn-content .btn {
+            height: 30px;
+            font-size: 12px;
+        }
+
+        .myBtn-content .btn {
+            margin-bottom: 10px;
+        }
+
+        .modal {
+            width: 100%;
+            height: 100%;
+        }
+
+        .inmodal .modal-header {
+            padding: 17px 15px;
+            text-align: center;
+        }
+
+        .modal-header {
+            width: 100%;
+            /*height: 10%;*/
+        }
+
+        .modal-body {
+            width: 100%;
+            height: 350px;
+            overflow: auto;
+        }
+
+        .pawnMsg1 .col-md-12 {
+            width: 100%;
+            height: 30%;
+        }
+
+        .modal-header .btn {
+            width: 47%;
+        }
+
+        .modal-header .btn span {
+            text-align: center;
+            font-size: 16px;
+            width: 100%;
+            height: 46px;
+            margin-top: -16px;
+        }
+
+        .upload {
+            text-align: right;
+        }
+
+        .downloadMsg {
+            padding-top: 0px;
+        }
+        .myLabel-content{
+            float: left;
+            line-height: 30px;
+        }
+        .myLabel-content, .myText-content{
+            float: left;
+        }
+        input.companyName{
+            float: left;
+        }
+    </style>
+
+</head>
+<body class="gray-bg" style="height: 100%;">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="ibox float-e-margins" style="height: 100%;">
+        <div class="ibox-title">
+            <h5>印章行业>印章查询</h5>
+        </div>
+        <div class="ibox-content" style="height: 95%;overflow-y: auto;">
+            <div class="row row-lg">
+                <div class="col-sm-12">
+                    <div class="example-wrap">
+                        <div class="example">
+                            <!--div class="my-container">
+                                <label class="myLabel-content">单位编码</label>
+                                <div class="myText-content">
+                                    <input id='companyNum' type="text" class="form-control" placeholder="">
+                                </div>
+                            </div>-->
+                            <div class="my-container">
+                                <label class="myLabel-content">单位名称</label>
+                                <div class="myText-content">
+                                    <input id='companyName' type="text" class="form-control" placeholder="">
+                                </div>
+                            </div>
+                            <div class="my-container">
+                                <label class="myLabel-content">管辖单位</label>
+                                <div class="myText-content">
+                                    <select id="dominion" class="chosen-select form-control">
+                                        <option value="">全部</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="my-container">
+                                <label class="myLabel-content">印章材质</label>
+                                <div class="myText-content">
+                                    <select id="sealMaterial" class="form-control" name="">
+                                        <option value="">全部</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="my-container">
+                                <label class="myLabel-content">印章规格</label>
+                                <div class="myText-content">
+                                    <select id="sealModel" class="form-control" name="">
+                                        <option value="">全部</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="my-container">
+                                <label class="myLabel-content">印章类型</label>
+                                <div class="myText-content">
+                                    <select id="sealType" class="form-control" name="">
+                                        <option value="">全部</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="my-container">
+                                <label class="myLabel-content">登记时间</label>
+                                <div class="myText-content">
+                                    <input id="registerTimeStart" style="vertical-align:middle;"
+                                           class="form-control layer-date" placeholder=""
+                                           onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+                                </div>
+                                <label class="myLabel-content" style="width:0px;">至</label>
+                                <div class="myText-content">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;<input style="vertical-align:middle;" id="registerTimeEnd"
+                                                                   class="form-control layer-date" placeholder="	"
+                                                                   onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+                                </div>
+                            </div>
+                            <!--<div class="my-container">
+                                <label class="myLabel-content">统计方式</label>
+                                <div class="myText-content">
+                                    <select id="countType" class="form-control" name="">
+                                        <option>扇形图</option>
+                                        <option>折线图</option>
+                                        <option>柱形图</option>
+                                    </select>
+                                </div>
+                            </div>-->
+                            <div style="display:block;" class="btn-group">
+                                <div style="float:left;">
+                                    <button id="btn_Msg" type="button" class="btn btn-default glyphicon "
+                                            data-toggle="modal" data-target="#myModal5"
+                                            style="padding: 3px 13px 8px 14px;">
+                                        <span class="glyphicon glyphicon-search" style="margin-right: 3px;"></span>详情
+                                    </button>
+                                </div>
+                                <div style="float:right;">
+                                    <button id="search_btn" type="button" class="btn btn-primary">查&nbsp;&nbsp;&nbsp;&nbsp;询</button>
+                                    <!--<button id="count_btn" type="button" class="btn btn-default">统&nbsp;&nbsp;&nbsp;&nbsp;计</button>
+                                    <button id="export_btn" type="button" class="btn btn-default">导&nbsp;&nbsp;&nbsp;&nbsp;出</button>-->
+                                </div>
+                            </div>
+                            <table id="sealTable" class="table table-bordered"
+                                   data-mobile-responsive="true"><!--data-height="660"-->
+                                <thead>
+                                <tr>
+                                    <th>序号</th>
+                                    <th></th>
+                                    <th>单位编号</th>
+                                    <th>单位名称</th>
+                                    <th>管辖单位</th>
+                                    <th>印章名称</th>
+                                    <th>印章类型</th>
+                                    <th>印章材质</th>
+                                    <th>印章规格</th>
+                                    <th>中心图案</th>
+                                    <th>登记时间</th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- 弹出框内容 -->
+                    <div class="modal inmodal fade" id="myModal5" tabindex="-1" role="dialog" aria-hidden="true"
+                         data-backdrop="static">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                                            class="sr-only">Close</span></button>
+                                    <br>
+                                    <!--<button style="margin-left: 10px;" id="btn_companyMsg1" type="button"
+                                            class="btn btn-default" data-toggle="modal" onclick="changeMsg1()">
+                                        <span class="" aria-hidden="true">基本信息</span>
+                                    </button>
+                                    <button id="btn_companyMsg2" type="button" class="btn btn-default"
+                                            data-toggle="modal" onclick="changeMsg2()" style="margin-left: -5px;">
+                                        <span class="" aria-hidden="true">上传资料</span>
+                                    </button>-->
+                                </div>
+                                <div class="modal-body">
+                                    <div class="col-md-12" id="company1">
+                                        <div class="ibox float-e-margins">
+                                            <div class="col-md-12 ibox-content">
+                                                <form role="form" class="form-horizontal m-t col-md-12">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group draggable ui-draggable">
+                                                            <label class="col-sm-5 control-label col5">单位编码:</label>
+                                                            <div class="col-sm-7">
+                                                                <p class="form-control-static" id="companyNumMsg"></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group draggable ui-draggable">
+                                                            <label class="col-sm-5 control-label col5">单位名称:</label>
+                                                            <div class="col-sm-7">
+                                                                <p class="form-control-static" id="companyNameMsg"></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group draggable ui-draggable">
+                                                            <label class="col-sm-5 control-label col5">印章编码:</label>
+                                                            <div class="col-sm-7">
+                                                                <p class="form-control-static" id="sealNumMsg"></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group draggable ui-draggable">
+                                                            <label class="col-sm-5 control-label col5">印章类型:</label>
+                                                            <div class="col-sm-7">
+                                                                <p class="form-control-static" id="sealTypeMsg"></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group draggable ui-draggable">
+                                                            <label class="col-sm-5 control-label col5">印章规格:</label>
+                                                            <div class="col-sm-7">
+                                                                <p class="form-control-static" id="sealModelMsg"></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group draggable ui-draggable">
+                                                            <label class="col-sm-5 control-label col5">印章材料:</label>
+                                                            <div class="col-sm-7">
+                                                                <p class="form-control-static" id="sealMaterialMsg"></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group draggable ui-draggable">
+                                                            <label class="col-sm-5 control-label col5">印章形状:</label>
+                                                            <div class="col-sm-7">
+                                                                <p class="form-control-static" id="sealShapeMsg"></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group draggable ui-draggable">
+                                                            <label class="col-sm-5 control-label col5">中心图案:</label>
+                                                            <div class="col-sm-7">
+                                                                <p class="form-control-static"
+                                                                   id="centerPatternMsg"></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group draggable ui-draggable">
+                                                            <label class="col-sm-5 control-label col5">登记时间:</label>
+                                                            <div class="col-sm-7">
+                                                                <p class="form-control-static" id="registerTime"></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- 上传资料 -->
+                                    <!--<div class="col-md-12" id="company2">
+                                        <div class="ibox float-e-margins">
+                                            <div class="col-md-12 ibox-content">
+                                                <div class="col-md-12">
+                                                    <div class="form-group draggable ui-draggable">
+                                                        <label class="col-sm-4 control-label upload">印模留档:</label>
+                                                        <div class="col-sm-3">
+                                                            <p class="form-control-static downloadMsg" id="sealFileMsg">
+                                                                xxx</p>
+                                                        </div>
+                                                        <div class="col-sm-1">
+                                                            <a id="download4">下载</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<!-- 全局js -->
+<script src="../js/jquery.min.js?v=2.1.4"></script>
+<script src="../js/bootstrap.min.js?v=3.3.6"></script>
+<!-- 自定义js -->
+<script src="../js/content.js?v=1.0.0"></script>
+<!-- Bootstrap table -->
+<script src="../js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="../js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+<script src="../js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+<script src="../seal/sealCount.js"></script>
+<!-- layerDate plugin javascript -->
+<script src="../js/plugins/layer/laydate/laydate.js"></script>
+<!-- Smoke alert -->
+<script src="../smoke-v3.1.1/js/smoke.js"></script>
+<script src="../smoke-v3.1.1/js/smoke.min.js"></script>
+<!-- select Chosen -->
+<script src="../js/plugins/chosen/chosen.jquery.js"></script>
+<script src="../js/demo/form-advanced-demo.js"></script>
+</body>
+</html>

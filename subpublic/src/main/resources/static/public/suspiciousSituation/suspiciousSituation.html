@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>可疑情况管理</title>
+    <meta name="keywords" content="Table">
+    <meta name="description" content="Table">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="../../css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="../../css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="../../css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="../../css/style.css?v=4.1.0" rel="stylesheet">
+    <link href="../../css/animate.css" rel="stylesheet">
+    <link href="../../css/search-criteria.css" rel="stylesheet">
+    <!-- smoke -->
+    <link href="../../smoke-v3.1.1/css/smoke.css" rel="stylesheet">
+    <link href="../../smoke-v3.1.1/css/smoke.min.css" rel="stylesheet">
+    <style type="text/css">
+        .my-container {
+            display: inline-block;
+            margin-right: 30px;
+        }
+
+        .myLabel-content, .myText-content, .myBtn-content {
+            display: inline-block;
+            margin-left: 10px;
+        }
+
+        .myLabel-content, .myText-content input[type='text'], .myBtn-content .btn {
+            height: 30px;
+            font-size: 12px;
+        }
+
+        .myBtn-content .btn {
+            margin-bottom: 10px;
+        }
+
+        .modal {
+            width: 100%;
+            height: 100%;
+        }
+
+        .modal-header {
+            width: 100%;
+            height: 10%;
+        }
+
+        .modal-body {
+            width: 100%;
+            height: 330px;
+            padding: 28px 40px 43px 55px;
+        }
+
+        .pawnMsg1 .col-md-12 {
+            width: 100%;
+            height: 30%;
+        }
+
+        .modal-header .btn {
+            width: 47%;
+        }
+
+        .modal-header .btn span {
+            text-align: center;
+            font-size: 16px;
+            width: 100%;
+            height: 46px;
+            margin-top: -16px;
+        }
+
+        .dataMsg {
+            width: 14.2%;
+        }
+
+        .col5 {
+            margin-left: -50px;
+            width: 34.666667%;
+        }
+
+        .col-sm-7 {
+            margin-top: 5px;
+            margin-left: -10px;
+        }
+
+        .has-error {
+            border-color: #ED5565;
+        }
+    </style>
+
+</head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <!-- Panel Other -->
+    <div class="ibox float-e-margins">
+        <div class="ibox-title">
+            <h5>日常管理>可疑情况上报</h5>
+        </div>
+        <div class="ibox-content">
+            <div class="row row-lg">
+                <div class="col-sm-12">
+                    <!-- Example Events -->
+                    <div class="example-wrap">
+                        <div class="example">
+                            <div class="my-container">
+                                <label class="myLabel-content">可疑情况类型</label>
+                                <div class="myText-content">
+                                    <select class="form-control kyqklx" id="kyqklx" name="">
+                                        <option value="">全部</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="my-container">
+                                <label class="myLabel-content">填报时间</label>
+                                <div class="myText-content">
+                                    <input id="startDate" style="vertical-align:middle;" class="form-control layer-date"
+                                           placeholder=""
+                                           onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+                                </div>
+                                <label class="myLabel-content" style="width:0px;">至</label>
+                                <div class="myText-content">
+                                    &nbsp;&nbsp;&nbsp;<input style="vertical-align:middle;" id="endDate"
+                                                             class="form-control layer-date" placeholder="	"
+                                                             onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+                                </div>
+                            </div>
+
+                            <div style="display:block;" class="btn-group">
+                                <div style="float:left;">
+                                    <button type="button" class="btn btn-default glyphicon " id="detailButton"
+                                            data-toggle="modal" data-target="#myModal1"
+                                            style="padding: 3px 13px 8px 14px;">
+                                        <span class="glyphicon glyphicon-search" style="margin-right: 3px;"></span>详情
+                                    </button>
+                                    <button style="margin-left: -2px;padding: 3px 13px 8px 14px;" id="addButton"
+                                            type="button" class="btn btn-default glyphicon " data-toggle="modal"
+                                            data-target="#myModal2" style="padding: 3px 13px 8px 14px;">
+                                        <span class="glyphicon glyphicon-plus" style="margin-right: 3px;"></span>添加
+                                    </button>
+                                    <button type="button" id="deleteButton"
+                                            class="btn-danger btn btn-default glyphicon deleteBtn" data-toggle="modal"
+                                            style="padding: 3px 13px 8px 14px;">
+                                        <span class="glyphicon-remove" style="margin-right: 3px;"></span>删除
+                                    </button>
+                                </div>
+                                <div style="float:right;">
+                                    <button id="search" type="button" class="btn btn-primary">
+                                        查&nbsp;&nbsp;&nbsp;&nbsp;询
+                                    </button>
+                                </div>
+                            </div>
+                            <table id="exampleTableEvents" class="table table-bordered" data-height="660"
+                                   data-mobile-responsive="true">
+                                <thead>
+                                <tr>
+                                    <th style="background-color:#f9f9f9;" data-field="number">序号</th>
+                                    <th data-field="state" data-checkbox="true"></th>
+                                    <th style="background-color:#f9f9f9;" data-field="kyqkid">登记序号</th>
+                                    <th style="background-color:#f9f9f9;" data-field="kyqklx">可疑情况类型</th>
+                                    <th style="background-color:#f9f9f9;" data-field="tbsj">填报时间</th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- End Example Events -->
+                    <!-- 详情弹出框内容 -->
+                    <div class="modal inmodal fade" id="myModal1" tabindex="-1" role="dialog" aria-hidden="true"
+                         data-backdrop="static">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content thumbnail">
+                                <div class="modal-body">
+                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                                            class="sr-only">Close</span></button>
+                                    <div class="col-md-12" style="margin-left: -10px;">
+                                        <div class="ibox float-e-margins" style="width: 915px;">
+                                            <form class="form-horizontal m-t  col-md-12" id="Form">
+                                                <div class="col-md-6">
+                                                    <div class="form-group draggable ui-draggable">
+                                                        <label class="col-sm-4 control-label">登记编号：</label>
+                                                        <div class="col-sm-8">
+                                                            <p class="form-control-static" id="djbh2"></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group draggable ui-draggable">
+                                                        <label class="col-sm-4 control-label">可疑情况类型：</label>
+                                                        <div class="col-sm-8">
+                                                            <p class="form-control-static" id="kyqklx2"></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group draggable ui-draggable">
+                                                        <label class="col-sm-4 control-label">填报人员编号：</label>
+                                                        <div class="col-sm-8">
+                                                            <p class="form-control-static" id="tbrybh2"></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group draggable ui-draggable">
+                                                        <label class="col-sm-4 control-label">填报人员姓名：</label>
+                                                        <div class="col-sm-8">
+                                                            <p class="form-control-static" id="tbryxm2"></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group draggable ui-draggable">
+                                                        <label class="col-sm-4 control-label">填报内容：</label>
+                                                        <div class="col-sm-8">
+                                                            <p class="form-control-static" id="tbnr2"></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <div class="clearfix">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 新增弹出框内容 -->
+                    <div class="modal inmodal fade" id="myModal2" tabindex="-1" role="dialog" aria-hidden="true"
+                         data-backdrop="static">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content thumbnail">
+                                <div class="modal-body">
+                                    <button type="button" class="close closeBtn" data-dismiss="modal"><span
+                                            aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                    <div class="col-md-12">
+                                        <div class="ibox float-e-margins" style="width: 124%;">
+                                            <form class="form-horizontal m-t  col-md-12" id="addForm">
+                                                <div class="col-md-12">
+                                                    <label class="myLabel-content"
+                                                           style="margin-left: 33px">可疑情况类型</label>
+                                                    <div class="myText-content">
+                                                        <select class="form-control kyqklx" id="kyqklx3" name="kyqklx3">
+                                                            <option value="">全部</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12" style="margin-top: 10px;">
+                                                    <label class="myLabel-content">填报内容</label>
+                                                    <br>
+                                                    <div class="myText-content  form-group">
+                                                        <textarea rows="6" id="tbnr3" name="tbnr3" cols="80"
+                                                                  style="resize: none;margin-left: 142px;margin-top: -34px;width: 69%"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div style="float:right;">
+                                                    <button id="search1" type="button"
+                                                            style=" margin-left: -347px;margin-top: 154px;"
+                                                            class="btn btn-primary">保&nbsp;&nbsp;&nbsp;&nbsp;存
+                                                    </button>
+                                                </div>
+                                            </form>
+                                            <div class="clearfix">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--弹出框结束-->
+                    <!-- 修改弹出框内容 -->
+                    <div class="modal inmodal fade" id="myModal3" tabindex="-1" role="dialog" aria-hidden="true"
+                         data-backdrop="static">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content thumbnail">
+                                <div class="modal-body">
+                                    <button type="button" class="close closeBtn" data-dismiss="modal"><span
+                                            aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                    <div class="ibox float-e-margins" style="width: 915px;">
+                                        <form class="form-horizontal m-t  col-md-12" id="editForm">
+                                            <div class="col-md-12">
+                                                <label class="myLabel-content">可疑情况类型</label>
+                                                <div class="myText-content">
+                                                    <select class="form-control" id="kyqklx4" name="kyqklx4">
+                                                        <option value="">全部</option>
+                                                        <option>通报协查人员</option>
+                                                        <option>违法犯罪活动</option>
+                                                        <option>其他</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <label class="myLabel-content form-group"
+                                                       style="margin-left:1.2%;margin-top: 2%;">填报内容</label>
+                                                <br>
+                                                <div class="myText-content">
+                                                    <textarea rows="6" cols="80" id="tbnr4" name="tbnr4"
+                                                              style="resize: none;margin-left: 50px;"></textarea>
+                                                </div>
+                                            </div>
+                                            <div style="float:right;">
+                                                <button id="search2" style=" margin-left: -296px;margin-top: 200px;"
+                                                        type="button" class="btn btn-primary">保&nbsp;&nbsp;&nbsp;&nbsp;存
+                                                </button>
+                                            </div>
+                                        </form>
+                                        <div class="clearfix">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--弹出框结束-->
+                </div>
+            </div>
+        </div>
+        <!-- End Panel Other -->
+    </div>
+</div>
+<!-- 全局js -->
+<script src="../../js/jquery.min.js?v=2.1.4"></script>
+<script src="../../js/bootstrap.min.js?v=3.3.6"></script>
+
+<!-- 自定义js -->
+<script src="../../js/content.js?v=1.0.0"></script>
+
+<!-- Bootstrap table -->
+<script src="../../js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="../../js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+<script src="../../js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+<!-- jQuery Validation plugin javascript-->
+<script src="../../js/plugins/validate/jquery.validate.min.js"></script>
+<script src="../../js/plugins/validate/messages_zh.min.js"></script>
+<script src="form-validate-roleJs.js"></script>
+<!-- layerDate plugin javascript -->
+<script src="../../js/plugins/layer/laydate/laydate.js"></script>
+<!-- Smoke alert -->
+<script src="../../smoke-v3.1.1/js/smoke.js"></script>
+<script src="../../smoke-v3.1.1/js/smoke.min.js"></script>
+<script src="suspiciousSituation.js"></script>
+<!--
+<script src="../../js/commonip.js"></script>
+-->
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+    <title>用户权限管理系统登录</title>
+    <meta name="keywords" content="">
+    <meta name="description"
+          content="">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/pawn_login.css" rel="stylesheet">
+    <link href="../../smoke-v3.1.1/css/smoke.css" rel="stylesheet">
+    <link href="../../smoke-v3.1.1/css/smoke.min.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <meta http-equiv="refresh" content="0;ie.html"/>
+    <![endif]-->
+    <script>
+        if (window.top !== window.self) {
+            window.top.location = window.location;
+        }
+    </script>
+
+</head>
+
+<body class="signin">
+<div class="signinpanel">
+    <div class="row">
+        <div class="col-sm-7">
+            <div class="signin-info"></div>
+        </div>
+        <div class="col-sm-5">
+            <form>
+                <!--  <h4 class="no-margins">登录：</h4>
+                <p class="m-t-md">登录到H+后台主题UI框架</p> -->
+
+                <input id="username" required type="text"
+                       class="form-control uname" placeholder="用户名"/> <input
+                    id="password" type="password" class="form-control pword m-b"
+                    required placeholder="密码"/>
+                <!--  <a href="">忘记密码了？</a> -->
+
+                <button id="login-bt" type="button"
+                        class="btn btn-success btn-block">登录
+                </button>
+            </form>
+
+        </div>
+    </div>
+    <div class="signup-footer">
+        <div class="pull-left">&copy; 2015 All Rights Reserved. H+</div>
+    </div>
+</div>
+</body>
+<script src="js/jquery.min.js?v=2.1.4"></script>
+<script src="js/login.js"></script>
+<script src="js/MD5.js"></script>
+<script src="js/bootstrap.min.js?v=3.3.6"></script>
+<script src="../../smoke-v3.1.1/js/smoke.js"></script>
+<script src="../../smoke-v3.1.1/js/smoke.min.js"></script>
+</html>

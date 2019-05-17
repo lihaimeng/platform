@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <meta name="keywords" content="Table">
+    <meta name="description" content="Table">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="../css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="../css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="../css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="../css/search-criteria.css" rel="stylesheet">
+    <link href="../css/animate.css" rel="stylesheet">
+    <link href="../css/style.css?v=4.1.0" rel="stylesheet">
+    <link href="../smoke-v3.1.1/css/smoke.css" rel="stylesheet">
+    <link href="../smoke-v3.1.1/css/smoke.min.css" rel="stylesheet">
+    <!--select chosen-->
+    <link href="../css/plugins/chosen/chosen.css" rel="stylesheet">
+    <style type="text/css">
+        .wrapper {
+            width: 100%;
+            height: 100%;
+        }
+
+        .my-container {
+            display: inline-block;
+            margin-right: 30px;
+        }
+
+        .myLabel-content, .myText-content, .myBtn-content {
+            display: inline-block;
+            margin-left: 10px;
+        }
+        .myLabel-content, .myText-content input[type='text'], .myBtn-content .btn {
+            height: 30px;
+            font-size: 12px;
+        }
+
+        .myBtn-content .btn {
+            margin-bottom: 10px;
+        }
+
+        .modal {
+            width: 100%;
+            height: 100%;
+        }
+
+        .inmodal .modal-header {
+            padding: 17px 15px;
+            text-align: center;
+        }
+
+        .form-control-static {
+/*            overflow: hidden;
+            text-overflow: ellipsis;*/
+            white-space: nowrap;
+        }
+        .modal-header {
+            width: 100%;
+            /*height: 10%;*/
+        }
+
+        .modal-body {
+            width: 100%;
+            height: auto;
+            overflow: auto;
+        }
+
+        .col-md-12 {
+            width: 100%;
+            height: 30%;
+        }
+
+        .modal-header .btn {
+            width: 47%;
+        }
+
+        .modal-header .btn span {
+            text-align: center;
+            font-size: 16px;
+            width: 100%;
+            height: 46px;
+            margin-top: -16px;
+        }
+
+        .upload {
+            text-align: right;
+        }
+
+        .downloadMsg {
+            padding-top: 0px;
+        }
+
+        label.myLabel-content {
+            width: 100px;
+            display: inline-block;
+            text-align: right;
+        }
+        .myLabel-content{
+            float: left;
+            line-height: 30px;
+        }
+        .myLabel-content, .myText-content{
+            float: left;
+        }
+        input.companyName{
+            float: left;
+        }
+    </style>
+    <script src="table-export.js"></script>
+
+</head>
+<body class="gray-bg" style="height: 100%;">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="ibox float-e-margins" style="height: 100%;">
+        <div class="ibox-title">
+            <h5>印章行业>新印章业务信息</h5>
+        </div>
+        <div class="ibox-content" style="height: 95%;overflow-y: auto;">
+            <div class="row row-lg">
+                <div class="col-sm-12">
+                    <div class="example-wrap">
+                        <div class="example">
+                            <div class="my-container" style="display: none">
+                                <label class="myLabel-content">使用单位编号</label>
+                                <div class="myText-content">
+                                    <input id="companyNum" type="text" class="form-control" placeholder="">
+                                </div>
+                            </div>
+                            <div class="my-container">
+                                <label class="myLabel-content">管辖单位</label>
+                                <div class="myText-content">
+                                    <select id="dominion" class="chosen-select form-control">
+                                        <option value="">全部</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="my-container">
+                                <label class="myLabel-content">使用单位名称</label>
+                                <div class="myText-content">
+                                    <input id='companyName' type="text" class="form-control" placeholder="">
+                                </div>
+                            </div>
+
+                            <div class="my-container">
+                                <label class="myLabel-content">制作单位名称</label>
+                                <div class="myText-content">
+                                    <input id='markCompanyName' type="text" class="form-control" placeholder="">
+                                </div>
+                            </div>
+                            <div class="my-container">
+                                <label class="myLabel-content">经办人姓名</label>
+                                <div class="myText-content">
+                                    <input id='markUerName' type="text" class="form-control" placeholder="">
+                                </div>
+                            </div>
+                            <div class="my-container">
+                                <label class="myLabel-content">登记时间</label>
+                                <div class="myText-content">
+                                    <input id="registerTimeStart" style="vertical-align:middle;"
+                                           class="form-control layer-date" placeholder=""
+                                           onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+                                </div>
+                                <label class="myLabel-content" style="width:0px;">至</label>
+                                <div class="myText-content">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;<input style="vertical-align:middle;" id="registerTimeEnd"
+                                                                   class="form-control layer-date" placeholder="	"
+                                                                   onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+                                </div>
+                            </div>
+                            <div style="display:block;" class="btn-group">
+                                <div style="float:left;">
+                                    <button id="btn_details" type="button" class="btn btn-default glyphicon "
+                                            data-toggle="modal" data-target="#myModal5"
+                                            style="padding: 3px 13px 8px 14px;">
+                                        <span class="glyphicon glyphicon-search" style="margin-right: 3px;"></span>详情
+                                    </button>
+                                </div>
+                                <div style="float:right;">
+                                    <button id="search_btn" type="button" class="btn btn-primary">查&nbsp;&nbsp;&nbsp;&nbsp;询</button>
+                                    <button type="button" id="btn_download" class="btn btn-primary">导&nbsp;&nbsp;&nbsp;&nbsp;出</button>
+                                </div>
+                            </div>
+                            <table id="sealOrderTable" class="table table-bordered"
+                                   data-mobile-responsive="true"><!--data-height="660"-->
+                                <thead>
+                                <tr>
+                                    <th>序号</th>
+                                    <th></th>
+                                    <th>使用单位名称</th>
+                                    <th>使用单位编号</th>
+                                    <th>经办人姓名</th>
+                                    <th>制作单位名称</th>
+                                    <th>管辖单位</th>
+                                    <th>登记时间</th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- 弹出框内容 -->
+                    <div class="modal inmodal fade" style='overflow: auto' id="myModal5" tabindex="-1" role="dialog"
+                         aria-hidden="true"
+                         data-backdrop="static">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                                            class="sr-only">Close</span></button>
+                                    <br>
+                                    <!--<button style="margin-left: 10px;" id="btn_companyMsg1" type="button"
+                                            class="btn btn-default" data-toggle="modal" onclick="changeMsg1()">
+                                        <span class="" aria-hidden="true">基本信息</span>
+                                    </button>
+                                    <button id="btn_companyMsg2" type="button" class="btn btn-default"
+                                            data-toggle="modal" onclick="changeMsg2()" style="margin-left: -5px;">
+                                        <span class="" aria-hidden="true">上传资料</span>
+                                    </button>-->
+                                </div>
+                                <div class="modal-body">
+                                    <div class="col-md-12" id="company1">
+                                        <div class="ibox float-e-margins">
+                                            <div class="ibox-title">
+                                                <h5>使用单位信息 :</h5>
+                                                <div class="ibox-tools">
+                                                    <a class="collapse-link">
+                                                        <i class="fa fa-chevron-up"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 ibox-content">
+                                                <form role="form" class="form-horizontal m-t col-md-12">
+                                                    <div class="col-md-4">
+                                                        <div class="form-group draggable ui-draggable">
+                                                            <label class="col-sm-5 control-label col5">单位编码:</label>
+                                                            <div class="col-sm-7">
+                                                                <p class="form-control-static" id="form1CompanyNo"></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group draggable ui-draggable">
+                                                            <label class="col-sm-5 control-label col5">单位名称:</label>
+                                                            <div class="col-sm-7">
+                                                                <p class="form-control-static"
+                                                                   id="form1CompanyName"></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group draggable ui-draggable">
+                                                            <label class="col-sm-5 control-label col5">单位类型:</label>
+                                                            <div class="col-sm-7">
+                                                                <p class="form-control-static"
+                                                                   id="form1CompanyType"></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group draggable ui-draggable">
+                                                            <label class="col-sm-5 control-label col5">单位电话:</label>
+                                                            <div class="col-sm-7">
+                                                                <p class="form-control-static"
+                                                                   id="form1CompanyPhone"></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group draggable ui-draggable">
+                                                            <label class="col-sm-5 control-label col5">单位地址:</label>
+                                                            <div class="col-sm-7">
+                                                                <p class="form-control-static"
+                                                                   id="Form1CompanyAddr"></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                                <div class="clearfix">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="ibox float-e-margins">
+                                            <div class="ibox-title">
+                                                <h5>经办人信息 :</h5>
+                                                <div class="ibox-tools">
+                                                    <a class="collapse-link">
+                                                        <i class="fa fa-chevron-up"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 ibox-content">
+                                                <form role="form" class="form-horizontal m-t col-md-12">
+                                                    <div class="col-md-4">
+                                                        <div class="form-group draggable ui-draggable">
+                                                            <label class="col-sm-5 control-label col5">姓名:</label>
+                                                            <div class="col-sm-7">
+                                                                <p class="form-control-static" id="form2UserName"></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group draggable ui-draggable">
+                                                            <label class="col-sm-5 control-label col5">证件类型:</label>
+                                                            <div class="col-sm-7">
+                                                                <p class="form-control-static" id="form2CardType"></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group draggable ui-draggable">
+                                                            <label class="col-sm-5 control-label col5">证件号码:</label>
+                                                            <div class="col-sm-7">
+                                                                <p class="form-control-static" id="form2CardNo"
+                                                                   title=""></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group draggable ui-draggable">
+                                                            <label class="col-sm-5 control-label col5">经办人照片:</label>
+                                                            <div class="col-sm-7" data-toggle="modal"
+                                                                 data-target="#myModal">
+                                                                <a id='jbrzpImage'><p class="form-control-static"
+                                                                                      id="form2TransactorImage"
+                                                                                      title="图片预览"
+                                                                                      style="display: none">
+                                                                </p>
+                                                                    <p class="form-control-static"
+                                                                       title="图片预览">图片预览
+                                                                    </p>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group draggable ui-draggable">
+                                                            <label class="col-sm-5 control-label col5">联系电话:</label>
+                                                            <div class="col-sm-7">
+                                                                <p class="form-control-static" id="form2Phone"></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                                <div class="clearfix">
+                                                </div>
+                                            </div>
+
+                                            <div class="ibox-title">
+                                                <h5>制作单位信息 :</h5>
+                                                <div class="ibox-tools">
+                                                    <a class="collapse-link">
+                                                        <i class="fa fa-chevron-up"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 ibox-content">
+                                                <form role="form" class="form-horizontal m-t col-md-12">
+                                                    <div class="col-md-4">
+                                                        <div class="form-group draggable ui-draggable">
+                                                            <label class="col-sm-5 control-label col51">单位编码:</label>
+                                                            <div class="col-sm-7">
+                                                                <p class="form-control-static"
+                                                                   id="Form3CompanyNo"></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group draggable ui-draggable">
+                                                            <label class="col-sm-5 control-label col51">单位名称:</label>
+                                                            <div class="col-sm-7">
+                                                                <p class="form-control-static"
+                                                                   id="Form3CompanyName"></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group draggable ui-draggable">
+                                                            <label class="col-sm-5 control-label col5">管辖单位:</label>
+                                                            <div class="col-sm-7">
+                                                                <p class="form-control-static" id="Form3Dominion"
+                                                                   title=""></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group draggable ui-draggable">
+                                                            <label class="col-sm-5 control-label col51">单位电话:</label>
+                                                            <div class="col-sm-7">
+                                                                <p class="form-control-static" id="Form3Phone"></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group draggable ui-draggable">
+                                                            <label class="col-sm-5 control-label col5">单位地址:</label>
+                                                            <div class="col-sm-7">
+                                                                <p class="form-control-static"
+                                                                   id="Form3CompanyAddr" title=""></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                                <div class="clearfix">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="ibox float-e-margins">
+                                            <div class="ibox-title">
+                                                <h5>印章信息登记 :</h5>
+                                                <div class="ibox-tools">
+                                                    <a class="collapse-link">
+                                                        <i class="fa fa-chevron-up"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 ibox-content">
+                                                <table id="sealDetailsTable" class="table table-bordered"
+                                                       data-mobile-responsive="true">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>印章编码</th>
+                                                        <th>印章内容</th>
+                                                        <th>印章类型</th>
+                                                        <th>印章形状</th>
+                                                        <th>印章规格</th>
+                                                        <th>印章材料</th>
+                                                        <th>中心图案</th>
+                                                        <th>印模留档照片</th>
+                                                        <th> 登记时间</th>
+                                                    </tr>
+                                                    </thead>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- 模态框（Modal） -->
+                                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+                                         aria-labelledby="myModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header" style="border-bottom:none">
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                            aria-hidden="true">&times;
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <img style="width: 100%; height: auto;" src="" id="showImage">
+                                                </div>
+                                            </div><!-- /.modal-content -->
+                                        </div><!-- /.modal -->
+                                    </div>
+
+                                    <!-- 上传资料 -->
+                                    <!--<div class="col-md-12" id="company2">
+                                        <div class="ibox float-e-margins">
+                                            <div class="col-md-12 ibox-content">
+                                                <div class="col-md-12">
+                                                    <div class="form-group draggable ui-draggable">
+                                                        <label class="col-sm-4 control-label upload">营业执照:</label>
+                                                        <div class="col-sm-3">
+                                                            <p class="form-control-static downloadMsg"
+                                                               id="businessLicenseMsg">xxx</p>
+                                                        </div>
+                                                        <div class="col-sm-1">
+                                                            <a id="download1">下载</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="form-group draggable ui-draggable">
+                                                        <label class="col-sm-4 control-label upload">法人身份证:</label>
+                                                        <div class="col-sm-3">
+                                                            <p class="form-control-static downloadMsg"
+                                                               id="lawPersonIdFileMsg">xxx</p>
+                                                        </div>
+                                                        <div class="col-sm-1">
+                                                            <a id="download2">下载</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="form-group draggable ui-draggable">
+                                                        <label class="col-sm-4 control-label upload">经办人身份证:</label>
+                                                        <div class="col-sm-3">
+                                                            <p class="form-control-static downloadMsg"
+                                                               id="operatorIdFileMsg">xxx</p>
+                                                        </div>
+                                                        <div class="col-sm-1">
+                                                            <a id="download3">下载</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="form-group draggable ui-draggable">
+                                                        <label class="col-sm-4 control-label upload">印模留档:</label>
+                                                        <div class="col-sm-3">
+                                                            <p class="form-control-static downloadMsg" id="sealFileMsg">
+                                                                xxx</p>
+                                                        </div>
+                                                        <div class="col-sm-1">
+                                                            <a id="download4">下载</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Panel Other -->
+    </div>
+</div>
+</div>
+<!-- 全局js -->
+<script src="../js/jquery.min.js?v=2.1.4"></script>
+<script src="../js/bootstrap.min.js?v=3.3.6"></script>
+<!-- 自定义js -->
+<script src="../js/content.js?v=1.0.0"></script>
+<!-- Bootstrap table -->
+<script src="../js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="../js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+<script src="../js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+<script src="../seal/DateConvert.js"></script>
+<script src="../seal/tableExport.js"></script>
+<script src="../seal/table-export.js"></script>
+<script src="../seal/newSealOrder.js"></script>
+
+<!-- layerDate plugin javascript -->
+<script src="../js/plugins/layer/laydate/laydate.js"></script>
+<!-- Smoke alert -->
+<script src="../smoke-v3.1.1/js/smoke.js"></script>
+<script src="../smoke-v3.1.1/js/smoke.min.js"></script>
+<!-- select Chosen -->
+<script src="../js/plugins/chosen/chosen.jquery.js"></script>
+</body>
+</html>

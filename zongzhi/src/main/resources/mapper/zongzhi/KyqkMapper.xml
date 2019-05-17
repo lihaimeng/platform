@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yuxin.platform.zongzhi.mapper.KyqkMapper">
+    <resultMap id="BaseResultMap" type="com.yuxin.platform.zongzhi.pojo.KyqkHt">
+        <id column="QYID" property="qyid" jdbcType="INTEGER"/>
+        <result column="QYMC" property="qymc" jdbcType="INTEGER"/>
+        <result column="HYLB" property="hylb" jdbcType="INTEGER"/>
+        <result column="GXDWMC" property="gxdwmc" jdbcType="INTEGER"/>
+        <result column="KYQKID" property="kyqkid" jdbcType="INTEGER"/>
+        <result column="KYQKLX" property="kyqklx" jdbcType="VARCHAR"/>
+        <result column="TBRBH" property="tbrbh" jdbcType="VARCHAR"/>
+        <result column="TBRXM" property="tbrxm" jdbcType="VARCHAR"/>
+        <result column="YDXXMS" property="ydxxms" jdbcType="VARCHAR"/>
+        <result column="JJRXM" property="jjrxm" jdbcType="VARCHAR"/>
+        <result column="JJSJ" property="jjsj" jdbcType="TIMESTAMP"/>
+        <result column="TBSJ" property="tbsj" jdbcType="TIMESTAMP"/>
+        <result column="JJCLJG" property="jjcljg" jdbcType="VARCHAR"/>
+        <result column="SCBZ" property="scbz" jdbcType="VARCHAR"/>
+        <result column="CLZT" property="clzt" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        QYID,QYMC,HYLB,GXDWMC,KYQKID,KYQKLX,TBRBH,TBRXM,YDXXMS,TBSJ,JJSJ,JJRXM,JJCLJG,SCBZ,CLZT
+    </sql>
+    <select id="selectKyqkListHt" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from dm_kyqk
+        <where>
+            <if test="qymc != null and qymc!=''">
+                AND QYMC LIKE CONCAT(CONCAT('%',#{qymc,jdbcType=VARCHAR}),'%')
+            </if>
+            <if test="hylx != null and hylx!=''">
+                AND HYLB LIKE CONCAT(CONCAT('%',#{hylx,jdbcType=VARCHAR}),'%')
+            </if>
+            <if test="gxdwbm != null and gxdwbm!=''">
+                AND GXDWBM LIKE CONCAT(CONCAT('%',#{gxdwbm,jdbcType=VARCHAR}),'%')
+            </if>
+            <if test="kyqklx != null and kyqklx!=''">
+                AND KYQKLX LIKE CONCAT(CONCAT('%',#{kyqklx,jdbcType=VARCHAR}),'%')
+            </if>
+            <if test="startDate != null and startDate!=''">
+                AND to_char(TBSJ,'yyyy-MM-dd HH24:mi:ss') &gt;= #{startDate,jdbcType=TIMESTAMP}
+            </if>
+            <if test="endDate != null and endDate!=''">
+                AND to_char(TBSJ,'yyyy-MM-dd HH24:mi:ss')  &lt;= #{endDate,jdbcType=TIMESTAMP}
+            </if>
+            <if test="organizationCode != null and organizationCode!=''">
+                AND gxdwbm like CONCAT(CONCAT('%',#{organizationCode,jdbcType=VARCHAR}), '%')
+            </if>
+            AND SCBZ != 1
+        </where>
+        order by KYQKID DESC
+    </select>
+    <update id="updateKyqkHt" parameterType="com.yuxin.platform.zongzhi.pojo.Kyqk">
+        UPDATE zhza.dm_kyqk
+        <set>
+            <if test="kyqkid != null">
+                KYQKID = #{kyqkid,jdbcType=INTEGER},
+            </if>
+            <if test="kyqklx != null">
+                KYQKLX = #{kyqklx,jdbcType=VARCHAR},
+            </if>
+            <if test="tbrbh != null">
+                TBRBH = #{tbrbh,jdbcType=VARCHAR},
+            </if>
+            <if test="tbrxm != null">
+                TBRXM = #{tbrxm,jdbcType=VARCHAR},
+            </if>
+            <if test="tbnr != null">
+                YDXXMS = #{tbnr,jdbcType=VARCHAR},
+            </if>
+            <if test="jjrxm != null">
+                JJRXM = #{jjrxm,jdbcType=VARCHAR},
+            </if>
+            <if test="jjrgh != null">
+                JJRGH = #{jjrgh,jdbcType=VARCHAR},
+            </if>
+            <if test="jjsj != null">
+                JJSJ = to_timestamp(#{jjsj,jdbcType=TIMESTAMP},'yyyy-mm-dd hh24:mi:ss.ff'),
+            </if>
+            <if test="jjcljg != null">
+                JJCLJG = #{jjcljg,jdbcType=VARCHAR},
+            </if>
+            <if test="clzt != null">
+                CLZT = #{clzt,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where KYQKID = #{kyqkid,jdbcType=INTEGER}
+    </update>
+    <resultMap id="BaseResultMap1" type="com.yuxin.platform.zongzhi.pojo.Kyqk">
+        <id column="QYID" property="qyid" jdbcType="INTEGER"/>
+        <result column="KYQKID" property="kyqkid" jdbcType="INTEGER"/>
+        <result column="KYQKLX" property="kyqklx" jdbcType="VARCHAR"/>
+        <result column="TBRBH" property="tbrbh" jdbcType="VARCHAR"/>
+        <result column="TBRXM" property="tbrxm" jdbcType="VARCHAR"/>
+        <result column="YDXXMS" property="ydxxms" jdbcType="VARCHAR"/>
+        <result column="JJRGH" property="jjrgh" jdbcType="VARCHAR"/>
+        <result column="JJRXM" property="jjrxm" jdbcType="VARCHAR"/>
+        <result column="JJSJ" property="jjsj" jdbcType="TIMESTAMP"/>
+        <result column="TBSJ" property="tbsj" jdbcType="TIMESTAMP"/>
+        <result column="JJCLJG" property="jjcljg" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List1">
+        KYQKID,QYID,KYQKDJXH,KYQKLXBM,KYQKLX,YDXXMS,TBRBH,TBRXM,TBSJ,JJSJ,JJRGH,JJRXM,JJCLJG
+    </sql>
+    <select id="selectKyqk" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from dm_kyqk  where rownum <![CDATA[<=]]> 10 ORDER BY TBSJ DESC
+    </select><!--WHERE  date_format(TBSJ,'%Y-%m')=date_format(now(),'%Y-%m')-->
+    <!--企业端-->
+    <resultMap id="BaseResultMap2" type="com.yuxin.platform.zongzhi.pojo.Kyqk">
+        <id column="QYID" property="qyid" jdbcType="INTEGER"/>
+        <result column="KYQKID" property="kyqkid" jdbcType="INTEGER"/>
+        <result column="KYQKLX" property="kyqklx" jdbcType="VARCHAR"/>
+        <result column="TBRBH" property="tbrbh" jdbcType="VARCHAR"/>
+        <result column="TBRXM" property="tbrxm" jdbcType="VARCHAR"/>
+        <result column="YDXXMS" property="ydxxms" jdbcType="VARCHAR"/>
+        <result column="JJRGH" property="jjrgh" jdbcType="VARCHAR"/>
+        <result column="JJRXM" property="jjrxm" jdbcType="VARCHAR"/>
+        <result column="JJSJ" property="jjsj" jdbcType="TIMESTAMP"/>
+        <result column="TBSJ" property="tbsj" jdbcType="TIMESTAMP"/>
+        <result column="JJCLJG" property="jjcljg" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List2">
+        KYQKID,QYID,KYQKDJXH,KYQKLXBM,KYQKLX,YDXXMS,TBRBH,TBRXM,TBSJ,JJSJ,JJRGH,JJRXM,JJCLJG
+    </sql>
+    <select id="selectKyqkList" resultMap="BaseResultMap2" parameterType="java.util.Map">
+        select
+        *
+        from dm_kyqk
+        <where>
+            <if test="kyqklx != null and kyqklx!=''">
+                AND KYQKLX LIKE CONCAT(CONCAT('%',#{kyqklx,jdbcType=VARCHAR}),'%')
+            </if>
+            <if test="startDate != null and startDate!=''">
+                AND to_char(TBSJ,'yyyy/MM/dd HH24:mi:ss') &gt;= #{startDate,jdbcType=TIMESTAMP}
+            </if>
+            <if test="endDate != null and endDate!=''">
+                AND to_char(TBSJ,'yyyy/MM/dd HH24:mi:ss') &lt;= #{endDate,jdbcType=TIMESTAMP}
+            </if>
+            AND dm_kyqk.TBRXM = #{username,jdbcType=TIMESTAMP}
+            AND dm_kyqk.SCBZ != 1
+        </where>
+        order by KYQKID DESC
+    </select>
+
+    <select id="selectKyqkLists" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from dm_kyqk
+        WHERE dm_kyqk.gxdwbm LIKE
+        CONCAT((SELECT sys_organization.brevitycode FROM sys_organization WHERE
+        sys_organization.organization_id=#{organizationid,jdbcType=INTEGER}),'%')
+        and dm_kyqk.hylb='典当行业'
+    </select>
+    <insert id="insertKyqk" parameterType="com.yuxin.platform.zongzhi.pojo.Kyqk">
+        <selectKey  keyProperty="kyqkid" resultType="int" order="BEFORE">
+            select nvl(max(kyqkid),0)+1 from dm_kyqk
+        </selectKey>
+        INSERT INTO zhza.dm_kyqk (QYID,QYMC,HYLB,GXDWMC,GXDWBM,KYQKLX,TBRBH,TBRXM,TBSJ,YDXXMS,SCBZ,CLZT,KYQKID)
+        VALUES
+        ( #{qyid,jdbcType=INTEGER}, #{qymc,jdbcType=VARCHAR}, #{hylb,jdbcType=VARCHAR}, #{gxdwmc,jdbcType=VARCHAR},
+        #{gxdwbm,jdbcType=VARCHAR} ,#{kyqklx,jdbcType=VARCHAR} ,
+        #{tbrbh,jdbcType=VARCHAR}, #{tbrxm,jdbcType=VARCHAR}, to_date(#{tbsj,jdbcType=TIMESTAMP},'YYYY-MM-DD   HH24:MI:SS'),
+         #{tbnr,jdbcType=VARCHAR},
+        #{scbz,jdbcType=VARCHAR},'未处理', #{kyqkid,jdbcType=VARCHAR})
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.yuxin.platform.zongzhi.pojo.Kyqk">
+        UPDATE zhza.dm_kyqk
+        <set>
+            <if test="scbz != null">
+                SCBZ = #{scbz,jdbcType=DECIMAL},
+            </if>
+        </set>
+        where KYQKID = #{kyqkid,jdbcType=INTEGER}
+    </update>
+</mapper>

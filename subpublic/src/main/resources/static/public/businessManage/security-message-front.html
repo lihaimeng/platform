@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>企业管理</title>
+    <meta name="keywords" content="Table">
+    <meta name="description" content="Table">
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link href="../../css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="../../css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="../../css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="../../css/style.css?v=4.1.0" rel="stylesheet">
+    <style type="text/css">
+        /*重写查询条件label中的文字样式  */
+        label.myLabel-content {
+            width: 84px;
+            display: inline-block;
+            text-align: right;
+        }
+
+        .control-label {
+            width: 108px;
+        }
+
+        .my-container {
+            display: inline-block;
+            margin-right: 30px;
+        }
+
+        .myLabel-content, .myText-content, .myBtn-content {
+            display: inline-block;
+            margin-left: 10px;
+        }
+
+        .myLabel-content, .myText-content input[type='text'], .myBtn-content .btn {
+            height: 30px;
+            font-size: 12px;
+        }
+
+        .myBtn-content .btn {
+            margin-bottom: 10px;
+        }
+
+        /* 详情中的label样式，防止文字折行 */
+        label.col-sm-3.control-label {
+            padding-left: 2px;
+        }
+    </style>
+
+</head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <!-- Panel Other -->
+    <div class="ibox float-e-margins">
+        <div class="ibox-title">
+            <h5>日常管理>安保信息</h5>
+        </div>
+        <div class="ibox-content">
+            <div class="row row-lg">
+                <div class="col-sm-12">
+                    <!-- Example Events -->
+                    <div class="example-wrap">
+                        <div class="example">
+                            <div class="ibox float-e-margins">
+                                <div class="ibox-title">
+                                    <h5>安保人员信息</h5>
+
+                                </div>
+                                <div class="ibox-content">
+                                    <form role="form" class="form-horizontal m-t">
+                                        <table id="securityTable" class="table table-bordered"
+                                               data-mobile-responsive="true">
+                                            <thead>
+                                            <tr>
+                                                <th style="background-color:#f9f9f9;">序号</th>
+                                                <th style="background-color:#f9f9f9;" data-field="jurisdictionalUnit">
+                                                    姓名
+                                                </th>
+                                                <th style="background-color:#f9f9f9;" data-field="enterpriseName">证件号
+                                                </th>
+                                                <th style="background-color:#f9f9f9;" data-field="unlockedPersonID">
+                                                    户籍所在地
+                                                </th>
+                                                <th style="background-color:#f9f9f9;" data-field="legalPersonName">
+                                                    上岗日期
+                                                </th>
+                                                <th style="background-color:#f9f9f9;" data-field="unlockingTime">保安类型
+                                                </th>
+
+                                            </tr>
+                                            </thead>
+                                        </table>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="ibox float-e-margins">
+                                <div class="ibox-title">
+                                    <h5>视频监控设备</h5>
+
+                                </div>
+                                <div class="ibox-content">
+                                    <form role="form" class="form-horizontal m-t">
+                                        <table id="monitoringTable" class="table table-bordered"
+                                               data-mobile-responsive="true">
+                                            <thead>
+                                            <tr>
+                                                <th style="background-color:#f9f9f9;">序号</th>
+                                                <th style="background-color:#f9f9f9;" data-field="jurisdictionalUnit">
+                                                    设备名称
+                                                </th>
+                                                <th style="background-color:#f9f9f9;" data-field="enterpriseName">生产厂商
+                                                </th>
+                                                <th style="background-color:#f9f9f9;" data-field="unlockedPersonID">
+                                                    规格型号
+                                                </th>
+                                                <th style="background-color:#f9f9f9;" data-field="legalPersonName">
+                                                    检测机构名称
+                                                </th>
+                                                <th style="background-color:#f9f9f9;" data-field="unlockingTime">
+                                                    网络传输类型
+                                                </th>
+
+                                            </tr>
+                                            </thead>
+                                        </table>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="ibox float-e-margins">
+                                <div class="ibox-title">
+                                    <h5>技防设备信息</h5>
+
+                                </div>
+                                <div class="ibox-content">
+                                    <form role="form" class="form-horizontal m-t">
+                                        <table id="technicalTable" class="table table-bordered"
+                                               data-mobile-responsive="true">
+                                            <thead>
+                                            <tr>
+                                                <th style="background-color:#f9f9f9;">序号</th>
+                                                <th style="background-color:#f9f9f9;" data-field="jurisdictionalUnit">
+                                                    设备名称
+                                                </th>
+                                                <th style="background-color:#f9f9f9;" data-field="enterpriseName">生产厂商
+                                                </th>
+                                                <th style="background-color:#f9f9f9;" data-field="unlockedPersonID">
+                                                    规格型号
+                                                </th>
+                                                <th style="background-color:#f9f9f9;" data-field="legalPersonName">
+                                                    技防设备种类
+                                                </th>
+                                                <th style="background-color:#f9f9f9;" data-field="unlockingTime">数量</th>
+                                            </tr>
+                                            </thead>
+                                        </table>
+                                    </form>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Panel Other -->
+
+</div>
+<!-- 全局js -->
+<script src="../../js/jquery.min.js?v=2.1.4"></script>
+<script src="../../js/bootstrap.min.js?v=3.3.6"></script>
+<!-- 自定义js -->
+<script src="../../js/content.js?v=1.0.0"></script>
+<script src="security-message-front.js"></script>
+<!-- Bootstrap table -->
+<script src="../../js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="../../js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+<script src="../../js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+<script>
+
+</script>
+</body>
+</html>

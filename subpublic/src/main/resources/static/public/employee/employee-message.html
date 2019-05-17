@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table</title>
+    <meta name="keywords" content="Table">
+    <meta name="description" content="Table">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="../../css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="../../css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="../../css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="../../css/style.css?v=4.1.0" rel="stylesheet">
+    <!-- 模态框 -->
+    <link href="../../css/animate.css" rel="stylesheet">
+    <!-- 输入框、弹出框css（自定义） -->
+    <link href="../../css/search-criteria.css" rel="stylesheet">
+    <!-- smoke -->
+    <link href="../../smoke-v3.1.1/css/smoke.css" rel="stylesheet">
+    <link href="../../smoke-v3.1.1/css/smoke.min.css" rel="stylesheet">
+    <style type="text/css">
+        .my-container {
+            display: inline-block;
+            margin-right: 30px;
+        }
+
+        .myLabel-content, .myText-content, .myBtn-content {
+            display: inline-block;
+            margin-left: 10px;
+        }
+
+        .control-label {
+            margin-left: -5px;
+        }
+
+        .myLabel-content, .myText-content input[type='text'], .myBtn-content .btn {
+            height: 30px;
+            font-size: 12px;
+        }
+
+        .myBtn-content .btn {
+            margin-bottom: 10px;
+        }
+
+        .modal {
+            width: 100%;
+            height: 100%;
+        }
+
+        .modal-body {
+            width: 100%;
+            min-height: 460px;
+            height: auto;
+            overflow: hidden
+        }
+
+        .modal-header {
+            width: 100%;
+            height: 111px;
+        }
+
+        .pawnMsg1 .col-md-12 {
+            width: 100%;
+            height: 30%;
+        }
+
+        .modal-header .btn {
+            width: 47%;
+        }
+
+        .modal-header .btn span {
+            text-align: center;
+            font-size: 16px;
+            width: 100%;
+            height: 46px;
+            margin-top: -16px;
+        }
+
+        .dataMsg {
+            width: 14.2%;
+        }
+
+        .col5 {
+            margin-left: -50px;
+        }
+
+        .col-md-1 a {
+            color: #1AB394;
+        }
+
+        .has-success .control-label {
+            color: #66696B;
+        }
+
+        .has-success .form-control {
+            border-color: #e5e6e7;
+            margin-top: 0;
+            color: #66696B;
+        }
+
+        .has-error .control-label {
+            color: #66696B;
+        }
+
+        .has-error .form-control {
+            margin-top: 0;
+            color: #66696B;
+        }
+
+        input[type=file] {
+            position: absolute;
+            overflow: hidden;
+            top: -4px;
+            height: 4px;
+            width: 4px;
+            opacity: 0;
+        }
+
+        .ibox-content {
+            width: 100%;
+            height: 800px;
+        }
+    </style>
+
+</head>
+<body class="gray-bg" style="height: 895px;">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <!-- Panel Other -->
+    <div class="ibox float-e-margins">
+        <div class="ibox-title">
+            <h5>日常管理>从业人员管理</h5>
+        </div>
+        <div class="ibox-content">
+            <div class="row row-lg">
+                <div class="col-sm-12">
+                    <!-- Example Events -->
+                    <div class="example-wrap">
+                        <div class="example">
+                            <!--将企业名称、企业编码、管辖单位去掉，因为登录人员为某企业管理员角色-->
+                            <!--<div class="my-container">
+                                <label class="myLabel-content">企业名称</label>
+                                <div class="myText-content">
+                                    <input id="qymc" name="qymc" type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="my-container">
+                                <label class="myLabel-content">企业编号</label>
+                                <div class="myText-content">
+                                    <input id="qybh" name="qybh" type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="my-container">
+                                <label class="myLabel-content">管辖单位</label>
+                                <div class="myText-content">
+                                    <select class="form-control" id="gxdw" name="gxdw">
+                                        <option>请选择</option>
+                                        <option>陕西省公安厅</option>
+                                        <option>西安市公安厅</option>
+                                        <option>雁塔区公安厅</option>
+                                    </select>
+                                </div>
+                            </div>-->
+                            <div class="my-container">
+                                <label class="myLabel-content">姓名</label>
+                                <div class="myText-content">
+                                    <input id="mz" name="mz" type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="my-container">
+                                <label class="myLabel-content">性别</label>
+                                <div class="myText-content">
+                                    <select class="form-control" id="xb1" name="xb1">
+                                        <option value="">全部</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="my-container">
+                                <label class="myLabel-content">证件号码</label>
+                                <div class="myText-content">
+                                    <input id="zjhm1" name="zjhm1" type="text" class="form-control">
+                                </div>
+                            </div>
+                            <!--<div class="my-container">
+                                <label class="myLabel-content">人员编号</label>
+                                <div class="myText-content">
+                                    <input id="rybh" name="rybh" type="text" class="form-control">
+                                </div>
+                            </div>-->
+                            <div class="my-container">
+                                <label class="myLabel-content">人员状态</label>
+                                <div class="myText-content">
+                                    <select class="form-control" id="ryzt" name="ryzt">
+                                        <option value="">全部</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div style="display:block;" class="btn-group">
+                                <div style="float:left;">
+                                    <button id="addButton" type="button" class="btn btn-default glyphicon "
+                                            data-toggle="modal" data-target="#myModal5"
+                                            style="padding: 3px 13px 8px 14px;">
+                                        <span class="glyphicon glyphicon-plus" style="margin-right: 3px;"></span>新增
+                                    </button>
+                                    <button id="editButton" style="margin-left: -2px;padding: 3px 13px 8px 14px;"
+                                            type="button" class="btn btn-default glyphicon " data-toggle="modal"
+                                            data-target="#myModal6" style="padding: 3px 13px 8px 14px;">
+                                        <span class="glyphicon glyphicon-pencil" style="margin-right: 3px;"></span>修改
+                                    </button>
+                                    <button id="detailButton" style="margin-left: -2px;padding: 3px 13px 8px 14px;"
+                                            type="button" class="btn btn-default glyphicon " data-toggle="modal"
+                                            data-target="#myModal7" style="padding: 3px 13px 8px 14px;">
+                                        <span class="glyphicon glyphicon-search" style="margin-right: 3px;"></span>详情
+                                    </button>
+                                    <button id="deleteButton" type="button"
+                                            class="btn-danger btn btn-default glyphicon demo4" data-toggle="modal"
+                                            style="padding: 3px 13px 8px 14px;">
+                                        <span class=" glyphicon-remove" style="margin-right: 3px;"></span>删除
+                                    </button>
+                                </div>
+                                <div style="float:right;">
+                                    <button id="search" type="button" class="btn btn-primary">
+                                        查&nbsp;&nbsp;&nbsp;&nbsp;询
+                                    </button>
+                                    <!--<button id="reset" type="button" class="btn btn-default">导&nbsp;&nbsp;&nbsp;&nbsp;出</button>-->
+                                </div>
+                            </div>
+                            <table id="exampleTableEvents" class="table table-bordered"
+                                   data-mobile-responsive="true">
+                                <thead>
+                                <tr>
+                                    <th style="background-color:#f9f9f9;" data-field="number">序号</th>
+                                    <th data-field="state" data-checkbox="true"></th>
+                                    <th style="background-color:#f9f9f9;" class="dataMsg" data-field="cyrybh">人员编号</th>
+                                    <th style="background-color:#f9f9f9;" class="dataMsg" data-field="xm">姓名</th>
+                                    <th style="background-color:#f9f9f9;" class="dataMsg" data-field="xb">性别</th>
+                                    <th style="background-color:#f9f9f9;" class="dataMsg" data-field="zjhm">证件号码</th>
+                                    <th style="background-color:#f9f9f9;" class="dataMsg" data-field="minzu">民族</th>
+                                    <th style="background-color:#f9f9f9;" class="dataMsg" data-field="cyryzt">人员状态</th>
+                                    <th style="background-color:#f9f9f9;" class="dataMsg" data-field="qymc">企业名称</th>
+                                    <th style="background-color:#f9f9f9;" class="dataMsg" data-field="qybm">企业编号</th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- End Example Events -->
+                    <!-- 新增弹出框内容BEGIN -->
+                    <div class="modal inmodal fade" id="myModal5" tabindex="-1" role="dialog" aria-hidden="true"
+                         data-backdrop="static">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content thumbnail">
+                                <!--<div class="modal-header">
+                                    <button type="button" class="close closeBtn" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                    <br>
+                                    <h4 class="modal-title">从业人员新增</h4>
+                                </div>-->
+                                <div class="modal-body">
+                                    <button type="button" class="close closeBtn" data-dismiss="modal" style=""><span
+                                            aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                    <div class="col-md-12" style="margin-left: -8px;margin-top: 7px;">
+                                        <div class="ibox float-e-margins pawnMsg1">
+                                            <!--<div class="col-md-12 ibox-content">-->
+                                            <form role="form" class="form-horizontal m-t " id="addForm">
+                                                <div class="col-md-10" style="margin-left: 21px;margin-right: -21px;">
+                                                    <!--<div class="col-md-6">
+                                                        <div class="form-group draggable ui-draggable">
+                                                            <label class="col-sm-5 control-label col5">人员编号<span class="required" title="" style="color: #ED5565">* </span></label>
+
+                                                            <div class="col-sm-7">
+                                                                <input class="form-control" id="cyrybh" name="cyrybh">
+                                                            </div>
+                                                            &lt;!&ndash;<span class="required" title="" style="color: #ED5565">* </span>&ndash;&gt;
+                                                        </div>
+                                                    </div>-->
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group draggable ui-draggable">
+                                                            <label class="col-sm-5 control-label col5">人员姓名<span
+                                                                    class="required" title=""
+                                                                    style="color: #ED5565">* </span></label>
+
+                                                            <div class="col-sm-7">
+                                                                <input class="form-control" id="xm" name="xm">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group draggable ui-draggable">
+                                                            <label class="col-sm-5 control-label col5">证件类型<span
+                                                                    class="required" title=""
+                                                                    style="color: #ED5565">* </span></label>
+                                                            <div class="col-sm-7">
+                                                                <select class="form-control" id="cyzj" name="cyzj">
+                                                                    <option value="">全部</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group draggable ui-draggable">
+                                                            <label class="col-sm-5 control-label col5">联系方式<span
+                                                                    class="required" title=""
+                                                                    style="color: #ED5565">* </span></label>
+                                                            <div class="col-sm-7">
+                                                                <input class="form-control" id="lxdh" name="lxdh">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group draggable ui-draggable">
+                                                            <label class="col-sm-5 control-label col5">证件号码<span
+                                                                    class="required" title=""
+                                                                    style="color: #ED5565">* </span></label>
+                                                            <div class="col-sm-7">
+                                                                <input class="form-control" id="zjhm" name="zjhm"
+                                                                       style="padding-left: 2px;padding-right: 0px;">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group draggable ui-draggable">
+                                                            <label class="col-sm-5 control-label col5">入职日期<span
+                                                                    class="required" title=""
+                                                                    style="color: #ED5565">* </span></label>
+                                                            <div class="col-sm-7">
+                                                                <input style="vertical-align:middle;padding-left: 6px;"
+                                                                       id="rzrq" name="rzrq"
+                                                                       class="form-control layer-date" placeholder=""
+                                                                       onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group draggable ui-draggable">
+                                                            <label class="col-sm-5 control-label col5">文化程度<span
+                                                                    class="required" title=""
+                                                                    style="color: #ED5565">* </span></label>
+                                                            <div class="col-sm-7">
+                                                                <select class="form-control" id="whcd" name="whcd">
+                                                                    <option value="">全部</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group draggable ui-draggable">
+                                                            <label class="col-sm-5 control-label col5">民族<span
+                                                                    class="required" title=""
+                                                                    style="color: #ED5565">* </span></label>
+                                                            <div class="col-sm-7">
+                                                                <select class="form-control" id="minzu" name="minzu">
+                                                                    <option value="">全部</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group draggable ui-draggable">
+                                                            <label class="col-sm-5 control-label col5">性别<span
+                                                                    class="required" title=""
+                                                                    style="color: #ED5565">* </span></label>
+                                                            <div class="col-sm-7">
+                                                                <select class="form-control" id="xb" name="xb">
+                                                                    <option value="">全部</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group draggable ui-draggable">
+                                                            <label class="col-sm-5 control-label col5">角色<span
+                                                                    class="required" title=""
+                                                                    style="color: #ED5565">* </span></label>
+                                                            <div class="col-sm-7">
+                                                                <select class="form-control" id="roleName"
+                                                                        name="roleName">
+                                                                    <option value="">全部</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-1"
+                                                     style="padding-left: -40px;margin-left: -31px;margin-top: 36px;">
+                                                    <img src="weichat.jpg" id="imageAdd1"
+                                                         style="width:100px;height:135px">
+                                                    <input type="file" name="files" id="FileUploadAdd"/>
+                                                    <input type="text" id="filenameAdd" name="filenameAdd" value=""
+                                                           hidden/>
+                                                    <input type="text" id="filetypeAdd" name="filetypeAdd" value=""
+                                                           hidden/>
+                                                    <input type="text" id="realpathAdd" name="realpathAdd" value=""
+                                                           hidden/>
+                                                    <div style="width: 100px; margin-left: 3px;">
+                                                        <a id="FileUploadAddBtn">上传</a>
+                                                        <!--&nbsp;&nbsp;<a>拍摄</a>&nbsp;&nbsp;<a>读证</a>-->
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="col-md-10" style="width: 600px;margin-left: 27px;">
+                                                        <div class="form-group draggable ui-draggable">
+                                                            <label class="col-sm-5 control-label col5"
+                                                                   style="width: 127px;">户籍地址<span></span></label>
+                                                            <div class="col-sm-7">
+                                                                <input class="form-control" style="width: 633px;"
+                                                                       id="hjdxz" name="hjdxz">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-10" style="width: 600px;margin-left: 27px;">
+                                                        <div class="form-group draggable ui-draggable">
+                                                            <label class="col-sm-5 control-label col5"
+                                                                   style="width: 127px;">现住址<span></span></label>
+                                                            <div class="col-sm-7">
+                                                                <input class="form-control" style="width: 633px;"
+                                                                       id="xzdxzqh" name="xzdxzqh">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div style="float:right;margin-right: 32px;">
+                                                    <button id="submitForAdd" type="button" class="btn btn-primary">保&nbsp;&nbsp;&nbsp;&nbsp;存</button>
+                                                </div>
+                                            </form>
+                                            <div class="clearfix">
+                                                <!--</div>-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 新增弹出框内容END-->
+                    <!-- 修改弹出框内容BEGIN -->
+                    <div class="modal inmodal fade" id="myModal6" tabindex="-1" role="dialog" aria-hidden="true"
+                         data-backdrop="static">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content thumbnail">
+                                <!--<div class="modal-header">
+                                    <button type="button" class="close closeBtn" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                    <br>
+                                    <h4 class="modal-title">从业人员修改</h4>
+                                </div>-->
+                                <div class="modal-body">
+                                    <button type="button" class="close closeBtn" data-dismiss="modal"><span
+                                            aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                    <div class="col-md-12" style="margin-left: -8px;margin-top: 7px;">
+                                        <div class="ibox float-e-margins ">
+                                            <!--<div class="col-md-12 ibox-content">-->
+                                            <form role="form" class="form-horizontal m-t " id="editForm">
+                                                <div class="col-md-10" style="margin-left: 21px;margin-right: -21px;">
+                                                    <!--<div class="col-md-6">
+                                                        <div class="form-group draggable ui-draggable">
+                                                            <label class="col-sm-5 control-label col5">人员编号<span class="required" title="" style="color: #ED5565">* </span></label>
+
+                                                            <div class="col-sm-7">
+                                                                <input class="form-control" id="cyrybhxg" name="cyrybhxg">
+                                                            </div>
+                                                            &lt;!&ndash;<span class="required" title="" style="color: #ED5565">* </span>&ndash;&gt;
+                                                        </div>
+                                                    </div>-->
+                                                    <div class="col-md-6">
+                                                        <div class="form-group draggable ui-draggable">
+                                                            <label class="col-sm-5 control-label col5">人员姓名<span
+                                                                    class="required" title=""
+                                                                    style="color: #ED5565">* </span></label>
+                                                            <div class="col-sm-7">
+                                                                <input class="form-control" id="xmxg" name="xmxg">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group draggable ui-draggable">
+                                                            <label class="col-sm-5 control-label col5">证件类型<span
+                                                                    class="required" title=""
+                                                                    style="color: #ED5565">* </span></label>
+                                                            <div class="col-sm-7">
+                                                                <select class="form-control" id="cyzjxg" name="cyzjxg">
+                                                                    <option value="">全部</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group draggable ui-draggable">
+                                                            <label class="col-sm-5 control-label col5">证件号码<span
+                                                                    class="required" title=""
+                                                                    style="color: #ED5565">* </span></label>
+                                                            <div class="col-sm-7">
+                                                                <input class="form-control" id="zjhmxg" name="zjhmxg"
+                                                                       style="padding-left: 2px;padding-right: 0px;">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group draggable ui-draggable">
+                                                            <label class="col-sm-5 control-label col5">文化程度<span
+                                                                    class="required" title=""
+                                                                    style="color: #ED5565">* </span></label>
+                                                            <div class="col-sm-7">
+                                                                <select class="form-control" id="whcdxg" name="whcdxg">
+                                                                    <option value="">全部</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group draggable ui-draggable">
+                                                            <label class="col-sm-5 control-label col5">入职日期<span
+                                                                    class="required" title=""
+                                                                    style="color: #ED5565">* </span></label>
+                                                            <div class="col-sm-7">
+                                                                <input id="rzrqxg" name="rzrqxg"
+                                                                       style="vertical-align:middle;padding-left: 6px;"
+                                                                       class="form-control layer-date" placeholder=""
+                                                                       onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group draggable ui-draggable">
+                                                            <label class="col-sm-5 control-label col5">人员状态<span
+                                                                    class="required" title=""
+                                                                    style="color: #ED5565">* </span></label>
+                                                            <div class="col-sm-7">
+                                                                <select class="form-control" id="cyryztxg"
+                                                                        name="cyryztxg">
+                                                                    <option value="">全部</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group draggable ui-draggable">
+                                                            <label class="col-sm-5 control-label col5">联系方式<span
+                                                                    class="required" title=""
+                                                                    style="color: #ED5565">* </span></label>
+                                                            <div class="col-sm-7">
+                                                                <input class="form-control" id="lxdhxg" name="lxdhxg">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group draggable ui-draggable">
+                                                            <label class="col-sm-5 control-label col5">民族<span
+                                                                    class="required" title=""
+                                                                    style="color: #ED5565">* </span></label>
+                                                            <div class="col-sm-7">
+                                                                <select class="form-control" id="minzuxg"
+                                                                        name="minzuxg">
+                                                                    <option value="">全部</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group draggable ui-draggable">
+                                                            <label class="col-sm-5 control-label col5">性别<span
+                                                                    class="required" title=""
+                                                                    style="color: #ED5565">* </span></label>
+                                                            <div class="col-sm-7">
+                                                                <select class="form-control" id="xbxg" name="xbxg">
+                                                                    <option value="">全部</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group draggable ui-draggable">
+                                                            <label class="col-sm-5 control-label col5">角色<span
+                                                                    class="required" title=""
+                                                                    style="color: #ED5565">* </span></label>
+                                                            <div class="col-sm-7">
+                                                                <select class="form-control" id="roleNamexg"
+                                                                        name="roleNamexg">
+                                                                    <option value="">全部</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-1"
+                                                     style="padding-left: -40px;margin-left: -31px;margin-top: 36px;">
+                                                    <img src="weichat.jpg" id="imageEdit1"
+                                                         onerror="this.src='weichat.jpg'"
+                                                         style="width:100px;height:135px">
+                                                    <input type="file" name="files" id="FileUploadEdit"/>
+                                                    <input type="text" id="filenameEdit" name="filenameEdit" value=""
+                                                           hidden/>
+                                                    <input type="text" id="filetypeEdit" name="filetypeEdit" value=""
+                                                           hidden/>
+                                                    <input type="text" id="realpathEdit" name="realpathEdit" value=""
+                                                           hidden/>
+                                                    <div style="width: 100px; margin-left: 3px;">
+                                                        <a id="FileUploadEditBtn">上传</a>
+                                                        <!--&nbsp;&nbsp;<a>拍摄</a>&nbsp;&nbsp;<a>读证</a>-->
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="col-md-10" style="width: 600px;margin-left: 27px;">
+                                                        <div class="form-group draggable ui-draggable">
+                                                            <label class="col-sm-5 control-label col5"
+                                                                   style="width: 127px;">户籍地址</label>
+                                                            <div class="col-sm-7">
+                                                                <input class="form-control" style="width: 633px;"
+                                                                       id="hjdxzxg" name="hjdxzxg">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-10" style="width: 600px;margin-left: 27px;">
+                                                        <div class="form-group draggable ui-draggable">
+                                                            <label class="col-sm-5 control-label col5"
+                                                                   style="width: 127px;">现住址</label>
+                                                            <div class="col-sm-7">
+                                                                <input class="form-control" style="width: 633px;"
+                                                                       id="xzdxzqhxg" name="xzdxzqhxg">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div style="float:right;margin-right: 32px;">
+                                                    <button id="submitForEdit" type="button" class="btn btn-primary">保&nbsp;&nbsp;&nbsp;&nbsp;存</button>
+                                                </div>
+                                            </form>
+                                            <div class="clearfix">
+                                                <!--</div>-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 修改弹出框内容END -->
+                    <!-- 详情弹出框内容BEGIN -->
+                    <div class="modal inmodal fade" id="myModal7" tabindex="-1" role="dialog" aria-hidden="true"
+                         data-backdrop="static">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content thumbnail">
+                                <!--<div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                    <br>
+                                    <h4 class="modal-title">从业人员详情</h4>
+                                </div>-->
+                                <div class="modal-body">
+                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                                            class="sr-only">Close</span></button>
+                                    <div class="col-md-12"
+                                         style="margin-left: -8px;margin-bottom: 0px;margin-top: 7px;">
+                                        <div class="ibox float-e-margins pawnMsg1">
+                                            <!--<div class="col-md-12 ibox-content">-->
+                                            <form role="form" class="form-horizontal m-t ">
+                                                <div class="col-md-10">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group draggable ui-draggable">
+                                                            <label class="col-sm-5 control-label col5">人员编号</label>
+                                                            <div class="col-sm-7">
+                                                                <p class="form-control-static" id="cyrybhxq"></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group draggable ui-draggable">
+                                                            <label class="col-sm-5 control-label col5">人员姓名</label>
+                                                            <div class="col-sm-7">
+                                                                <p class="form-control-static" id="xmxq"></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group draggable ui-draggable">
+                                                            <label class="col-sm-5 control-label col5">证件类型</label>
+                                                            <div class="col-sm-7">
+                                                                <p class="form-control-static" id="cyzjxq"></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group draggable ui-draggable">
+                                                            <label class="col-sm-5 control-label col5">证件号码</label>
+                                                            <div class="col-sm-7">
+                                                                <p class="form-control-static" id="zjhmxq"></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group draggable ui-draggable">
+                                                            <label class="col-sm-5 control-label col5">文化程度</label>
+                                                            <div class="col-sm-7">
+                                                                <p class="form-control-static" id="whcdxq"></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group draggable ui-draggable">
+                                                            <label class="col-sm-5 control-label col5">入职日期</label>
+                                                            <div class="col-sm-7">
+                                                                <p class="form-control-static" id="rzrqxq"></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group draggable ui-draggable">
+                                                            <label class="col-sm-5 control-label col5">人员状态</label>
+                                                            <div class="col-sm-7">
+                                                                <p class="form-control-static" id="cyryztxq"></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group draggable ui-draggable">
+                                                            <label class="col-sm-5 control-label col5">联系方式</label>
+                                                            <div class="col-sm-7">
+                                                                <p class="form-control-static" id="lxdhxq"></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group draggable ui-draggable">
+                                                            <label class="col-sm-5 control-label col5">性别</label>
+                                                            <div class="col-sm-7">
+                                                                <p class="form-control-static" id="xbxq"></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group draggable ui-draggable">
+                                                            <label class="col-sm-5 control-label col5">民族</label>
+                                                            <div class="col-sm-7">
+                                                                <p class="form-control-static" id="minzuxq"></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group draggable ui-draggable">
+                                                            <label class="col-sm-5 control-label col5">角色</label>
+                                                            <div class="col-sm-7">
+                                                                <p class="form-control-static" id="roleNamexq"></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-1">
+                                                    <img src="weichat.jpg" id="imageDetail1"
+                                                         style="width:100px;height:135px"
+                                                         onerror="this.src='weichat.jpg'">
+                                                </div>
+                                                <div class="col-md-12" style="margin-left: 6px;">
+                                                    <div class="col-md-10" style="width: 600px;">
+                                                        <div class="form-group draggable ui-draggable">
+                                                            <label class="col-sm-5 control-label col5"
+                                                                   style="width: 127px;">户籍地址</label>
+                                                            <div class="col-sm-7">
+                                                                <p class="form-control-static" id="hjdxzxq"
+                                                                   style="width: 633px;"></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-10" style="width: 600px;">
+                                                        <div class="form-group draggable ui-draggable">
+                                                            <label class="col-sm-5 control-label col5"
+                                                                   style="width: 127px;">现住址</label>
+                                                            <div class="col-sm-7">
+                                                                <p class="form-control-static" id="xzdxzqhxq"
+                                                                   style="width: 633px;"></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <div class="clearfix">
+                                                <!--</div>-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 详情弹出框内容END-->
+                </div>
+            </div>
+        </div>
+        <!-- End Panel Other -->
+    </div>
+</div>
+<input type="text" id="ryid" hidden/>
+<!--<input type="   text" id="cyrybh" hidden/>-->
+<input type="text" id="table_name" value="cyry" hidden/>
+<!-- 全局js -->
+<script src="../../js/jquery.min.js?v=2.1.4"></script>
+<script src="../../js/bootstrap.min.js?v=3.3.6"></script>
+<!-- 自定义js -->
+<script src="../../js/content.js?v=1.0.0"></script>
+<!-- Bootstrap table -->
+<script src="../../js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="../../js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+<script src="../../js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+<!-- jQuery Validation plugin javascript-->
+<script src="../../js/plugins/validate/jquery.validate.min.js"></script>
+<script src="../../js/plugins/validate/messages_zh.min.js"></script>
+<script src="form-validate-employeeJs.js"></script>
+<!-- layerDate plugin javascript -->
+<script src="../../js/plugins/layer/laydate/laydate.js"></script>
+<!-- Smoke alert -->
+<script src="../../smoke-v3.1.1/js/smoke.js"></script>
+<script src="../../smoke-v3.1.1/js/smoke.min.js"></script>
+<script src="employee-optionmessage.js"></script>
+<script src="employee-messageJs.js"></script>
+<script src="upload.js"></script>
+</body>
+</html>

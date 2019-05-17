@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yuxin.platform.common.mapper.LogMapper">
+    <resultMap id="BaseResultMap" type="com.yuxin.platform.common.model.Log">
+        <id column="log_id" property="logId" jdbcType="INTEGER"/>
+        <result column="description" property="description" jdbcType="VARCHAR"/>
+        <result column="username" property="username" jdbcType="VARCHAR"/>
+        <result column="addtime" property="addtime" jdbcType="TIMESTAMP"/>
+        <result column="uri" property="uri" jdbcType="VARCHAR"/>
+        <result column="method" property="method" jdbcType="VARCHAR"/>
+        <result column="ip" property="ip" jdbcType="VARCHAR"/>
+        <result column="result" property="result" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        log_id, description, username, addtime, uri, method, ip,
+        result
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap"
+            parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_log
+        where log_id = #{logId,jdbcType=INTEGER} ORDER BY log_id DESC
+    </select>
+
+    <select id="selectLog" resultMap="BaseResultMap"
+            parameterType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_log
+        ORDER BY log_id DESC
+    </select>
+
+    <select id="selectByCondition" resultMap="BaseResultMap" parameterType="com.yuxin.platform.upms.dto.LogDto">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_log
+        <where>
+            <if test="paramName != null and paramName!=''">
+                username LIKE CONCAT(CONCAT('%',#{paramName,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="paramValue != null and paramValue!=''">
+                AND uri like CONCAT(CONCAT('%',#{paramValue,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="description != null and description!=''">
+                AND description like CONCAT(CONCAT('%',#{description,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="loginDateStart!=null">
+                <![CDATA[ AND addtime>=#{loginDateStart,jdbcType=TIMESTAMP} ]]>
+            </if>
+            <if test="loginDateEnd!=null">
+                <![CDATA[ AND  addtime <= #{loginDateEnd,jdbcType=TIMESTAMP} ]]>
+            </if>
+        </where>
+        ORDER BY log_id DESC
+    </select>
+
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from
+        sys_log
+        where log_id = #{logId,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.yuxin.platform.common.model.Log">
+        <selectKey  keyProperty="logId" resultType="int" order="BEFORE">
+            select nvl(max(log_id),0)+1 from sys_log
+        </selectKey>
+        insert into sys_log (log_id,
+        description, username,
+        addtime, uri, method,
+        ip, result)
+        values
+        (#{logId,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR},
+        #{username,jdbcType=VARCHAR},
+        #{addtime,jdbcType=TIMESTAMP},
+        #{uri,jdbcType=VARCHAR}, #{method,jdbcType=VARCHAR},
+        #{ip,jdbcType=VARCHAR}, #{result,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.yuxin.platform.common.model.Log">
+        <selectKey  keyProperty="logId" resultType="int" order="BEFORE">
+            select nvl(max(log_id),0)+1 from sys_log
+        </selectKey>
+        insert into sys_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="logId != null">
+                log_id,
+            </if>
+            <if test="description != null">
+                description,
+            </if>
+            <if test="username != null">
+                username,
+            </if>
+            <if test="addtime != null">
+                addtime,
+            </if>
+            <if test="uri != null">
+                uri,
+            </if>
+            <if test="method != null">
+                method,
+            </if>
+            <if test="ip != null">
+                ip,
+            </if>
+            <if test="result != null">
+                result,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="logId != null">
+                #{logId,jdbcType=INTEGER},
+            </if>
+            <if test="description != null">
+                #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="username != null">
+                #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="addtime != null">
+                #{addtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="uri != null">
+                #{uri,jdbcType=VARCHAR},
+            </if>
+            <if test="method != null">
+                #{method,jdbcType=VARCHAR},
+            </if>
+            <if test="ip != null">
+                #{ip,jdbcType=VARCHAR},
+            </if>
+            <if test="result != null">
+                #{result,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.yuxin.platform.common.model.Log">
+        update sys_log
+        <set>
+            <if test="description != null">
+                description = #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="username != null">
+                username = #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="addtime != null">
+                addtime = #{addtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="uri != null">
+                uri = #{uri,jdbcType=VARCHAR},
+            </if>
+            <if test="method != null">
+                method = #{method,jdbcType=VARCHAR},
+            </if>
+            <if test="ip != null">
+                ip = #{ip,jdbcType=VARCHAR},
+            </if>
+            <if test="result != null">
+                result = #{result,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where log_id = #{logId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.yuxin.platform.common.model.Log">
+        update sys_log
+        set
+        description = #{description,jdbcType=VARCHAR},
+        username =
+        #{username,jdbcType=VARCHAR},
+        addtime = #{addtime,jdbcType=TIMESTAMP},
+        uri = #{uri,jdbcType=VARCHAR},
+        method = #{method,jdbcType=VARCHAR},
+        ip =
+        #{ip,jdbcType=VARCHAR},
+        result = #{result,jdbcType=VARCHAR}
+        where log_id
+        = #{logId,jdbcType=INTEGER}
+    </update>
+</mapper>

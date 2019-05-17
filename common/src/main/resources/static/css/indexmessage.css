@@ -1,0 +1,67 @@
+.font-bold {
+    margin-left: 1px;
+
+}
+
+span.text-muted.text-xs.block {
+    margin-left: 1px;
+    margin-top: 2px;
+}
+
+.dropdown-menu {
+    min-height: 61px;
+    min-width: 80px;
+}
+
+.dropdown-menu.animated.fadeInRight.m-t-xs {
+    margin-left: 2px;
+}
+
+.modal-content {
+    margin-left: 203px;
+    margin-top: 79px;
+}
+
+.btn-default {
+    background-color: #FFFFFF;
+    border-color: #c2c2c2;
+    color: #333;
+}
+
+.m-t-xs {
+    margin-top: 3px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 3px 12px;
+    margin-bottom: 0;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.btn-primary:active {
+    background-color: white;
+}
+
+.btn.btn-link.btn-sm {
+    outline: none;
+}
+
+button#search.btn.btn-primary {
+    margin-right: 72px;
+}

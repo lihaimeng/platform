@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>企业管理</title>
+    <meta name="keywords" content="Table">
+    <meta name="description" content="Table">
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link href="../../css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="../../css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="../../css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="../../css/style.css?v=4.1.0" rel="stylesheet">
+    <style type="text/css">
+        /*重写查询条件label中的文字样式  */
+        .control-label {
+            width: 108px;
+            display: inline-block;
+            text-align: right;
+        }
+
+        .my-container {
+            display: inline-block;
+            margin-right: 30px;
+        }
+
+        .myLabel-content, .myText-content, .myBtn-content {
+            display: inline-block;
+            margin-left: 10px;
+        }
+
+        .myLabel-content, .myText-content input[type='text'], .myBtn-content .btn {
+            height: 30px;
+            font-size: 12px;
+        }
+
+        .myBtn-content .btn {
+            margin-bottom: 10px;
+        }
+
+        /* 详情中的label样式，防止文字折行 */
+        label.col-sm-3.control-label {
+            padding-left: 2px;
+        }
+
+        div .col-sm-6 {
+            bottom: 8px;
+        }
+    </style>
+
+</head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <!-- Panel Other -->
+    <div class="ibox float-e-margins">
+        <div class="ibox-title">
+            <h5>日常管理>企业信息</h5>
+        </div>
+        <div class="ibox-content">
+            <div class="row row-lg">
+                <div class="col-sm-12">
+                    <!-- Example Events -->
+                    <div class="example-wrap">
+                        <div class="example">
+                            <div class="ibox float-e-margins">
+                                <!-- <div class="ibox-content"> -->
+                                <!--<div style="border:1px solid #000">-->
+                                <div class="col-md-4">
+                                    <div class="form-group draggable ui-draggable">
+                                        <label class="col-sm-3 control-label">企业类别：</label>
+                                        <div class="col-sm-6">
+                                            <p id="hylb" class="form-control-static"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="form-group draggable ui-draggable">
+                                        <label class="col-sm-3 control-label">管辖单位：</label>
+                                        <div class="col-sm-6">
+                                            <p id="gxdwmc" class="form-control-static"></p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="col-sm-12">
+                    <!-- Example Events -->
+                    <div class="example-wrap">
+                        <div class="example">
+                            <div class="ibox float-e-margins">
+                                <div class="col-md-4">
+                                    <div class="form-group draggable ui-draggable">
+                                        <label class="col-sm-3 control-label">企业编号：</label>
+                                        <div class="col-sm-6">
+                                            <p id="qybm" class="form-control-static"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group draggable ui-draggable">
+                                        <label class="col-sm-3 control-label">企业名称：</label>
+                                        <div class="col-sm-6">
+                                            <p id="qymc" class="form-control-static"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group draggable ui-draggable">
+                                        <label class="col-sm-3 control-label"
+                                               style="padding-right: 2px;">营业执照编号：</label>
+                                        <div class="col-sm-6">
+                                            <p id="yyzzbh" class="form-control-static"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group draggable ui-draggable">
+                                        <label class="col-sm-3 control-label">法人姓名：</label>
+                                        <div class="col-sm-6">
+                                            <p id="frdb" class="form-control-static"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group draggable ui-draggable">
+                                        <label class="col-sm-3 control-label">法人证件号：</label>
+                                        <div class="col-sm-6">
+                                            <p id="frdbzjhm" class="form-control-static"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group draggable ui-draggable">
+                                        <label class="col-sm-3 control-label"
+                                               style="padding-right: 2px;">单位联系方式：</label>
+                                        <div class="col-sm-6">
+                                            <p id="lxdh" class="form-control-static"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group draggable ui-draggable">
+                                        <label class="col-sm-3 control-label">单位地址：</label>
+                                        <div class="col-sm-6">
+                                            <p id="jydz" class="form-control-static"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group draggable ui-draggable">
+                                        <label class="col-sm-3 control-label">经营范围：</label>
+                                        <div class="col-sm-6">
+                                            <p id="jyfwzy" class="form-control-static"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- </div> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Panel Other -->
+</div>
+<!-- 全局js -->
+<script src="../../js/jquery.min.js?v=2.1.4"></script>
+<script src="../../js/bootstrap.min.js?v=3.3.6"></script>
+<!-- 自定义js -->
+<script src="../../js/content.js?v=1.0.0"></script>
+<script src="business-message-front.js"></script>
+<!-- Bootstrap table -->
+<script src="../../js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="../../js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+<script src="../../js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+</body>
+</html>

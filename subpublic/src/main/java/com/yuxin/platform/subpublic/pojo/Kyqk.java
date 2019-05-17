@@ -1,0 +1,140 @@
+package com.yuxin.platform.subpublic.pojo;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+/**
+ * Created by Xk on 2018/3/1.
+ */
+public class Kyqk {
+    private Integer kyqkid;//可疑情况id
+
+    private Integer qyid;//企业id
+
+    private String kyqklx;//可疑情况类型
+
+    private String tbrbh;//填报人编号
+
+    private String tbnr;//填报内容
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
+    private String tbsj;//填报时间
+
+    private String tbrxm;//填报人姓名
+
+    private String ydxxms;//疑点详细描述
+
+    private String jjrgh;//接警人工号
+
+    private String jjrxm;//接警人姓名
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", locale = "zh", timezone = "GMT+8")
+    private String jjsj;//接警时间
+
+    private String jjcljg;//接警处理结果
+
+    private Short scbz;//0 正常 1删除 2修改
+
+    public Integer getKyqkid() {
+        return kyqkid;
+    }
+
+    public void setKyqkid(Integer kyqkid) {
+        this.kyqkid = kyqkid;
+    }
+
+    public Integer getQyid() {
+        return qyid;
+    }
+
+    public void setQyid(Integer qyid) {
+        this.qyid = qyid;
+    }
+
+    public String getKyqklx() {
+        return kyqklx;
+    }
+
+    public void setKyqklx(String kyqklx) {
+        this.kyqklx = kyqklx;
+    }
+
+    public String getTbrbh() {
+        return tbrbh;
+    }
+
+    public void setTbrbh(String tbrbh) {
+        this.tbrbh = tbrbh;
+    }
+
+    public String getTbrxm() {
+        return tbrxm;
+    }
+
+    public void setTbrxm(String tbrxm) {
+        this.tbrxm = tbrxm;
+    }
+
+    public String getTbnr() {
+        return tbnr;
+    }
+
+    public void setTbnr(String tbnr) {
+        this.tbnr = tbnr;
+    }
+
+    public String getYdxxms() {
+        return ydxxms;
+    }
+
+    public void setYdxxms(String ydxxms) {
+        this.ydxxms = ydxxms;
+    }
+
+    public String getJjrgh() {
+        return jjrgh;
+    }
+
+    public void setJjrgh(String jjrgh) {
+        this.jjrgh = jjrgh;
+    }
+
+    public String getJjrxm() {
+        return jjrxm;
+    }
+
+    public void setJjrxm(String jjrxm) {
+        this.jjrxm = jjrxm;
+    }
+
+    public String getJjsj() {
+        return jjsj;
+    }
+
+    public void setJjsj(String jjsj) {
+        this.jjsj = jjsj;
+    }
+
+    public String getTbsj() {
+        return tbsj;
+    }
+
+    public void setTbsj(String tbsj) {
+        this.tbsj = tbsj;
+    }
+
+    public String getJjcljg() {
+        return jjcljg;
+    }
+
+    public void setJjcljg(String jjcljg) {
+        this.jjcljg = jjcljg;
+    }
+
+    public short getScbz() {
+        return scbz;
+    }
+
+    public void setScbz(short scbz) {
+        this.scbz = scbz;
+    }
+}

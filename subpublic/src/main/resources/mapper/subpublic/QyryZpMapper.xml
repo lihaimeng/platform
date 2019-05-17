@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yuxin.platform.subpublic.mapper.QyryZpMapper">
+    <resultMap id="BaseResultMap" type="com.yuxin.platform.subpublic.pojo.QyryZp">
+        <id column="QYID" property="qyid" jdbcType="INTEGER"/>
+        <result column="RYID" property="ryid" jdbcType="INTEGER"/>
+        <result column="ZPID" property="zpid" jdbcType="INTEGER"/>
+        <result column="TPMC" property="tpmc" jdbcType="VARCHAR"/>
+        <result column="TPLX" property="tplx" jdbcType="VARCHAR"/>
+    </resultMap>
+    <resultMap id="ResultMapWithBLOBs" type="com.yuxin.platform.subpublic.pojo.QyryZp" extends="BaseResultMap">
+        <result column="TPNR" property="tpnr" jdbcType="LONGVARBINARY"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        QYID, RYID, ZPID, TPMC, TPLX
+    </sql>
+    <sql id="Blob_Column_List">
+        TPNR
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from pub_qyry_zp
+        where QYID = #{qyid,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from pub_qyry_zp
+        where QYID = #{qyid,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.yuxin.platform.subpublic.pojo.QyryZp">
+        <selectKey  keyProperty="qyid" resultType="int" order="BEFORE">
+            select nvl(max(qyid),0)+1 from pub_qyry_zp
+        </selectKey>
+        insert into pub_qyry_zp (QYID, RYID, ZPID,
+        TPMC, TPLX, TPNR
+        )
+        values (#{qyid,jdbcType=INTEGER}, #{ryid,jdbcType=INTEGER}, #{zpid,jdbcType=INTEGER},
+        #{tpmc,jdbcType=VARCHAR}, #{tplx,jdbcType=VARCHAR}, #{tpnr,jdbcType=LONGVARBINARY}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.yuxin.platform.subpublic.pojo.QyryZp">
+        <selectKey  keyProperty="qyid" resultType="int" order="BEFORE">
+            select nvl(max(qyid),0)+1 from pub_qyry_zp
+        </selectKey>
+        insert into pub_qyry_zp
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="qyid != null">
+                QYID,
+            </if>
+            <if test="ryid != null">
+                RYID,
+            </if>
+            <if test="zpid != null">
+                ZPID,
+            </if>
+            <if test="tpmc != null">
+                TPMC,
+            </if>
+            <if test="tplx != null">
+                TPLX,
+            </if>
+            <if test="tpnr != null">
+                TPNR,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="qyid != null">
+                #{qyid,jdbcType=INTEGER},
+            </if>
+            <if test="ryid != null">
+                #{ryid,jdbcType=INTEGER},
+            </if>
+            <if test="zpid != null">
+                #{zpid,jdbcType=INTEGER},
+            </if>
+            <if test="tpmc != null">
+                #{tpmc,jdbcType=VARCHAR},
+            </if>
+            <if test="tplx != null">
+                #{tplx,jdbcType=VARCHAR},
+            </if>
+            <if test="tpnr != null">
+                #{tpnr,jdbcType=LONGVARBINARY},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.yuxin.platform.subpublic.pojo.QyryZp">
+        update pub_qyry_zp
+        <set>
+            <if test="ryid != null">
+                RYID = #{ryid,jdbcType=INTEGER},
+            </if>
+            <if test="zpid != null">
+                ZPID = #{zpid,jdbcType=INTEGER},
+            </if>
+            <if test="tpmc != null">
+                TPMC = #{tpmc,jdbcType=VARCHAR},
+            </if>
+            <if test="tplx != null">
+                TPLX = #{tplx,jdbcType=VARCHAR},
+            </if>
+            <if test="tpnr != null">
+                TPNR = #{tpnr,jdbcType=LONGVARBINARY},
+            </if>
+        </set>
+        where QYID = #{qyid,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.yuxin.platform.subpublic.pojo.QyryZp">
+        update pub_qyry_zp
+        set RYID = #{ryid,jdbcType=INTEGER},
+        ZPID = #{zpid,jdbcType=INTEGER},
+        TPMC = #{tpmc,jdbcType=VARCHAR},
+        TPLX = #{tplx,jdbcType=VARCHAR},
+        TPNR = #{tpnr,jdbcType=LONGVARBINARY}
+        where QYID = #{qyid,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.yuxin.platform.subpublic.pojo.QyryZp">
+        update pub_qyry_zp
+        set RYID = #{ryid,jdbcType=INTEGER},
+        ZPID = #{zpid,jdbcType=INTEGER},
+        TPMC = #{tpmc,jdbcType=VARCHAR},
+        TPLX = #{tplx,jdbcType=VARCHAR}
+        where QYID = #{qyid,jdbcType=INTEGER}
+    </update>
+</mapper>

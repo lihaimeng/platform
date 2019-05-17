@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yuxin.platform.subpublic.mapper.BldsjksbMapper">
+    <resultMap id="BaseResultMap" type="com.yuxin.platform.subpublic.pojo.Bldsjksb">
+        <id column="QYID" property="qyid" jdbcType="INTEGER"/>
+        <result column="BLDSJKSBID" property="bldsjksbid" jdbcType="INTEGER"/>
+        <result column="WLCSLXBM" property="wlcslxbm" jdbcType="VARCHAR"/>
+        <result column="WLCSLXMC" property="wlcslxmc" jdbcType="VARCHAR"/>
+        <result column="SBJCJGMC" property="sbjcjgmc" jdbcType="VARCHAR"/>
+        <result column="AZSXTSL" property="azsxtsl" jdbcType="INTEGER"/>
+        <result column="SBXH" property="sbxh" jdbcType="VARCHAR"/>
+        <result column="SCCSMC" property="sccsmc" jdbcType="VARCHAR"/>
+        <result column="GGXH" property="ggxh" jdbcType="VARCHAR"/>
+        <result column="AZSL" property="azsl" jdbcType="INTEGER"/>
+        <result column="SBMC" property="sbmc" jdbcType="VARCHAR"/>
+        <result column="SFLX" property="sflx" jdbcType="VARCHAR"/>
+        <result column="IPDZ" property="ipdz" jdbcType="VARCHAR"/>
+        <result column="ANWZ" property="anwz" jdbcType="VARCHAR"/>
+        <result column="ZT" property="zt" jdbcType="VARCHAR"/>
+        <result column="TYYY" property="tyyy" jdbcType="VARCHAR"/>
+        <result column="TYSJ" property="tysj" jdbcType="TIMESTAMP"/>
+        <result column="JIBR" property="jibr" jdbcType="VARCHAR"/>
+        <result column="BZ" property="bz" jdbcType="VARCHAR"/>
+        <result column="LRR" property="lrr" jdbcType="VARCHAR"/>
+        <result column="LRSJ" property="lrsj" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        QYID, BLDSJKSBID, WLCSLXBM, WLCSLXMC, SBJCJGMC, AZSXTSL, SBXH, SCCSMC, GGXH, AZSL,
+        SBMC, SFLX, IPDZ, ANWZ, ZT, TYYY, TYSJ, JIBR, BZ, LRR, LRSJ
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from pub_bldsjksb
+        where QYID = #{qyid,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectBldsjksb" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from pub_bldsjksb
+        where QYID = #{qyid,jdbcType=INTEGER} and ZT = '0'
+    </select>
+
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from pub_bldsjksb
+        where QYID = #{qyid,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.yuxin.platform.subpublic.pojo.Bldsjksb">
+        <selectKey  keyProperty="qyid" resultType="int" order="BEFORE">
+            select nvl(max(qyid),0)+1 from pub_bldsjksb
+        </selectKey>
+        insert into pub_bldsjksb (QYID, BLDSJKSBID, WLCSLXBM,
+        WLCSLXMC, SBJCJGMC, AZSXTSL,
+        SBXH, SCCSMC, GGXH,
+        AZSL, SBMC, SFLX, IPDZ,
+        ANWZ, ZT, TYYY, TYSJ,
+        JIBR, BZ, LRR, LRSJ
+        )
+        values (#{qyid,jdbcType=INTEGER}, #{bldsjksbid,jdbcType=INTEGER}, #{wlcslxbm,jdbcType=VARCHAR},
+        #{wlcslxmc,jdbcType=VARCHAR}, #{sbjcjgmc,jdbcType=VARCHAR}, #{azsxtsl,jdbcType=INTEGER},
+        #{sbxh,jdbcType=VARCHAR}, #{sccsmc,jdbcType=VARCHAR}, #{ggxh,jdbcType=VARCHAR},
+        #{azsl,jdbcType=INTEGER}, #{sbmc,jdbcType=VARCHAR}, #{sflx,jdbcType=VARCHAR}, #{ipdz,jdbcType=VARCHAR},
+        #{anwz,jdbcType=VARCHAR}, #{zt,jdbcType=VARCHAR}, #{tyyy,jdbcType=VARCHAR}, #{tysj,jdbcType=TIMESTAMP},
+        #{jibr,jdbcType=VARCHAR}, #{bz,jdbcType=VARCHAR}, #{lrr,jdbcType=VARCHAR}, #{lrsj,jdbcType=TIMESTAMP}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.yuxin.platform.subpublic.pojo.Bldsjksb">
+        <selectKey  keyProperty="bldsjksbid" resultType="int" order="BEFORE">
+            select nvl(max(bldsjksbid),0)+1 from pub_bldsjksb
+        </selectKey>
+        insert into pub_bldsjksb
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="qyid != null">
+                QYID,
+            </if>
+            <if test="bldsjksbid != null">
+                BLDSJKSBID,
+            </if>
+            <if test="wlcslxbm != null">
+                WLCSLXBM,
+            </if>
+            <if test="wlcslxmc != null">
+                WLCSLXMC,
+            </if>
+            <if test="sbjcjgmc != null">
+                SBJCJGMC,
+            </if>
+            <if test="azsxtsl != null">
+                AZSXTSL,
+            </if>
+            <if test="sbxh != null">
+                SBXH,
+            </if>
+            <if test="sccsmc != null">
+                SCCSMC,
+            </if>
+            <if test="ggxh != null">
+                GGXH,
+            </if>
+            <if test="azsl != null">
+                AZSL,
+            </if>
+            <if test="sbmc != null">
+                SBMC,
+            </if>
+            <if test="sflx != null">
+                SFLX,
+            </if>
+            <if test="ipdz != null">
+                IPDZ,
+            </if>
+            <if test="anwz != null">
+                ANWZ,
+            </if>
+            <if test="zt != null">
+                ZT,
+            </if>
+            <if test="tyyy != null">
+                TYYY,
+            </if>
+            <if test="tysj != null">
+                TYSJ,
+            </if>
+            <if test="jibr != null">
+                JIBR,
+            </if>
+            <if test="bz != null">
+                BZ,
+            </if>
+            <if test="lrr != null">
+                LRR,
+            </if>
+            <if test="lrsj != null">
+                LRSJ,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="qyid != null">
+                #{qyid,jdbcType=INTEGER},
+            </if>
+            <if test="bldsjksbid != null">
+                #{bldsjksbid,jdbcType=INTEGER},
+            </if>
+            <if test="wlcslxbm != null">
+                #{wlcslxbm,jdbcType=VARCHAR},
+            </if>
+            <if test="wlcslxmc != null">
+                #{wlcslxmc,jdbcType=VARCHAR},
+            </if>
+            <if test="sbjcjgmc != null">
+                #{sbjcjgmc,jdbcType=VARCHAR},
+            </if>
+            <if test="azsxtsl != null">
+                #{azsxtsl,jdbcType=INTEGER},
+            </if>
+            <if test="sbxh != null">
+                #{sbxh,jdbcType=VARCHAR},
+            </if>
+            <if test="sccsmc != null">
+                #{sccsmc,jdbcType=VARCHAR},
+            </if>
+            <if test="ggxh != null">
+                #{ggxh,jdbcType=VARCHAR},
+            </if>
+            <if test="azsl != null">
+                #{azsl,jdbcType=INTEGER},
+            </if>
+            <if test="sbmc != null">
+                #{sbmc,jdbcType=VARCHAR},
+            </if>
+            <if test="sflx != null">
+                #{sflx,jdbcType=VARCHAR},
+            </if>
+            <if test="ipdz != null">
+                #{ipdz,jdbcType=VARCHAR},
+            </if>
+            <if test="anwz != null">
+                #{anwz,jdbcType=VARCHAR},
+            </if>
+            <if test="zt != null">
+                #{zt,jdbcType=VARCHAR},
+            </if>
+            <if test="tyyy != null">
+                #{tyyy,jdbcType=VARCHAR},
+            </if>
+            <if test="tysj != null">
+                #{tysj,jdbcType=TIMESTAMP},
+            </if>
+            <if test="jibr != null">
+                #{jibr,jdbcType=VARCHAR},
+            </if>
+            <if test="bz != null">
+                #{bz,jdbcType=VARCHAR},
+            </if>
+            <if test="lrr != null">
+                #{lrr,jdbcType=VARCHAR},
+            </if>
+            <if test="lrsj != null">
+                #{lrsj,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.yuxin.platform.subpublic.pojo.Bldsjksb">
+        update pub_bldsjksb
+        <set>
+            <if test="wlcslxbm != null">
+                WLCSLXBM = #{wlcslxbm,jdbcType=VARCHAR},
+            </if>
+            <if test="wlcslxmc != null">
+                WLCSLXMC = #{wlcslxmc,jdbcType=VARCHAR},
+            </if>
+            <if test="sbjcjgmc != null">
+                SBJCJGMC = #{sbjcjgmc,jdbcType=VARCHAR},
+            </if>
+            <if test="azsxtsl != null">
+                AZSXTSL = #{azsxtsl,jdbcType=INTEGER},
+            </if>
+            <if test="sbxh != null">
+                SBXH = #{sbxh,jdbcType=VARCHAR},
+            </if>
+            <if test="sccsmc != null">
+                SCCSMC = #{sccsmc,jdbcType=VARCHAR},
+            </if>
+            <if test="ggxh != null">
+                GGXH = #{ggxh,jdbcType=VARCHAR},
+            </if>
+            <if test="azsl != null">
+                AZSL = #{azsl,jdbcType=INTEGER},
+            </if>
+            <if test="sbmc != null">
+                SBMC = #{sbmc,jdbcType=VARCHAR},
+            </if>
+            <if test="sflx != null">
+                SFLX = #{sflx,jdbcType=VARCHAR},
+            </if>
+            <if test="ipdz != null">
+                IPDZ = #{ipdz,jdbcType=VARCHAR},
+            </if>
+            <if test="anwz != null">
+                ANWZ = #{anwz,jdbcType=VARCHAR},
+            </if>
+            <if test="zt != null">
+                ZT = #{zt,jdbcType=VARCHAR},
+            </if>
+            <if test="tyyy != null">
+                TYYY = #{tyyy,jdbcType=VARCHAR},
+            </if>
+            <if test="tysj != null">
+                TYSJ = #{tysj,jdbcType=TIMESTAMP},
+            </if>
+            <if test="jibr != null">
+                JIBR = #{jibr,jdbcType=VARCHAR},
+            </if>
+            <if test="bz != null">
+                BZ = #{bz,jdbcType=VARCHAR},
+            </if>
+            <if test="lrr != null">
+                LRR = #{lrr,jdbcType=VARCHAR},
+            </if>
+            <if test="lrsj != null">
+                LRSJ = #{lrsj,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where BLDSJKSBID = #{bldsjksbid,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.yuxin.platform.subpublic.pojo.Bldsjksb">
+        update pub_bldsjksb
+        set
+        WLCSLXBM = #{wlcslxbm,jdbcType=VARCHAR},
+        WLCSLXMC = #{wlcslxmc,jdbcType=VARCHAR},
+        SBJCJGMC = #{sbjcjgmc,jdbcType=VARCHAR},
+        AZSXTSL = #{azsxtsl,jdbcType=INTEGER},
+        SBXH = #{sbxh,jdbcType=VARCHAR},
+        SCCSMC = #{sccsmc,jdbcType=VARCHAR},
+        GGXH = #{ggxh,jdbcType=VARCHAR},
+        AZSL = #{azsl,jdbcType=INTEGER},
+        SBMC = #{sbmc,jdbcType=VARCHAR},
+        SFLX = #{sflx,jdbcType=VARCHAR},
+        IPDZ = #{ipdz,jdbcType=VARCHAR},
+        ANWZ = #{anwz,jdbcType=VARCHAR},
+        ZT = #{zt,jdbcType=VARCHAR},
+        TYYY = #{tyyy,jdbcType=VARCHAR},
+        TYSJ = #{tysj,jdbcType=TIMESTAMP},
+        JIBR = #{jibr,jdbcType=VARCHAR},
+        BZ = #{bz,jdbcType=VARCHAR},
+        LRR = #{lrr,jdbcType=VARCHAR},
+        LRSJ = #{lrsj,jdbcType=TIMESTAMP}
+        where BLDSJKSBID = #{bldsjksbid,jdbcType=INTEGER}
+    </update>
+</mapper>

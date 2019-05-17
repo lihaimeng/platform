@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yuxin.platform.zongzhiserver.lock.mapper.SubLockOrderMapper">
+    <resultMap id="BaseResultMap" type="com.yuxin.platform.common.model.SubLockOrder">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="ksrxm" jdbcType="VARCHAR" property="ksrxm"/>
+        <result column="ksrzjlx" jdbcType="VARCHAR" property="ksrzjlx"/>
+        <result column="ksrzjhm" jdbcType="VARCHAR" property="ksrzjhm"/>
+        <result column="ksrzp" jdbcType="VARCHAR" property="ksrzp"/>
+        <result column="ksrlxdh" jdbcType="VARCHAR" property="ksrlxdh"/>
+        <result column="qymc" jdbcType="VARCHAR" property="qymc"/>
+        <result column="qydz" jdbcType="VARCHAR" property="qydz"/>
+        <result column="wtrxm" jdbcType="VARCHAR" property="wtrxm"/>
+        <result column="wtrzjlx" jdbcType="VARCHAR" property="wtrzjlx"/>
+        <result column="wtrzjhm" jdbcType="VARCHAR" property="wtrzjhm"/>
+        <result column="wtrzp" jdbcType="VARCHAR" property="wtrzp"/>
+        <result column="wtrlxdh" jdbcType="VARCHAR" property="wtrlxdh"/>
+        <result column="wtrhjdz" jdbcType="VARCHAR" property="wtrhjdz"/>
+        <result column="ksdz" jdbcType="VARCHAR" property="ksdz"/>
+        <result column="kslx" jdbcType="VARCHAR" property="kslx"/>
+                            <result column="kssj" jdbcType="TIMESTAMP" property="kssj"/>
+        <result column="ksfy" jdbcType="REAL" property="ksfy"/>
+        <result column="bz" jdbcType="VARCHAR" property="bz"/>
+        <result column="zmclzp" jdbcType="VARCHAR" property="zmclzp"/>
+        <result column="kszp" jdbcType="VARCHAR" property="kszp"/>
+        <result column="djr" jdbcType="VARCHAR" property="djr"/>
+        <result column="djsj" jdbcType="TIMESTAMP" property="djsj"/>
+        <result column="gxdw" jdbcType="VARCHAR" property="gxdw"/>
+        <result column="ddh" jdbcType="VARCHAR" property="ddh"/>
+    </resultMap>
+
+
+    <sql id="Base_Column_List">
+        id, ksrxm, ksrzjlx, ksrzjhm, ksrzp,ksrlxdh, qymc, qydz, wtrxm,
+        wtrzjlx, wtrzjhm, wtrzp, wtrlxdh, wtrhjdz,
+        ksdz, kslx, kssj, ksfy, bz,
+        zmclzp, kszp, djr, djsj,gxdw,ddh
+    </sql>
+
+
+    <insert id="insertSelective" parameterType="com.yuxin.platform.common.model.SubLockOrder">
+        <selectKey  keyProperty="id" resultType="int" order="BEFORE">
+            select nvl(max(id),0)+1 from sub_lock_order
+        </selectKey>
+        insert into sub_lock_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="ksrxm != null">
+                ksrxm,
+            </if>
+            <if test="ksrzjlx != null">
+                ksrzjlx,
+            </if>
+            <if test="ksrzjhm != null">
+                ksrzjhm,
+            </if>
+            <if test="ksrzp != null">
+                ksrzp,
+            </if>
+            <if test="ksrlxdh != null">
+                ksrlxdh,
+            </if>
+            <if test="qymc != null">
+                qymc,
+            </if>
+            <if test="qydz != null">
+                qydz,
+            </if>
+            <if test="wtrxm != null">
+                wtrxm,
+            </if>
+            <if test="wtrzjlx != null">
+                wtrzjlx,
+            </if>
+            <if test="wtrzjhm != null">
+                wtrzjhm,
+            </if>
+            <if test="wtrzp != null">
+                wtrzp,
+            </if>
+            <if test="wtrlxdh != null">
+                wtrlxdh,
+            </if>
+            <if test="wtrhjdz != null">
+                wtrhjdz,
+            </if>
+            <if test="ksdz != null">
+                ksdz,
+            </if>
+            <if test="kslx != null">
+                kslx,
+            </if>
+            <if test="kssj != null">
+                kssj,
+            </if>
+            <if test="ksfy != null">
+                ksfy,
+            </if>
+            <if test="bz != null">
+                bz,
+            </if>
+            <if test="zmclzp != null">
+                zmclzp,
+            </if>
+            <if test="kszp != null">
+                kszp,
+            </if>
+            <if test="djr != null">
+                djr,
+            </if>
+            <if test="djsj != null">
+                djsj,
+            </if>
+            <if test="gxdw != null">
+                gxdw,
+            </if>
+            <if test="ddh != null">
+                ddh,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="ksrxm != null">
+                #{ksrxm,jdbcType=VARCHAR},
+            </if>
+            <if test="ksrzjlx != null">
+                #{ksrzjlx,jdbcType=VARCHAR},
+            </if>
+            <if test="ksrzjhm != null">
+                #{ksrzjhm,jdbcType=VARCHAR},
+            </if>
+            <if test="ksrzp != null">
+                #{ksrzp,jdbcType=VARCHAR},
+            </if>
+            <if test="ksrlxdh != null">
+                #{ksrlxdh,jdbcType=VARCHAR},
+            </if>
+            <if test="qymc != null">
+                #{qymc,jdbcType=VARCHAR},
+            </if>
+            <if test="qydz != null">
+                #{qydz,jdbcType=VARCHAR},
+            </if>
+            <if test="wtrxm != null">
+                #{wtrxm,jdbcType=VARCHAR},
+            </if>
+            <if test="wtrzjlx != null">
+                #{wtrzjlx,jdbcType=VARCHAR},
+            </if>
+            <if test="wtrzjhm != null">
+                #{wtrzjhm,jdbcType=VARCHAR},
+            </if>
+            <if test="wtrzp != null">
+                #{wtrzp,jdbcType=VARCHAR},
+            </if>
+            <if test="wtrlxdh != null">
+                #{wtrlxdh,jdbcType=VARCHAR},
+            </if>
+            <if test="wtrhjdz != null">
+                #{wtrhjdz,jdbcType=VARCHAR},
+            </if>
+            <if test="ksdz != null">
+                #{ksdz,jdbcType=VARCHAR},
+            </if>
+            <if test="kslx != null">
+                #{kslx,jdbcType=VARCHAR},
+            </if>
+            <if test="kssj != null">
+                #{kssj,jdbcType=TIMESTAMP},
+            </if>
+            <if test="ksfy != null">
+                #{ksfy,jdbcType=REAL},
+            </if>
+            <if test="bz != null">
+                #{bz,jdbcType=VARCHAR},
+            </if>
+            <if test="zmclzp != null">
+                #{zmclzp,jdbcType=VARCHAR},
+            </if>
+            <if test="kszp != null">
+                #{kszp,jdbcType=VARCHAR},
+            </if>
+            <if test="djr != null">
+                #{djr,jdbcType=VARCHAR},
+            </if>
+            <if test="djsj != null">
+                #{djsj,jdbcType=TIMESTAMP},
+            </if>
+            <if test="gxdw != null">
+                #{gxdw,jdbcType=VARCHAR},
+            </if>
+            <if test="ddh != null">
+                #{ddh,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="searchList" resultMap="BaseResultMap"
+            parameterType="com.yuxin.platform.zongzhiserver.lock.dto.SubLockOrderDto">
+        select
+        <include refid="Base_Column_List"/>
+        from sub_lock_order
+        <where>
+            <if test="qymc != null and qymc!=''">
+                AND qymc like CONCAT(CONCAT('%',#{qymc,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="ksrxm != null and ksrxm!=''">
+                AND ksrxm like CONCAT(CONCAT('%',#{ksrxm,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="gxdw != null and gxdw!=''">
+                AND gxdw like CONCAT(CONCAT('%',#{gxdw,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="wtrxm != null and wtrxm!=''">
+                AND wtrxm like CONCAT(CONCAT('%',#{wtrxm,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="ddh != null and ddh!=''">
+                AND ddh = #{ddh,jdbcType=VARCHAR}
+            </if>
+            <if test="wtrzjhm != null and wtrzjhm!=''">
+                AND wtrzjhm like CONCAT(CONCAT('%',#{wtrzjhm,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="registerTimeStart!=null">
+                <![CDATA[ AND kssj>=#{registerTimeStart,jdbcType=TIMESTAMP} ]]>
+            </if>
+            <if test="registerTimeEnd!=null">
+                <![CDATA[ AND  kssj <= #{registerTimeEnd,jdbcType=TIMESTAMP} ]]>
+            </if>
+        </where>
+        order by kssj desc
+    </select>
+
+
+    <select id="selectGroupByGxdwbm" parameterType="java.util.Map" resultType="java.util.HashMap">
+        select p.DIC_NAME "name", nvl((select COUNT(*)
+        from sub_lock_order
+        <where>
+            <if test="beginStr!=null and beginStr!=''">
+                <![CDATA[ to_char(kssj,'yyyy/MM/dd HH24:mi:ss')>=#{beginStr,jdbcType=TIMESTAMP} ]]>
+            </if>
+            <if test="endStr!=null and endStr!=''">
+                <![CDATA[ AND  to_char(kssj,'yyyy/MM/dd HH24:mi:ss') <= #{endStr,jdbcType=TIMESTAMP} ]]>
+            </if>
+        </where>
+        AND gxdw like CONCAT(CONCAT('', #{gxdw,jdbcType=VARCHAR}),'%')
+        and sub_lock_order.kslx=p.DIC_CODE) ,0) "value"
+        from pub_dictionary p where p.PDICTID=127
+    </select>
+
+    <select id="selectLastSevenDay" parameterType="java.util.Map" resultType="java.util.HashMap">
+        select to_char(a.click_date,'yyyy-mm-dd')  "name",nvl(b.count,0)  "value"
+        from (
+        SELECT
+        SYSDATE  AS click_date from dual
+        UNION
+        ALL
+        SELECT
+        (SYSDATE- 1) AS click_date from dual
+        UNION
+        ALL
+        SELECT
+        (SYSDATE- 2) AS click_date from dual
+        UNION
+        ALL
+        SELECT
+        (SYSDATE- 3) AS click_date from dual
+        UNION
+        ALL
+        SELECT
+        (SYSDATE- 4) AS click_date from dual
+        UNION
+        ALL
+        SELECT
+        (SYSDATE- 5) AS click_date from dual
+        UNION
+        ALL
+        SELECT
+        (SYSDATE- 6) AS click_date from dual) a left join (
+        select kssj as datetime, count(*) as count
+        from sub_lock_order where gxdw like CONCAT(CONCAT('', #{gxdw,jdbcType=VARCHAR}),'%')
+        group by kssj
+        ) b on a.click_date = b.datetime
+        order by "name"
+    </select>
+
+
+    <select id="selectByGxdwbm" parameterType="java.util.Map" resultType="java.util.HashMap">
+        select s.description as "name" ,(select count(*) from sub_lock_order
+        <where>
+            <if test="beginStr!=null and beginStr!=''">
+                <![CDATA[ to_char(kssj,'yyyy-MM-dd HH24:mi:ss')>=#{beginStr,jdbcType=TIMESTAMP} ]]>
+            </if>
+            <if test="endStr!=null and endStr!=''">
+                <![CDATA[ AND  to_char(kssj,'yyyy-MM-dd HH24:mi:ss') <= #{endStr,jdbcType=TIMESTAMP} ]]>
+            </if>
+        </where>
+        AND gxdw like concat(brevitycode,'%') ) as "value"
+        from sys_organization s
+        where
+        s.pid= #{pid,jdbcType=INTEGER} or s.organization_id=#{organizationid,jdbcType=INTEGER}
+    </select>
+
+
+    <select id="selectByGxdwbm1" parameterType="java.util.Map" resultType="java.util.HashMap">
+        select s.description as "name",(select count(distinct qymc) from sub_lock_order
+        <where>
+            <if test="beginStr!=null and beginStr!=''">
+                <![CDATA[ to_char(kssj,'yyyy-MM-dd HH24:mi:ss')>=#{beginStr,jdbcType=TIMESTAMP} ]]>
+            </if>
+            <if test="endStr!=null and endStr!=''">
+                <![CDATA[ AND  to_char(kssj,'yyyy-MM-dd HH24:mi:ss') <= #{endStr,jdbcType=TIMESTAMP} ]]>
+            </if>
+        </where>
+        AND gxdw like concat(brevitycode,'%')) as "value"
+        from sys_organization s
+        where
+            s.pid= #{pid,jdbcType=INTEGER} or s.organization_id=#{organizationid,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectOfyear" parameterType="java.util.Map" resultType="java.util.HashMap">
+        SELECT to_char(kssj,'yyyy-mm')  as "name",count(Distinct kssj) as "value" FROM sub_lock_order where
+        to_char(kssj,'yyyy-mm')>
+        to_char(add_months(sysdate,-2),'yyyy-mm')
+        AND gxdw like CONCAT(CONCAT('', #{gxdw,jdbcType=VARCHAR}),'%')
+        GROUP BY to_number(to_char(kssj,'mm')),to_char(kssj,'yyyy-mm')
+        ORDER BY to_char(kssj,'yyyy-mm')
+    </select>
+</mapper>

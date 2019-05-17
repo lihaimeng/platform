@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yuxin.platform.zongzhiserver.seal.mapper.SubSealSydwMapper">
+    <resultMap id="BaseResultMap" type="com.yuxin.platform.common.model.SubSealSydw">
+
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="dwmc" jdbcType="VARCHAR" property="dwmc"/>
+        <result column="dwbh" jdbcType="VARCHAR" property="dwbh"/>
+        <result column="dwdz" jdbcType="VARCHAR" property="dwdz"/>
+        <result column="dwlx" jdbcType="VARCHAR" property="dwlx"/>
+        <result column="dwdh" jdbcType="VARCHAR" property="dwdh"/>
+        <result column="yyzzzp" jdbcType="VARCHAR" property="yyzzzp"/>
+        <result column="yyzzbh" jdbcType="VARCHAR" property="yyzzbh"/>
+        <result column="djsj" jdbcType="TIMESTAMP" property="djsj"/>
+        <result column="gxdw" jdbcType="VARCHAR" property="gxdw"/>
+        <result column="frxm" jdbcType="VARCHAR" property="frxm"/>
+        <result column="frzjhm" jdbcType="VARCHAR" property="frzjhm"/>
+        <result column="frzjlx" jdbcType="VARCHAR" property="frzjlx"/>
+        <result column="frzp" jdbcType="VARCHAR" property="frzp"/>
+        <result column="frhjdz" jdbcType="VARCHAR" property="frhjdz"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, dwmc, dwbh, dwdz, dwlx,dwdh, yyzzzp, yyzzbh, djsj,
+        gxdw, frxm, frzjhm, frzjlx,frzp,frhjdz
+    </sql>
+
+    <select id="selectSealSydwByParams" resultMap="BaseResultMap"
+            parameterType="com.yuxin.platform.zongzhiserver.seal.dto.SubSealSydwDto">
+        select
+        <include refid="Base_Column_List"/>
+        from sub_seal_sydw
+        <where>
+            <if test="dwmc != null and dwmc!=''">
+                dwmc like CONCAT(CONCAT('%',#{dwmc,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="gxdw != null and gxdw!=''">
+                AND gxdw like CONCAT(CONCAT('%',#{gxdw,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="frxm != null and frxm!=''">
+                AND frxm like CONCAT(CONCAT('%',#{frxm,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="dwbh != null and dwbh!=''">
+                AND dwbh = #{dwbh,jdbcType=VARCHAR}
+            </if>
+            <if test="frzjhm != null and frzjhm!=''">
+                AND frzjhm like CONCAT(CONCAT('%',#{frzjhm,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="yyzzbh != null and yyzzbh!=''">
+                AND yyzzbh like CONCAT(CONCAT('%',#{yyzzbh,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="registerTimeStart!=null">
+                <![CDATA[ AND djsj>=#{registerTimeStart,jdbcType=TIMESTAMP} ]]>
+            </if>
+            <if test="registerTimeEnd!=null">
+                <![CDATA[ AND  djsj <= #{registerTimeEnd,jdbcType=TIMESTAMP} ]]>
+            </if>
+        </where>
+        ORDER BY djsj DESC
+    </select>
+</mapper>

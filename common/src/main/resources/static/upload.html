@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>文件上传</title>
+</head>
+<body>
+<form method="POST" enctype="multipart/form-data" id="fileUploadForm">
+    <input type="text" name="extraField"/><br/><br/>
+    <img src="" id="image1" width="100" height="150">
+    <input id="FileUpload" type="file" name="files"/><br/><br/>
+    <img src="" id="image2" width="100" height="150">
+    <input type="file" name="files"/><br/><br/>
+    <input type="submit" value="提交" id="btnSubmit"/>
+</form>
+
+<h1>Ajax提交结果：</h1>
+<pre>
+    <span id="result"></span>
+</pre>
+
+<script src="../js/jquery.min.js?v=2.1.4"></script>
+<script type="text/javascript" src="upload.js"></script>
+
+</body>
+</html>

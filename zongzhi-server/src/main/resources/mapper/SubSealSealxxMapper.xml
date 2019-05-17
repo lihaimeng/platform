@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yuxin.platform.zongzhiserver.seal.mapper.SubSealSealxxMapper">
+    <resultMap id="BaseResultMap" type="com.yuxin.platform.common.model.SubSealSealxx">
+
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="yzbm" jdbcType="VARCHAR" property="yzbm"/>
+        <result column="yznr" jdbcType="VARCHAR" property="yznr"/>
+        <result column="yzlx" jdbcType="VARCHAR" property="yzlx"/>
+        <result column="yzxz" jdbcType="VARCHAR" property="yzxz"/>
+        <result column="yzgg" jdbcType="VARCHAR" property="yzgg"/>
+        <result column="yzcl" jdbcType="VARCHAR" property="yzcl"/>
+        <result column="pbfs" jdbcType="VARCHAR" property="pbfs"/>
+        <result column="zxta" jdbcType="VARCHAR" property="zxta"/>
+        <result column="jg" jdbcType="INTEGER" property="jg"/>
+        <result column="ymldzp" jdbcType="VARCHAR" property="ymldzp"/>
+        <result column="djsj" jdbcType="TIMESTAMP" property="djsj"/>
+        <result column="ddh" jdbcType="VARCHAR" property="ddh"/>
+    </resultMap>
+
+    <!--<resultMap id="BaseResultMap" type="com.yuxin.platform.zongzhiserver.seal.model.SubSealOrder">
+
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="sydwmc" jdbcType="VARCHAR" property="sydwmc"/>
+        <result column="sydwbh" jdbcType="VARCHAR" property="sydwbh"/>
+        <result column="sydwlx" jdbcType="VARCHAR" property="sydwlx"/>
+        <result column="sydwdh" jdbcType="VARCHAR" property="sydwdh"/>
+        <result column="sydwdz" jdbcType="VARCHAR" property="sydwdz"/>
+        <result column="jbrxm" jdbcType="VARCHAR" property="jbrxm"/>
+        <result column="jbrzjlx" jdbcType="VARCHAR" property="jbrzjlx"/>
+        <result column="jbrzjh" jdbcType="VARCHAR" property="jbrzjh"/>
+        <result column="jbrzp" jdbcType="VARCHAR" property="jbrzp"/>
+        <result column="jbrlxdh" jdbcType="VARCHAR" property="jbrlxdh"/>
+        <result column="zzdwbm" jdbcType="VARCHAR" property="zzdwbm"/>
+        <result column="zzdwmc" jdbcType="VARCHAR" property="zzdwmc"/>
+        <result column="zzr" jdbcType="VARCHAR" property="zzr"/>
+        <result column="zzdwdh" jdbcType="VARCHAR" property="zzdwdh"/>
+        <result column="zzdwdz" jdbcType="VARCHAR" property="zzdwdz"/>
+        <result column="djsj" jdbcType="TIMESTAMP" property="djsj"/>
+        <result column="gxdw" jdbcType="VARCHAR" property="gxdw"/>
+        <result column="ddh" jdbcType="VARCHAR" property="ddh"/>
+        <result column="badwbh" jdbcType="VARCHAR" property="badwbh"/>
+        <result column="badwmc" jdbcType="VARCHAR" property="badwmc"/>
+        <result column="bar" jdbcType="VARCHAR" property="bar"/>
+        <result column="basj" jdbcType="TIMESTAMP" property="basj"/>
+    </resultMap>-->
+
+    <resultMap id="BaseResultMap1" type="com.yuxin.platform.zongzhiserver.seal.dto.ResultSubSealOrderDto">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="yzbm" jdbcType="VARCHAR" property="yzbm"/>
+        <result column="yznr" jdbcType="VARCHAR" property="yznr"/>
+        <result column="yzlx" jdbcType="VARCHAR" property="yzlx"/>
+        <result column="yzxz" jdbcType="VARCHAR" property="yzxz"/>
+        <result column="yzgg" jdbcType="VARCHAR" property="yzgg"/>
+        <result column="yzcl" jdbcType="VARCHAR" property="yzcl"/>
+        <result column="pbfs" jdbcType="VARCHAR" property="pbfs"/>
+        <result column="zxta" jdbcType="VARCHAR" property="zxta"/>
+        <result column="jg" jdbcType="INTEGER" property="jg"/>
+        <result column="ymldzp" jdbcType="VARCHAR" property="ymldzp"/>
+        <result column="djsj" jdbcType="TIMESTAMP" property="djsj"/>
+        <result column="ddh" jdbcType="VARCHAR" property="ddh"/>
+        <result column="sydwmc" jdbcType="VARCHAR" property="sydwmc"/>
+        <result column="sydwbh" jdbcType="VARCHAR" property="sydwbh"/>
+        <result column="sydwlx" jdbcType="VARCHAR" property="sydwlx"/>
+        <result column="sydwdh" jdbcType="VARCHAR" property="sydwdh"/>
+        <result column="sydwdz" jdbcType="VARCHAR" property="sydwdz"/>
+        <result column="jbrxm" jdbcType="VARCHAR" property="jbrxm"/>
+        <result column="jbrzjlx" jdbcType="VARCHAR" property="jbrzjlx"/>
+        <result column="jbrzjh" jdbcType="VARCHAR" property="jbrzjh"/>
+        <result column="jbrzp" jdbcType="VARCHAR" property="jbrzp"/>
+        <result column="jbrlxdh" jdbcType="VARCHAR" property="jbrlxdh"/>
+        <result column="zzdwbm" jdbcType="VARCHAR" property="zzdwbm"/>
+        <result column="zzdwmc" jdbcType="VARCHAR" property="zzdwmc"/>
+        <result column="zzr" jdbcType="VARCHAR" property="zzr"/>
+        <result column="zzdwdh" jdbcType="VARCHAR" property="zzdwdh"/>
+        <result column="zzdwdz" jdbcType="VARCHAR" property="zzdwdz"/>
+        <result column="badwbh" jdbcType="VARCHAR" property="badwbh"/>
+        <result column="badwmc" jdbcType="VARCHAR" property="badwmc"/>
+        <result column="gxdw" jdbcType="VARCHAR" property="gxdw"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, yzbm, yznr, yzlx, yzxz,yzgg, yzcl, pbfs, zxta,
+        jg, ymldzp, djsj, ddh
+    </sql>
+
+
+    <sql id="Base_Column_List1">
+        sub_seal_sealxx.id, sub_seal_sealxx.yzbm, sub_seal_sealxx.yznr, sub_seal_sealxx.yzlx, sub_seal_sealxx.yzxz,
+        sub_seal_sealxx.yzgg, sub_seal_sealxx.yzcl, sub_seal_sealxx.pbfs, sub_seal_sealxx.zxta,
+        sub_seal_sealxx.jg, sub_seal_sealxx.ymldzp, sub_seal_sealxx.djsj, sub_seal_sealxx.ddh,
+        sub_seal_order.sydwmc, sub_seal_order.sydwbh, sub_seal_order.sydwlx, sub_seal_order.sydwdh,sydwdz,
+        sub_seal_order.jbrxm, sub_seal_order.jbrzjlx, sub_seal_order.jbrzjh,sub_seal_order.bar,
+        sub_seal_order.jbrzp, sub_seal_order.jbrlxdh, sub_seal_order.zzdwbm, sub_seal_order.zzdwmc, sub_seal_order.zzr,
+        sub_seal_order.zzdwdh, sub_seal_order.zzdwdz,sub_seal_order.badwbh, sub_seal_order.badwmc, sub_seal_order.basj
+    </sql>
+
+    <select id="selectSealSealxxByParams" resultMap="BaseResultMap"
+            parameterType="com.yuxin.platform.zongzhiserver.seal.dto.SubSealSealxxDto">
+        select
+        <include refid="Base_Column_List"/>
+        from sub_seal_sealxx
+        <where>
+            <if test="sydwmc != null and sydwmc!=''">
+                sydwmc like CONCAT(CONCAT('%',#{sydwmc,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="yzbm != null and yzbm!=''">
+                AND yzbm like CONCAT(CONCAT('%',#{yzbm,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="yzlx != null and yzlx!=''">
+                AND yzlx like CONCAT(CONCAT('%',#{yzlx,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="yzcl != null and yzcl!=''">
+                AND yzcl like CONCAT(CONCAT('%',#{yzcl,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="yzgg != null and yzgg!=''">
+                AND yzgg like CONCAT(CONCAT('%',#{yzgg,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="zxta != null and zxta!=''">
+                AND zxta like CONCAT(CONCAT('%',#{zxta,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="yzxz != null and yzxz!=''">
+                AND yzxz like CONCAT(CONCAT('%',#{yzxz,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="registerTimeStart!=null">
+                <![CDATA[ AND djsj>=#{registerTimeStart,jdbcType=TIMESTAMP} ]]>
+            </if>
+            <if test="registerTimeEnd!=null">
+                <![CDATA[ AND  djsj <= #{registerTimeEnd,jdbcType=TIMESTAMP} ]]>
+            </if>
+        </where>
+    </select>
+
+    <select id="sealxxAndSubSealOrderDetails" resultMap="BaseResultMap1">
+        select
+        <include refid="Base_Column_List1"/>
+        from sub_seal_sealxx left join sub_seal_order on sub_seal_order.ddh=sub_seal_sealxx.ddh
+        <where>
+            <if test="sydwmc != null and sydwmc!=''">
+                sub_seal_order.gxdw like CONCAT(CONCAT('%',#{gxdw,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="sydwmc != null and sydwmc!=''">
+                sydwmc like CONCAT(CONCAT('%',#{sydwmc,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="yzbm != null and yzbm!=''">
+                AND yzbm like CONCAT(CONCAT('%',#{yzbm,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="yzlx != null and yzlx!=''">
+                AND yzlx like CONCAT(CONCAT('%',#{yzlx,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="yzcl != null and yzcl!=''">
+                AND yzcl like CONCAT(CONCAT('%',#{yzcl,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="yzgg != null and yzgg!=''">
+                AND yzgg like CONCAT(CONCAT('%',#{yzgg,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="zxta != null and zxta!=''">
+                AND zxta like CONCAT(CONCAT('%',#{zxta,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="yzxz != null and yzxz!=''">
+                AND yzxz like CONCAT(CONCAT('%',#{yzxz,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="registerTimeStart!=null">
+                <![CDATA[ AND sub_seal_sealxx.djsj>=#{registerTimeStart,jdbcType=TIMESTAMP} ]]>
+            </if>
+            <if test="registerTimeEnd!=null">
+                <![CDATA[ AND  sub_seal_sealxx.djsj <= #{registerTimeEnd,jdbcType=TIMESTAMP} ]]>
+            </if>
+        </where>
+        ORDER BY sub_seal_sealxx.djsj DESC
+    </select>
+</mapper>

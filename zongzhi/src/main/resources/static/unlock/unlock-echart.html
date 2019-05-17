@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link href="../css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="../css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="../css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="../css/animate.css" rel="stylesheet">
+    <link href="../css/style.css?v=4.1.0" rel="stylesheet">
+    <link href="../smoke-v3.1.1/css/smoke.css" rel="stylesheet">
+    <link href="../smoke-v3.1.1/css/smoke.min.css" rel="stylesheet">
+    <link href="../css/search-criteria.css" rel="stylesheet">
+
+    <style>
+        .dayclick {
+
+            text-align: right;
+            width: 25%;
+        }
+
+        .dayclick span {
+
+            height: 22px;
+            color: #333;
+            text-align: center;
+            line-height: 22px;
+            /*border: 1px solid #797979;*/
+            float: right;
+            cursor: pointer;
+            padding: 0 10px;
+            background: #fff;
+        }
+
+        .dayclick .day {
+            background: #1abc9c;
+            color: #fff;
+        }
+
+        .echart-title {
+            padding: 8px 0 0 0;
+        }
+
+        .myText-content {
+            width: 28%;
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        .my-container {
+            width: 58%
+        }
+
+        .myText-content input {
+            width: 82%;
+            height: 26px;
+            line-height: 26px;
+            font-size: 14px;
+        }
+
+        .myLabel-content {
+            width: 14px;
+            text-align: center;
+        }
+        .myText-content input {
+            line-height: 0px;
+        }
+        @media screen and (max-width: 1066px){
+            .myText-content{
+                width: 45%;
+            }
+            .cqy_title{
+                width: 18%;
+            }
+            .my-container{
+                width: 57%;
+            }
+        }
+        @media screen and (max-width: 1030px){
+            .cqy_title{
+                width: 19%;
+            }
+            .cqy1_title{
+                width: 20%;
+            }
+            .my-container{
+                width: 56%;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+<div class="box" id="app">
+
+    <div class="row white-bg col-sm-12 col-md-12 col-lg-12">
+
+
+                       <!-- <div class="row">
+                            <div class="col-sm-11" style="float: left;">
+                                <div class="ibox float-e-margins">
+                                    <div class="ibox-content" style="height: 485px;">
+                                        <div id="bar" style="margin-top:20px;vertical-align: middle;width: 100%;height:100%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>-->
+
+        <div class="white-bg col-sm-12 col-md-12 col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title gray-bg echart-title">
+                    <span class="title_info col-sm-2 col-md-2 col-lg-2 cqy_title">地区业务数据情况</span>
+                    <div class="dayclick col-sm-2 col-md-2 col-lg-2" id="dqdata">
+                        <span id="month1" class="thirty-days">最近30天</span>
+                        <span id="day1" class="seven-days day">最近7天</span>
+                    </div>
+                    <div class="my-container col-sm-8 col-md-8 col-lg-8" id="getTime">
+                        <div class="myText-content col-sm-6 col-md-6 col-lg-6 " style="text-align:right;">
+                            <input style="vertical-align:middle;" id="cdDateStart" class="form-control layer-date"
+                                   placeholder="请选择开始时间"
+                                   onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss',istoday: false,choose:getDateStr2})">
+                        </div>
+                        <!-- <label class="myLabel-content col-sm-1" style="width:0px;">~</label> -->
+                        <div class="myText-content col-sm-6 col-md-6 col-lg-6">
+                            ~
+                            <input style="vertical-align:middle;" id="cdDateEnd" class="form-control layer-date"
+                                   placeholder="请选择结束时间"
+                                   onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss',istoday: false,choose:getDateStr2}) ">
+                        </div>
+                        <!--  <span class="glyphicon glyphicon-calendar down-calendar "></span> -->
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="echarts" style="height:400px" id="echarts-bar-chart">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!--//地区业务数据情况End-->
+        <!--//开锁类型占比情况Begin&ndash;&gt;-->
+        <div class="white-bg col-sm-12 col-md-12 col-lg-12" style="visibility: hidden; height: 0;overflow: hidden;>
+            <div class="ibox float-e-margins">
+                <div class="ibox-title gray-bg echart-title">
+                    <span class="title_info col-sm-2 col-md-2 col-lg-2 cqy_title">开锁类型占比情况</span>
+                    <div class="dayclick col-sm-2 col-md-2 col-lg-2" id="dqzb">
+                        <span id="month2" class="thirty-days" 　>最近30天</span>
+                        <span id="day2" class="even-days day">最近7天</span>
+                    </div>
+                    <div class="my-container col-sm-8 col-md-8 col-lg-8">
+                        <div class="myText-content col-sm-6 col-md-6 col-lg-6 " style="text-align:right;">
+                            <input style="vertical-align:middle;" class="form-control layer-date" placeholder="请选择开始时间"
+                                   id="cdDateStart2"
+                                   onclick="laydate({ istime: true, format: 'YYYY-MM-DD hh:mm:ss',istoday: false,choose:getDateStr1}) ">
+                        </div>
+                        <!-- <label class="myLabel-content col-sm-1" style="width:0px;">~</label> -->
+                        <div class="myText-content col-sm-6 col-md-6 col-lg-6">
+                            ~
+                            <input style="vertical-align:middle;" class="form-control layer-date" placeholder="请选择结束时间"
+                                   id="cdDateEnd2"
+                                   onclick="laydate({ istime: true, format: 'YYYY-MM-DD hh:mm:ss',istoday: false,choose:getDateStr1}) ">
+                        </div>
+                        <!-- <span class="glyphicon glyphicon-calendar down-calendar "></span> -->
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="echarts" style="height:400px" id="main-pie-chart2">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--//开锁类型占比情况End-->
+
+        <!--//开锁企业分布情况Begin&ndash;&gt;-->
+
+        <div class="white-bg col-sm-12 col-md-12 col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title gray-bg echart-title">
+                    <span class="title_info col-sm-2 col-md-2 col-lg-2 cqy_title">锁匠分布情况</span>
+                    <div class="dayclick col-sm-2 col-md-2 col-lg-2">
+                        <span id="month3" class="thirty-days">最近30天</span>
+                        <span id="day3" class="seven-days day">最近7天</span>
+                    </div>
+                    <div class="my-container col-sm-8 col-md-8 col-lg-8">
+                        <div class="myText-content col-sm-6 col-md-6 col-lg-6 " style="text-align:right;">
+                            <input style="vertical-align:middle;" class="form-control layer-date" placeholder="请选择开始时间"
+                                   id="cdDateStart3"
+                                   onclick="laydate({ istime: true, format: 'YYYY-MM-DD hh:mm:ss',istoday: false,choose:getDateStr}) ">
+                        </div>
+                        <!-- <label class="myLabel-content col-sm-1" style="width:0px;">~</label> -->
+                        <div class="myText-content col-sm-6 col-md-6 col-lg-6">
+                            ~
+                            <input style="vertical-align:middle;" class="form-control layer-date" placeholder="请选择结束时间"
+                                   id="cdDateEnd3"
+                                   onclick="laydate({ istime: true, format: 'YYYY-MM-DD hh:mm:ss',istoday: false,choose:getDateStr}) ">
+                        </div>
+                        <!-- <span class="glyphicon glyphicon-calendar down-calendar "></span> -->
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="echarts" style="height:400px" id="main-pie-chart3">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="white-bg col-sm-12 col-md-12 col-lg-12" style="visibility: hidden;height: 0;overflow: hidden;>
+            <div class="ibox float-e-margins">
+                <div class="ibox-title gray-bg echart-title">
+                    <span class="title_info col-sm-2 col-md-2 col-lg-2 cqy1_title">委托人数量增长情况</span>
+                    <div class="dayclick col-sm-2 col-md-2 col-lg-2" style="width: 50%">
+                        <span class="yhsl-year thirty-days">按年统计</span>
+                        <span id="day4" class="seven-days day" id="select">最近7天</span>
+                    </div>
+                    <!--<div class="my-container col-sm-8 col-md-8 col-lg-8">-->
+                    <!--<div class="myText-content col-sm-6 col-md-6 col-lg-6 " style="text-align:right;">-->
+                    <!--<input style="vertical-align:middle;" class="form-control layer-date" placeholder="请选择开始时间" id="cdDateStart4"-->
+                    <!--onclick="laydate({ istime: true, format: 'YYYY-MM-DD hh:mm:ss',istoday: false,choose:getDateStr}) ">-->
+                    <!--</div>-->
+                    <!--&lt;!&ndash; <label class="myLabel-content col-sm-1" style="width:0px;">~</label> &ndash;&gt;-->
+                    <!--<div class="myText-content col-sm-6 col-md-6 col-lg-6">-->
+                    <!--~-->
+                    <!--<input style="vertical-align:middle;" class="form-control layer-date" placeholder="请选择结束时间" id="cdDateEnd4"-->
+                    <!--onclick="laydate({ istime: true, format: 'YYYY-MM-DD hh:mm:ss',istoday: false,choose:getDateStr}) ">-->
+                    <!--</div>-->
+                    <!--&lt;!&ndash; <span class="glyphicon glyphicon-calendar down-calendar "></span> &ndash;&gt;-->
+                    <!--</div>-->
+                </div>
+                <div class="ibox-content">
+                    <div class="echarts" style="height:400px" id="main-line-chart">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script src="../js/jquery.min.js?v=2.1.4"></script>
+<script src="../js/bootstrap.min.js?v=3.3.6"></script>
+<script src="../js/echarts.common.min.js"></script>
+<script src="../js/plugins/layer/laydate/laydate.js"></script>
+<script src="../smoke-v3.1.1/js/smoke.js"></script>
+<script src="../smoke-v3.1.1/js/smoke.min.js"></script>
+<script src="./unlock-echart.js"></script>
+<script>
+    $('.dayclick span').on('click', function () {
+        $(this).addClass('day');
+        $(this).siblings().removeClass('day');
+    })
+</script>

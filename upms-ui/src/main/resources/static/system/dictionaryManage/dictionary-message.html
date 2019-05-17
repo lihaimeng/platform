@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table</title>
+    <meta name="keywords" content="Table">
+    <meta name="description" content="Table">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="../../css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="../../css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="../../css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="../../css/style.css?v=4.1.0" rel="stylesheet">
+    <!-- jsTree -->
+    <link href="../../css/plugins/jsTree/style.min.css" rel="stylesheet">
+    <link href="../../css/plugins/jsTree/style.min.css" rel="stylesheet">
+    <!-- 输入框、弹出框css（自定义） -->
+    <link href="../../css/search-criteria.css" rel="stylesheet">
+    <link href="../../css/myModal-criteria.css" rel="stylesheet">
+    <!-- 模态框 -->
+    <link href="../../css/animate.css" rel="stylesheet">
+    <!-- smoke -->
+    <link href="../../smoke-v3.1.1/css/smoke.css" rel="stylesheet">
+    <link href="../../smoke-v3.1.1/css/smoke.min.css" rel="stylesheet">
+    <style type="text/css">
+        .wrapper {
+            width: 100%;
+            height: 100%;
+        }
+
+        .ibox {
+            width: 100%;
+            height: 95%;
+        }
+
+        .ibox-content {
+            width: 100%;
+            height: 100%;
+        }
+
+        .my-container {
+            display: inline-block;
+            margin-right: 30px;
+        }
+
+        .myLabel-content, .myText-content, .myBtn-content {
+            display: inline-block;
+            margin-left: 10px;
+        }
+
+        .myLabel-content, .myText-content input[type='text'], .myBtn-content .btn {
+            height: 30px;
+            font-size: 12px;
+        }
+
+        .myBtn-content .btn {
+            margin-bottom: 10px;
+        }
+
+        .has-success .control-label {
+            color: #666982;
+        }
+
+        .has-success .form-control {
+            border-color: #E4E5E6;
+            margin-top: 0;
+        }
+
+        .jstree-open > .jstree-anchor > .fa-folder:before {
+            content: "\f07c";
+        }
+
+        .jstree-default .jstree-icon.none {
+            width: 0;
+        }
+
+        .colSm2 {
+            height: 100%;
+            background-color: #F3F3F5;
+        }
+
+        .colSm {
+            width: 100%;
+            margin-left: 0px;
+        }
+
+        .navbar {
+            background-color: #F3F3F5;
+            overflow: auto;
+        }
+
+        .modal-body {
+            padding-left: 56px;
+            padding-right: 4px;
+        }
+
+        .ibox-content .example {
+            height: 100%;
+        }
+        @media screen and (max-width: 1366px){
+            *{
+                font-size: 12px !important;
+            }
+
+            .cqyContent{
+                padding: 15px 10px 20px;
+                font-size: 12px;
+            }
+            .xcNavSm{
+                padding-left: 2px;
+            }
+        }
+    </style>
+
+</head>
+<body class="gray-bg" style="height: 895px;">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <!-- Panel Other -->
+    <div class="ibox float-e-margins">
+        <div class="ibox-title">
+            <h5>系统管理>字典管理</h5>
+        </div>
+        <div class="ibox-content cqyContent">
+            <div class="col-sm-2 colSm2 xcNavSm">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content navbar">
+                        <div id="using_json"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row row-lg col-sm-10 xcConLog">
+                <div class="col-sm-10 colSm">
+                    <!-- Example Events -->
+                    <div class="example-wrap">
+                        <div class="example">
+                            <div style="display:block;" class="btn-group">
+                                <div style="float:left;">
+                                    <button id="btn_detail" type="button" class="btn btn-default glyphicon "
+                                            data-toggle="modal"
+                                            data-target="#myModal7" style="padding: 3px 13px 8px 14px;">
+                                        <span class="glyphicon glyphicon-search" style="margin-right: 3px;"></span>详情
+                                    </button>
+                                    <button type="button" class="btn btn-default glyphicon addBtn" data-toggle="modal"
+                                            data-target="#myModal5" style="padding: 3px 13px 8px 14px;">
+                                        <span class="glyphicon-plus" style="margin-right: 3px;"></span>新增
+                                    </button>
+                                    <button type="button" class="btn btn-default glyphicon editBtn"
+                                            data-toggle="modal" data-target="#myModal6"
+                                            style="padding: 3px 13px 8px 14px;">
+                                        <span class="glyphicon-pencil" style="margin-right: 3px;"></span>修改
+                                    </button>
+                                    <button id="deleteBtn" type="button" class="btn-danger btn btn-default glyphicon "
+                                            data-toggle="modal" style="padding: 3px 13px 8px 14px;">
+                                        <span class=" glyphicon-remove" style="margin-right: 3px;"></span>删除
+                                    </button>
+                                </div>
+                            </div>
+                            <table id="exampleTableEvents" class="table table-bordered"
+                                   data-mobile-responsive="true">
+                                <thead>
+                                <tr>
+                                    <th style="background-color:#f9f9f9;" data-field="number">序号</th>
+                                    <th data-field="state" data-checkbox="true"></th>
+                                    <th style="background-color:#f9f9f9;" data-field="dicName">名称</th>
+                                    <th style="background-color:#f9f9f9;" data-field="dicCode">编号</th>
+                                    <th style="background-color:#f9f9f9;" data-field="dicType" hidden>类型</th>
+                                    <th style="background-color:#f9f9f9;" data-field="orderby">排列顺序</th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- End Example Events -->
+                    <!-- 新增弹出框内容 -->
+                    <div class="modal inmodal fade" id="myModal5" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content thumbnail ">
+                                <div class="modal-header">
+                                    <button type="button" class="close" id="closeBtnAdd" data-dismiss="modal" style="">
+                                        <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                                    </button>
+                                    <h4 class="modal-title">添加字典</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="ibox float-e-margins">
+                                        <form class="form-horizontal m-t" id="PermissionForm">
+                                            <div class="form-group">
+                                                <input type="hidden" id="hid">
+                                                <input type="hidden" id="level">
+                                                <label class="col-sm-2 control-label">名称<span class="required" title=""
+                                                                                              style="color: #ED5565">* </span></label>
+                                                <div class="col-sm-8">
+                                                    <input id="dicNameAdd" name="dicNameAdd" class="form-control"
+                                                           type="text">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">编号<span class="required" title=""
+                                                                                              style="color: #ED5565">* </span></label>
+                                                <div class="col-sm-8">
+                                                    <input id="dicCodeAdd" name="dicCodeAdd" class="form-control"
+                                                           type="text"
+                                                           aria-required="true" aria-invalid="false" class="valid">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">排列顺序</label>
+                                                <div class="col-sm-8">
+                                                    <input id="orderbyAdd" name="orderbyAdd" class="form-control"
+                                                           type="text" aria-required="true" aria-invalid="false"
+                                                           class="valid">
+                                                </div>
+                                            </div>
+                                            <div class="form-group save">
+                                                <div class="col-sm-8 col-sm-offset-3">
+                                                    <button id="submitMsg" class="btn btn-primary" type="button"
+                                                    >保&nbsp;&nbsp;&nbsp;&nbsp;存
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--修改弹出框内容 -->
+                    <div class="modal inmodal fade" id="myModal6" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content thumbnail ">
+                                <div class="modal-header">
+                                    <button type="button" class="close closeBtn" id="closeBtnEdit" data-dismiss="modal"
+                                            style=""><span aria-hidden="true">&times;</span><span
+                                            class="sr-only">Close</span></button>
+                                    <h4 class="modal-title">修改字典</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="ibox float-e-margins">
+                                        <form class="form-horizontal m-t" id="dictionaryFormEdit">
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">名称<span class="required" title=""
+                                                                                              style="color: #ED5565">* </span></label>
+                                                <div class="col-sm-8">
+                                                    <input id="dicNameEdit" name="dicNameEdit" class="form-control"
+                                                           type="text">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">编号<span class="required" title=""
+                                                                                              style="color: #ED5565">* </span></label>
+                                                <div class="col-sm-8">
+                                                    <input id="dicCodeEdit" name="dicCodeEdit" class="form-control"
+                                                           type="text"
+                                                           aria-required="true" aria-invalid="false" class="valid">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">排列顺序</label>
+                                                <div class="col-sm-8">
+                                                    <input id="orderbyEdit" name="orderbyEdit" class="form-control"
+                                                           type="text" aria-required="true" aria-invalid="false"
+                                                           class="valid">
+                                                </div>
+                                            </div>
+                                            <div class="form-group save">
+                                                <div class="col-sm-8 col-sm-offset-3">
+                                                    <button id="submitEditBtn" class="btn btn-primary" type="button"
+                                                    >保&nbsp;&nbsp;&nbsp;&nbsp;存
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--详情弹出框内容 -->
+                    <div class="modal inmodal fade" id="myModal7" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content thumbnail ">
+                                <div class="modal-header">
+                                    <button type="button" class="close closeBtn" data-dismiss="modal"><span
+                                            aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                    <h4 class="modal-title">字典详情</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="ibox float-e-margins">
+                                        <form class="form-horizontal m-t" id="dictionaryFormDetail">
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">名称</label>
+                                                <div class="col-sm-8">
+                                                    <p id="dicNameDetail" name="dicNameDetail"
+                                                       class="form-control-static"></p>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">编号</label>
+                                                <div class="col-sm-8">
+                                                    <p id="dicCodeDetail" name="dicCodeDetail"
+                                                       class="form-control-static">
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">排列顺序</label>
+                                                <div class="col-sm-8">
+                                                    <p id="orderbyDetail" name="orderbyDetail"
+                                                       class="form-control-static">
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Panel Other -->
+</div>
+<!-- 全局js -->
+<script src="../../js/jquery.min.js?v=2.1.4"></script>
+<script src="../../js/bootstrap.min.js?v=3.3.6"></script>
+<!-- 自定义js -->
+<script src="../../js/content.js?v=1.0.0"></script>
+
+
+<!-- Bootstrap table -->
+<script src="../../js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="../../js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+<script src="../../js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+<!-- jQuery Validation plugin javascript-->
+<script src="../../js/plugins/validate/jquery.validate.min.js"></script>
+<script src="../../js/plugins/validate/messages_zh.min.js"></script>
+<!-- jsTree -->
+<script src="../../js/plugins/jsTree/jstree.min.js"></script>
+<script type="text/javascript" src="jsTree.js"></script>
+<!-- Smoke alert -->
+<script src="../../smoke-v3.1.1/js/smoke.js"></script>
+<script src="../../smoke-v3.1.1/js/smoke.min.js"></script>
+<script src="dictionary-messageJs.js"></script>
+<script src="form-validate-dictionaryJs.js"></script>
+</body>
+</html>
+<script src="../../js/common.js"></script>

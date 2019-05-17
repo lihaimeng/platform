@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yuxin.platform.zongzhi.mapper.SubZhzaQyjbxxMapper">
+    <resultMap id="BaseResultMap" type="com.yuxin.platform.zongzhi.pojo.SubZhzaQyjbxx">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="dwdz" property="dwdz" jdbcType="VARCHAR"/>
+        <result column="dwmc" property="dwmc" jdbcType="VARCHAR"/>
+        <result column="frmc" property="frmc" jdbcType="VARCHAR"/>
+        <result column="frsfzh" property="frsfzh" jdbcType="VARCHAR"/>
+        <result column="gxdwbm" property="gxdwbm" jdbcType="VARCHAR"/>
+        <result column="gxdwmc" property="gxdwmc" jdbcType="VARCHAR"/>
+        <result column="hylx" property="hylx" jdbcType="VARCHAR"/>
+        <result column="hylxbm" property="hylxbm" jdbcType="VARCHAR"/>
+        <result column="lxdh" property="lxdh" jdbcType="VARCHAR"/>
+        <result column="qybm" property="qybm" jdbcType="VARCHAR"/>
+        <result column="yyzzbh" property="yyzzbh" jdbcType="VARCHAR"/>
+        <result column="zcsj" property="zcsj" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, dwdz, dwmc, frmc, frsfzh, gxdwbm, gxdwmc, hylx, hylxbm, lxdh, qybm, yyzzbh,zcsj
+    </sql>
+    <select id="selectSubZhzaQyjbxx" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sub_zhza_qyjbxx
+    </select>
+    <select id="selectSubZhzaQyjbxxByParams" resultMap="BaseResultMap"
+            parameterType="com.yuxin.platform.zongzhi.pojo.SubZhzaQyjbxx">
+        select
+        <include refid="Base_Column_List"/>
+        from sub_zhza_qyjbxx
+        <where>
+            <if test="id != null and id!=''">
+                id like CONCAT(CONCAT('%',#{id,jdbcType=INTEGER}), '%')
+            </if>
+            <if test="dwmc != null and dwmc!=''">
+                AND dwmc like CONCAT(CONCAT('%',#{dwmc,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="gxdwmc != null and gxdwmc!=''">
+                AND gxdwmc like CONCAT(CONCAT('%',#{gxdwmc,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="gxdwbm != null and gxdwbm!=''">
+                AND gxdwbm like CONCAT(CONCAT('%',#{gxdwbm,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="hylx != null and hylx!=''">
+                AND hylx like CONCAT(CONCAT('%',#{hylx,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="hylxbm != null and hylxbm!=''">
+                AND hylxbm like CONCAT(CONCAT('%',#{hylxbm,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="frmc != null and frmc!=''">
+                AND frmc like CONCAT(CONCAT('%',#{frmc,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="frsfzh != null and frsfzh!=''">
+                AND frsfzh like CONCAT(CONCAT('%',#{frsfzh,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="yyzzbh != null and yyzzbh!=''">
+                AND yyzzbh like CONCAT(CONCAT('%',#{yyzzbh,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="zcsj != null and zcsj!=''">
+                AND zcsj like CONCAT(CONCAT('%',#{zcsj,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="lxdh != null and lxdh!=''">
+                AND lxdh like CONCAT(CONCAT('%',#{lxdh,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="dwdz != null and dwdz!=''">
+                AND dwdz like CONCAT(CONCAT('%',#{dwdz,jdbcType=VARCHAR}), '%')
+            </if>
+            <if test="qybm != null and qybm!=''">
+                AND qybm like CONCAT(CONCAT('%',#{qybm,jdbcType=VARCHAR}), '%')
+            </if>
+        </where>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from sub_zhza_qyjbxx
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from sub_zhza_qyjbxx
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.yuxin.platform.zongzhi.pojo.SubZhzaQyjbxx">
+        <selectKey  keyProperty="id" resultType="int" order="BEFORE">
+            select nvl(max(id),0)+1 from sub_zhza_qyjbxx
+        </selectKey>
+        insert into sub_zhza_qyjbxx (id, dwdz, dwmc,
+        frmc, frsfzh, gxdwbm,
+        gxdwmc, hylx, hylxbm,
+        lxdh, qybm, yyzzbh,zcsj)
+        values (#{id,jdbcType=INTEGER}, #{dwdz,jdbcType=VARCHAR}, #{dwmc,jdbcType=VARCHAR},
+        #{frmc,jdbcType=VARCHAR}, #{frsfzh,jdbcType=VARCHAR}, #{gxdwbm,jdbcType=VARCHAR},
+        #{gxdwmc,jdbcType=VARCHAR}, #{hylx,jdbcType=VARCHAR}, #{hylxbm,jdbcType=VARCHAR},
+        #{lxdh,jdbcType=VARCHAR}, #{qybm,jdbcType=VARCHAR}, #{yyzzbh,jdbcType=VARCHAR}, #{zcsj,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.yuxin.platform.zongzhi.pojo.SubZhzaQyjbxx">
+        <selectKey  keyProperty="id" resultType="int" order="BEFORE">
+            select nvl(max(id),0)+1 from sub_zhza_qyjbxx
+        </selectKey>
+        insert into sub_zhza_qyjbxx
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="dwdz != null">
+                dwdz,
+            </if>
+            <if test="dwmc != null">
+                dwmc,
+            </if>
+            <if test="frmc != null">
+                frmc,
+            </if>
+            <if test="frsfzh != null">
+                frsfzh,
+            </if>
+            <if test="gxdwbm != null">
+                gxdwbm,
+            </if>
+            <if test="gxdwmc != null">
+                gxdwmc,
+            </if>
+            <if test="hylx != null">
+                hylx,
+            </if>
+            <if test="hylxbm != null">
+                hylxbm,
+            </if>
+            <if test="lxdh != null">
+                lxdh,
+            </if>
+            <if test="qybm != null">
+                qybm,
+            </if>
+            <if test="yyzzbh != null">
+                yyzzbh,
+            </if>
+            <if test="zcsj != null">
+                zcsj,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="dwdz != null">
+                #{dwdz,jdbcType=VARCHAR},
+            </if>
+            <if test="dwmc != null">
+                #{dwmc,jdbcType=VARCHAR},
+            </if>
+            <if test="frmc != null">
+                #{frmc,jdbcType=VARCHAR},
+            </if>
+            <if test="frsfzh != null">
+                #{frsfzh,jdbcType=VARCHAR},
+            </if>
+            <if test="gxdwbm != null">
+                #{gxdwbm,jdbcType=VARCHAR},
+            </if>
+            <if test="gxdwmc != null">
+                #{gxdwmc,jdbcType=VARCHAR},
+            </if>
+            <if test="hylx != null">
+                #{hylx,jdbcType=VARCHAR},
+            </if>
+            <if test="hylxbm != null">
+                #{hylxbm,jdbcType=VARCHAR},
+            </if>
+            <if test="lxdh != null">
+                #{lxdh,jdbcType=VARCHAR},
+            </if>
+            <if test="qybm != null">
+                #{qybm,jdbcType=VARCHAR},
+            </if>
+            <if test="yyzzbh != null">
+                #{yyzzbh,jdbcType=VARCHAR},
+            </if>
+            <if test="zcsj != null">
+                #{zcsj,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.yuxin.platform.zongzhi.pojo.SubZhzaQyjbxx">
+        update sub_zhza_qyjbxx
+        <set>
+            <if test="dwdz != null">
+                dwdz = #{dwdz,jdbcType=VARCHAR},
+            </if>
+            <if test="dwmc != null">
+                dwmc = #{dwmc,jdbcType=VARCHAR},
+            </if>
+            <if test="frmc != null">
+                frmc = #{frmc,jdbcType=VARCHAR},
+            </if>
+            <if test="frsfzh != null">
+                frsfzh = #{frsfzh,jdbcType=VARCHAR},
+            </if>
+            <if test="gxdwbm != null">
+                gxdwbm = #{gxdwbm,jdbcType=VARCHAR},
+            </if>
+            <if test="gxdwmc != null">
+                gxdwmc = #{gxdwmc,jdbcType=VARCHAR},
+            </if>
+            <if test="hylx != null">
+                hylx = #{hylx,jdbcType=VARCHAR},
+            </if>
+            <if test="hylxbm != null">
+                hylxbm = #{hylxbm,jdbcType=VARCHAR},
+            </if>
+            <if test="lxdh != null">
+                lxdh = #{lxdh,jdbcType=VARCHAR},
+            </if>
+            <if test="qybm != null">
+                qybm = #{qybm,jdbcType=VARCHAR},
+            </if>
+            <if test="yyzzbh != null">
+                yyzzbh = #{yyzzbh,jdbcType=VARCHAR},
+            </if>
+            <if test="zcsj != null">
+                zcsj = #{zcsj,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.yuxin.platform.zongzhi.pojo.SubZhzaQyjbxx">
+        update sub_zhza_qyjbxx
+        set dwdz = #{dwdz,jdbcType=VARCHAR},
+        dwmc = #{dwmc,jdbcType=VARCHAR},
+        frmc = #{frmc,jdbcType=VARCHAR},
+        frsfzh = #{frsfzh,jdbcType=VARCHAR},
+        gxdwbm = #{gxdwbm,jdbcType=VARCHAR},
+        gxdwmc = #{gxdwmc,jdbcType=VARCHAR},
+        hylx = #{hylx,jdbcType=VARCHAR},
+        hylxbm = #{hylxbm,jdbcType=VARCHAR},
+        lxdh = #{lxdh,jdbcType=VARCHAR},
+        qybm = #{qybm,jdbcType=VARCHAR},
+        yyzzbh = #{yyzzbh,jdbcType=VARCHAR},
+        zcsj = #{zcsj,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>

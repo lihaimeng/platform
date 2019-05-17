@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yuxin.platform.upms.mapper.OrganizationMapper">
+    <resultMap id="BaseResultMap" type="com.yuxin.platform.upms.pojo.Organization">
+        <id column="organization_id" property="organizationId" jdbcType="INTEGER"/>
+        <result column="pid" property="pid" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="description" property="description" jdbcType="VARCHAR"/>
+        <result column="addtime" property="addtime" jdbcType="DATE"/>
+        <result column="code" property="code" jdbcType="VARCHAR"/>
+        <result column="brevitycode" property="brevitycode" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        organization_id, pid, name, description, addtime, code,brevitycode
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap"
+            parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_organization
+        where organization_id =
+        #{organizationId,jdbcType=INTEGER} ORDER BY code ASC
+    </select>
+
+    <select id="selectByObject" resultMap="BaseResultMap"
+            parameterType="com.yuxin.platform.upms.pojo.Organization">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_organization
+        <where>
+            (name = #{name,jdbcType=VARCHAR} or code=#{code,jdbcType=VARCHAR})
+            <if test="organizationId!=null">
+                and organization_id !=#{organizationId,jdbcType=INTEGER}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectUnderOrgbyid" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        SELECT organization_id,NAME FROM`sys_organization` WHERE `brevitycode` LIKE
+        CONCAT((SELECT `brevitycode` FROM `sys_organization` WHERE `organization_id`=#{orgid,jdbcType=INTEGER}),'%')
+    </select>
+
+    <select id="selectByPid" resultMap="BaseResultMap"
+            parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_organization
+        where pid = #{pid,jdbcType=INTEGER} ORDER BY code ASC
+    </select>
+
+    <select id="selectByBrevitycode" resultMap="BaseResultMap"
+            parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_organization
+        where brevitycode like concat(concat('%', #{brevitycode,jdbcType=VARCHAR}), '%')
+        ORDER BY organization_id ASC
+    </select>
+    <select id="selectByBrevitycode1" parameterType="java.util.Map" resultType="java.util.HashMap">
+        select s.name as name ,(select count(*) from
+        (select s.ddxxid,pub_qyjbxx.gxdwbm,pub_qyjbxx.gxdwmc, s.ddlx
+        from(select * from pawn_ddxx
+        where pawn_ddxx.qyid
+        IN(SELECT pub_qyjbxx.qyid FROM pub_qyjbxx WHERE pub_qyjbxx.gxdwbm LIKE
+        CONCAT((SELECT sys_organization.brevitycode FROM sys_organization WHERE
+        sys_organization.organization_id=#{organizationid,jdbcType=INTEGER}),'%')
+        and pub_qyjbxx.hylbdm=#{hylbdm,jdbcType=VARCHAR})
+        <if test="beginStr!=null and beginStr!=''">
+            <![CDATA[ AND pawn_ddxx.slsj>=#{beginStr,jdbcType=TIMESTAMP} ]]>
+        </if>
+        <if test="endStr!=null and endStr!=''">
+            <![CDATA[ AND  pawn_ddxx.slsj <= #{endStr,jdbcType=TIMESTAMP} ]]>
+        </if>) s
+        left join pub_qyjbxx on s.qyid=pub_qyjbxx.qyid)ddxx
+        where gxdwbm like concat(brevitycode,'%') ) as value
+        from sys_organization s
+        where s.pid= #{organizationid,jdbcType=INTEGER}
+    </select>
+    <select id="isNullByBrevitycode" resultMap="BaseResultMap"
+            parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_organization
+        where brevitycode =#{brevitycode,jdbcType=VARCHAR}
+    </select>
+    <select id="selectByCode" resultMap="BaseResultMap"
+            parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_organization
+        where code =#{code,jdbcType=VARCHAR}
+    </select>
+    <!-- <select id="selectByBrevitycode1" parameterType="java.util.Map" resultType="java.util.HashMap">
+         select s.name as name ,(select count(*) from pawn_ddxx
+         where qyid IN(SELECT pub_qyjbxx.qyid FROM pub_qyjbxx WHERE pub_qyjbxx.gxdwbm LIKE
+         CONCAT((SELECT brevitycode FROM sys_organization WHERE organization_id=#{organizationid,jdbcType=INTEGER}),'%')
+         and hylbdm=#{hylbdm,jdbcType=VARCHAR}))as value
+         from sys_organization s
+         where s.pid= #{organizationid,jdbcType=INTEGER}
+     </select>-->
+    <select id="selectByBrevitycode4zz" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_organization WHERE organization_id!=0
+        ORDER BY organization_id ASC
+    </select>
+
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from
+        sys_organization
+        where organization_id =
+        #{organizationId,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.yuxin.platform.upms.pojo.Organization">
+        <selectKey  keyProperty="organizationId" resultType="int" order="BEFORE">
+            select nvl(max(organization_id),0)+1 from sys_organization
+        </selectKey>
+        insert into sys_organization
+        (organization_id, pid, name,
+        description, addtime, code,brevitycode
+        )
+        values
+        (#{organizationId,jdbcType=INTEGER}, #{pid,jdbcType=INTEGER},
+        #{name,jdbcType=VARCHAR},
+        #{description,jdbcType=VARCHAR},
+        #{addtime,jdbcType=DATE}, #{code,jdbcType=VARCHAR},#{brevitycode,jdbcType=VARCHAR}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.yuxin.platform.upms.pojo.Organization">
+        <selectKey  keyProperty="organizationId" resultType="int" order="BEFORE">
+            select nvl(max(organization_id),0)+1 from sys_organization
+        </selectKey>
+        insert into sys_organization
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="organizationId != null">
+                organization_id,
+            </if>
+            <if test="pid != null">
+                pid,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="description != null">
+                description,
+            </if>
+            <if test="addtime != null">
+                addtime,
+            </if>
+            <if test="code != null">
+                code,
+            </if>
+            <if test="brevitycode != null">
+                brevitycode,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="organizationId != null">
+                #{organizationId,jdbcType=INTEGER},
+            </if>
+            <if test="pid != null">
+                #{pid,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null">
+                #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="addtime != null">
+                #{addtime,jdbcType=DATE},
+            </if>
+            <if test="code != null">
+                #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="brevitycode != null">
+                #{brevitycode,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.yuxin.platform.upms.pojo.Organization">
+        update sys_organization
+        <set>
+            <if test="pid != null">
+                pid = #{pid,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null">
+                description = #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="addtime != null">
+                addtime = #{addtime,jdbcType=DATE},
+            </if>
+            <if test="code != null">
+                code = #{code,jdbcType=VARCHAR},
+            </if>
+            <if test="brevitycode != null">
+                brevitycode = #{brevitycode,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where organization_id = #{organizationId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.yuxin.platform.upms.pojo.Organization">
+        update
+        sys_organization
+        set pid = #{pid,jdbcType=INTEGER},
+        name =
+        #{name,jdbcType=VARCHAR},
+        description =
+        #{description,jdbcType=VARCHAR},
+        addtime = #{addtime,jdbcType=DATE},
+        code = #{code,jdbcType=VARCHAR}
+        where organization_id =
+        #{organizationId,jdbcType=INTEGER}
+    </update>
+</mapper>

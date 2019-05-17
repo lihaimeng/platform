@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="../css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="../css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="../css/animate.css" rel="stylesheet">
+    <link href="../css/style.css?v=4.1.0" rel="stylesheet">
+    <style type="text/css">
+        html, body {
+            height: 100%;
+            width: 100%;
+        }
+
+        span {
+            font-size: 14px;
+        }
+
+        table td {
+            border: 1px solid rgb(153, 153, 153);
+        }
+    </style>
+</head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="col-sm-9">
+        <div class="col-md-4" style="float: left;">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <img style="width: 100%;height: 125px;" src="title.png"/>
+                </div>
+                <div class="ibox-content" style="height: 175px;">
+                    <table cellspacing="0" style="width:100%;">
+                        <tr style="height: 70px;">
+                            <td align="center">
+                                <span class="tdtitle">所属行政区域</span><br/>
+                                <span id="organizationParentName"></span>
+                            </td>
+                            <td align="center">
+                                <span class="tdtitle">部门</span><br/>
+                                <span id="organizationName"></span>
+                            </td>
+                        </tr>
+
+                        <tr style="height: 70px;">
+                            <td align="center">
+                                <span class="tdtitle">角色</span><br/>
+                                <span id="roleName"></span>
+                            </td>
+                            <td align="center">
+                                <span class="tdtitle">本月已查阅数据</span><br/>
+                                <span>40000000</span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8" style="float: left;">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>行业占比</h5>
+                    <div class="ibox-tools">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="graph_flot.html#">
+                            <i class="fa fa-chevron-down"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a id="companyStaff">人员</a>
+                            </li>
+                            <li><a id="company">企业</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="ibox-content" style="height: 277px">
+                    <div id="pie1" style="width: 737px;height:241px;"></div>
+                    <div id="pie2" style="width: 737px;height: 241px;display: none"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-3" style="float: right;">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>通知公告</h5>
+            </div>
+            <div class="ibox-content" style="height: 880px;">
+                <div class="col-md-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>协查通告</h5>
+                        </div>
+                        <div class="ibox-content" style="height: 30%">
+                            <span>协查通告：王晓明发布的协查通告</span><br/>
+                            <span>协查通告：王晓明发布的协查通告</span><br/>
+                            <span>协查通告：王晓明发布的协查通告</span><br/>
+                            <span>协查通告：王晓明发布的协查通告</span><br/>
+                            <span>协查通告：王晓明发布的协查通告</span><br/>
+                            <span>协查通告：王晓明发布的协查通告</span><br/>
+                            <span>协查通告：王晓明发布的协查通告</span><br/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>可疑情况上报</h5>
+                        </div>
+                        <div class="ibox-content" style="height: 30%">
+                            <span>印章行业>陕西昱鑫上报的可疑情况</span><br/>
+                            <span>印章行业>陕西昱鑫上报的可疑情况</span><br/>
+                            <span>印章行业>陕西昱鑫上报的可疑情况</span><br/>
+                            <span>印章行业>陕西昱鑫上报的可疑情况</span><br/>
+                            <span>印章行业>陕西昱鑫上报的可疑情况</span><br/>
+                            <span>印章行业>陕西昱鑫上报的可疑情况</span><br/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>未上传通知</h5>
+                        </div>
+                        <div class="ibox-content" style="height: 30%">
+                            <span>开锁行业：3月10有54家企业未上传数据</span><br/>
+                            <span>旅游行业：3月10有54家企业未上传数据</span><br/>
+                            <span>印章行业：3月10有54家企业未上传数据</span><br/>
+                            <span>典当行业：3月10有54家企业未上传数据</span><br/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-9" style="float: left;">
+        <div class="ibox float-e-margins">
+            <div class="ibox-content" style="height: 578px;">
+                <div id="bar" style="margin-top:20px;vertical-align: middle;width: 100%;height:100%;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 全局js -->
+<script src="../js/jquery.min.js?v=2.1.4"></script>
+<script src="../js/bootstrap.min.js?v=3.3.6"></script>
+<!-- ECharts -->
+<script src="echarts.min.js"></script>
+<!-- 自定义js -->
+<script src="../js/content.js?v=1.0.0"></script>
+<script src="echartIndex.js"></script>
+</body>
+</html>

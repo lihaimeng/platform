@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yuxin.platform.common.mapper.AttachmentsMapper">
+    <resultMap id="BaseResultMap" type="com.yuxin.platform.common.model.Attachments">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="table_name" property="tableName" jdbcType="VARCHAR"/>
+        <result column="table_id" property="tableId" jdbcType="INTEGER"/>
+        <result column="file_type" property="fileType" jdbcType="VARCHAR"/>
+        <result column="file_name" property="fileName" jdbcType="VARCHAR"/>
+        <result column="real_path" property="realPath" jdbcType="VARCHAR"/>
+        <result column="mark" property="mark" jdbcType="VARCHAR"/>
+        <result column="creater" property="creater" jdbcType="VARCHAR"/>
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, table_name, table_id, file_type, file_name, real_path, mark, creater, create_date
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_attachments
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <select id="getAttachment" resultMap="BaseResultMap" parameterType="com.yuxin.platform.common.model.Attachments">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_attachments
+        <where>
+            table_id = #{tableId,jdbcType=INTEGER}
+            AND table_name = #{tableName,jdbcType=VARCHAR}
+            <if test="mark != null and mark!=''">
+                AND mark = #{mark,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectAttachments" resultMap="BaseResultMap"
+            parameterType="com.yuxin.platform.common.model.Attachments">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_attachments
+        <where>
+            table_id = #{tableId,jdbcType=INTEGER}
+            AND table_name = #{tableName,jdbcType=VARCHAR}
+            <if test="mark != null and mark!=''">
+                AND mark = #{mark,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from sys_attachments
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteByWhere" parameterType="com.yuxin.platform.common.model.Attachments">
+        delete from sys_attachments
+        where table_id = #{tableId,jdbcType=INTEGER}
+        and table_name = #{tableName,jdbcType=VARCHAR}
+        <if test="mark != null and mark!=''">
+            AND mark = #{mark,jdbcType=VARCHAR}
+        </if>
+    </delete>
+
+    <insert id="insert" parameterType="com.yuxin.platform.common.model.Attachments">
+        <selectKey  keyProperty="id" resultType="int" order="BEFORE">
+            select nvl(max(id),0)+1 from sys_attachments
+        </selectKey>
+        insert into sys_attachments (id, table_name, table_id,
+        file_type, file_name, real_path,
+        mark, creater, create_date
+        )
+        values (#{id,jdbcType=INTEGER}, #{tableName,jdbcType=VARCHAR}, #{tableId,jdbcType=INTEGER},
+        #{fileType,jdbcType=VARCHAR}, #{fileName,jdbcType=VARCHAR}, #{realPath,jdbcType=VARCHAR},
+        #{mark,jdbcType=VARCHAR}, #{creater,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.yuxin.platform.common.model.Attachments">
+        <selectKey  keyProperty="id" resultType="int" order="BEFORE">
+            select nvl(max(id),0)+1 from sys_attachments
+        </selectKey>
+        insert into sys_attachments
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="tableName != null">
+                table_name,
+            </if>
+            <if test="tableId != null">
+                table_id,
+            </if>
+            <if test="fileType != null">
+                file_type,
+            </if>
+            <if test="fileName != null">
+                file_name,
+            </if>
+            <if test="realPath != null">
+                real_path,
+            </if>
+            <if test="mark != null">
+                mark,
+            </if>
+            <if test="creater != null">
+                creater,
+            </if>
+            <if test="createDate != null">
+                create_date,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="tableName != null">
+                #{tableName,jdbcType=VARCHAR},
+            </if>
+            <if test="tableId != null">
+                #{tableId,jdbcType=INTEGER},
+            </if>
+            <if test="fileType != null">
+                #{fileType,jdbcType=VARCHAR},
+            </if>
+            <if test="fileName != null">
+                #{fileName,jdbcType=VARCHAR},
+            </if>
+            <if test="realPath != null">
+                #{realPath,jdbcType=VARCHAR},
+            </if>
+            <if test="mark != null">
+                #{mark,jdbcType=VARCHAR},
+            </if>
+            <if test="creater != null">
+                #{creater,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.yuxin.platform.common.model.Attachments">
+        update sys_attachments
+        <set>
+            <if test="tableName != null">
+                table_name = #{tableName,jdbcType=VARCHAR},
+            </if>
+            <if test="tableId != null">
+                table_id = #{tableId,jdbcType=INTEGER},
+            </if>
+            <if test="fileType != null">
+                file_type = #{fileType,jdbcType=VARCHAR},
+            </if>
+            <if test="fileName != null">
+                file_name = #{fileName,jdbcType=VARCHAR},
+            </if>
+            <if test="realPath != null">
+                real_path = #{realPath,jdbcType=VARCHAR},
+            </if>
+            <if test="mark != null">
+                mark = #{mark,jdbcType=VARCHAR},
+            </if>
+            <if test="creater != null">
+                creater = #{creater,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByTableid" parameterType="com.yuxin.platform.common.model.Attachments">
+        update sys_attachments
+        <set>
+            <if test="fileType != null">
+                file_type = #{fileType,jdbcType=VARCHAR},
+            </if>
+            <if test="fileName != null">
+                file_name = #{fileName,jdbcType=VARCHAR},
+            </if>
+            <if test="realPath != null">
+                real_path = #{realPath,jdbcType=VARCHAR},
+            </if>
+            <if test="creater != null">
+                creater = #{creater,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where table_id = #{tableId,jdbcType=INTEGER}
+        <if test="mark != null and mark!=''">
+            AND mark = #{mark,jdbcType=VARCHAR}
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.yuxin.platform.common.model.Attachments">
+        update sys_attachments
+        set table_name = #{tableName,jdbcType=VARCHAR},
+        table_id = #{tableId,jdbcType=INTEGER},
+        file_type = #{fileType,jdbcType=VARCHAR},
+        file_name = #{fileName,jdbcType=VARCHAR},
+        real_path = #{realPath,jdbcType=VARCHAR},
+        mark = #{mark,jdbcType=VARCHAR},
+        creater = #{creater,jdbcType=VARCHAR},
+        create_date = #{createDate,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>

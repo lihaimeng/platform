@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table</title>
+    <meta name="keywords" content="Table">
+    <meta name="description" content="Table">
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link href="../css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="../css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="../css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="../css/search-criteria.css" rel="stylesheet">
+    <link href="../css/animate.css" rel="stylesheet">
+    <link href="../css/style.css?v=4.1.0" rel="stylesheet">
+    <style type="text/css">
+        .my-container {
+            display: inline-block;
+            margin-right: 30px;
+        }
+
+        .myLabel-content, .myText-content, .myBtn-content {
+            display: inline-block;
+            margin-left: 10px;
+        }
+
+        .myLabel-content, .myText-content input[type='text'], .myBtn-content .btn {
+            height: 30px;
+            font-size: 12px;
+        }
+
+        .myBtn-content .btn {
+            margin-bottom: 10px;
+        }
+    </style>
+
+</head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <!-- Panel Other -->
+    <div class="ibox float-e-margins">
+        <div class="ibox-title">
+            <h5>机修行业管理>高频信息查询</h5>
+        </div>
+        <div class="ibox-content">
+            <div class="row row-lg">
+                <div class="col-sm-12">
+                    <!-- Example Events -->
+                    <div class="example-wrap">
+                        <div class="example">
+                            <div class="my-container">
+                                <label class="myLabel-content">
+                                    <input type="checkbox" value="" name="myCheckbox" id="high_frequency_car"> <i></i>高频车辆</label>
+                            </div>
+                            <div class="my-container">
+                                <label class="myLabel-content">取修时间</label>
+                                <div class="myText-content">
+                                    <input id="registrationtime" style="vertical-align:middle;"
+                                           class="form-control layer-date" placeholder=""
+                                           onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+                                </div>
+                                <label class="myLabel-content" style="width:0px;">至</label>
+                                <div class="myText-content">
+                                    &nbsp;&nbsp;&nbsp;<input style="vertical-align:middle;"
+                                                             class="form-control layer-date" placeholder="	"
+                                                             onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+                                </div>
+                            </div>
+                            <div class="my-container">
+                                <label class="myLabel-content">最低送修次数</label>
+                                <div class="myText-content">
+                                    <input id="unlockedPersonName" type="text" class="form-control" placeholder="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="example">
+                            <div class="my-container">
+                                <label class="myLabel-content">
+                                    <input type="checkbox" value="" name="myCheckbox" id="high_frequency_people">
+                                    <i></i>高频人群</label>
+                            </div>
+                            <div class="my-container">
+                                <label class="myLabel-content">取送时间</label>
+                                <div class="myText-content">
+                                    <input id="registrationtime" style="vertical-align:middle;"
+                                           class="form-control layer-date" placeholder=""
+                                           onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+                                </div>
+                                <label class="myLabel-content" style="width:0px;">至</label>
+                                <div class="myText-content">
+                                    &nbsp;&nbsp;&nbsp;<input style="vertical-align:middle;"
+                                                             class="form-control layer-date" placeholder="	"
+                                                             onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+                                </div>
+                            </div>
+                            <div class="my-container">
+                                <label class="myLabel-content">最低取送次数</label>
+                                <div class="myText-content">
+                                    <input id="unlockedPersonName" type="text" class="form-control" placeholder="">
+                                </div>
+                            </div>
+                            <div style="display:block;" class="btn-group">
+                                <div style="float:right;">
+                                    <button id="search" type="button" class="btn btn-primary">
+                                        查&nbsp;&nbsp;&nbsp;&nbsp;询
+                                    </button>
+                                    <button id="reset" type="button" class="btn btn-default">
+                                        导&nbsp;&nbsp;&nbsp;&nbsp;出
+                                    </button>
+                                </div>
+                            </div>
+                            <table id="exampleTableEvents" class="table table-bordered" data-height="660"
+                                   data-mobile-responsive="true">
+                                <thead>
+                                <tr>
+                                    <!-- <th data-field="state" data-checkbox="true"></th> -->
+                                    <th style="background-color:#f9f9f9;" data-field="registrationNumber">登记序号</th>
+                                    <th style="background-color:#f9f9f9;" data-field="Enterprise">企业名称</th>
+                                    <th style="background-color:#f9f9f9;" data-field="plate">车主</th>
+                                    <th style="background-color:#f9f9f9;" data-field="plateNumber">车牌号</th>
+                                    <th style="background-color:#f9f9f9;" data-field="carFeeder">送车人姓名</th>
+                                    <th style="background-color:#f9f9f9;" data-field="ID">身份证号</th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Panel Other -->
+</div>
+<!-- 全局js -->
+<script src="../js/jquery.min.js?v=2.1.4"></script>
+<script src="../js/bootstrap.min.js?v=3.3.6"></script>
+
+<!-- 自定义js -->
+<script src="../js/content.js?v=1.0.0"></script>
+<script src="../js/pageJs/mechanical/high_frequency_information-select.js"></script>
+<!-- Bootstrap table -->
+<script src="../js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="../js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+<script src="../js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+<script src="high_frequency_information-select.js"></script>
+<!-- layerDate plugin javascript -->
+<script src="../js/plugins/layer/laydate/laydate.js"></script>
+</body>
+</html>

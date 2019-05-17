@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>境内游客查询</title>
+    <meta name="keywords" content="Table">
+    <meta name="description" content="Table">
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link href="../css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="../css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="../css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="../css/animate.css" rel="stylesheet">
+    <link href="../css/search-criteria.css" rel="stylesheet">
+    <link href="../css/style.css?v=4.1.0" rel="stylesheet">
+    <style type="text/css">
+        /*重写查询条件label中的文字样式  */
+        label.myLabel-content {
+            width: 55px;
+            display: inline-block;
+            text-align: right;
+        }
+
+        .my-container {
+            display: inline-block;
+            margin-right: 30px;
+        }
+
+        .myLabel-content, .myText-content, .myBtn-content {
+            display: inline-block;
+            margin-left: 10px;
+        }
+
+        .myLabel-content, .myText-content input[type='text'], .myBtn-content .btn {
+            height: 30px;
+            font-size: 12px;
+        }
+
+        .myBtn-content .btn {
+            margin-bottom: 10px;
+        }
+
+        /* 设置图片大小 */
+        img {
+            width: 104px;
+        }
+        .myLabel-content{
+            float: left;
+            line-height: 30px;
+        }
+        .myLabel-content, .myText-content{
+            float: left;
+        }
+        input.companyName{
+            float: left;
+        }
+    </style>
+
+</head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <!-- Panel Other -->
+    <div class="ibox float-e-margins">
+        <div class="ibox-title">
+            <h5>旅游行业管理>境内游客查询</h5>
+        </div>
+        <div class="ibox-content">
+            <div class="row row-lg">
+                <div class="col-sm-12">
+                    <!-- Example Events -->
+                    <div class="example-wrap">
+                        <div class="example">
+                            <div class="my-container">
+                                <label class="myLabel-content">身份证号</label>
+                                <div class="myText-content">
+                                    <input id="busNo" type="text" class="form-control" placeholder="">
+                                </div>
+                            </div>
+                            <div class="my-container">
+                                <label class="myLabel-content">民族</label>
+                                <div class="myText-content">
+                                    <input id="busNo" type="text" class="form-control" placeholder="">
+                                </div>
+                            </div>
+                            <div class="my-container">
+                                <label class="myLabel-content">旅游景点</label>
+                                <div class="myText-content">
+                                    <input id="busNo" type="text" class="form-control" placeholder="">
+                                </div>
+                            </div>
+                            <div class="my-container">
+                                <label class="myLabel-content">省市县</label>
+                                <div class="myText-content">
+                                    <input id="busNo" type="text" class="form-control" placeholder="">
+                                </div>
+                            </div>
+                            <div class="my-container">
+                                <label class="myLabel-content">姓名</label>
+                                <div class="myText-content">
+                                    <input id="busNo" type="text" class="form-control" placeholder="">
+                                </div>
+                            </div>
+                            <div class="my-container">
+                                <label class="myLabel-content">管辖单位</label>
+                                <div class="myText-content">
+                                    <select class="form-control" name="">
+                                        <option>选项 1</option>
+                                        <option>选项 2</option>
+                                        <option>选项 3</option>
+                                        <option>选项 4</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="my-container">
+                                <label class="myLabel-content">性别</label>
+                                <div class="myText-content">
+                                    <select class="form-control" name="">
+                                        <option>请选择</option>
+                                        <option>男</option>
+                                        <option>女</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="my-container">
+                                <label class="myLabel-content">入园时间</label>
+                                <div class="myText-content">
+                                    <input id="registrationtime" style="vertical-align:middle;"
+                                           class="form-control layer-date" placeholder=""
+                                           onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+                                </div>
+                                <label class="myLabel-content" style="width:0px;">至</label>
+                                <div class="myText-content">
+                                    &nbsp;&nbsp;&nbsp;<input style="vertical-align:middle;"
+                                                             class="form-control layer-date" placeholder="	"
+                                                             onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+                                </div>
+                            </div>
+                            <div style="display:block;" class="btn-group">
+                                <div style="float:left;">
+                                    <button id="btn_edit" type="button" class="btn btn-default glyphicon "
+                                            data-toggle="modal" data-target="#myModal5"
+                                            style="padding: 3px 13px 8px 14px;">
+                                        <span class="glyphicon glyphicon-search" style="margin-right: 3px;"></span>详情
+                                    </button>
+                                </div>
+                                <div style="float:right;">
+                                    <button id="search" type="button" class="btn btn-primary">
+                                        查&nbsp;&nbsp;&nbsp;&nbsp;询
+                                    </button>
+                                    <button id="reset" type="button" class="btn btn-default">
+                                        导&nbsp;&nbsp;&nbsp;&nbsp;出
+                                    </button>
+                                </div>
+                            </div>
+                            <table id="exampleTableEvents" class="table table-bordered" data-height="660"
+                                   data-mobile-responsive="true">
+                                <thead>
+                                <tr>
+                                    <th data-field="state" data-checkbox="true"></th>
+                                    <th style="background-color:#f9f9f9;" data-field="scenicName">旅游景点名称</th>
+                                    <th style="background-color:#f9f9f9;" data-field="name">姓名</th>
+                                    <th style="background-color:#f9f9f9;" data-field="gender">性别</th>
+                                    <th style="background-color:#f9f9f9;" data-field="ID">身份证号</th>
+                                    <th style="background-color:#f9f9f9;" data-field="nation">民族</th>
+                                    <th style="background-color:#f9f9f9;" data-field="address">省市县</th>
+                                    <!-- <th style="background-color:#f9f9f9;" data-field="operate">操作</th> -->
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- 弹出框内容 -->
+                    <div class="modal inmodal fade" id="myModal5" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                                            class="sr-only">Close</span></button>
+                                    <h4 class="modal-title">境内游客详情</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="ibox float-e-margins">
+                                        <div class="ibox-content">
+                                            <form role="form" class="form-horizontal m-t">
+                                                <div class="row">
+                                                    <div class="col-md-4" style="padding-left: 69px;">
+                                                        <div class="row">
+                                                            <div class="my-container">
+                                                                <div class="form-group draggable ui-draggable">
+                                                                    <label class="control-label">身份证号：</label>
+                                                                    <div class="myText-content">
+                                                                        <p class="form-control-static"></p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="my-container">
+                                                                <div class="form-group draggable ui-draggable">
+                                                                    <label class="control-label"
+                                                                           style="width:65px;">性别：</label>
+                                                                    <div class="myText-content">
+                                                                        <p class="form-control-static"></p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="my-container">
+                                                                <div class="form-group draggable ui-draggable">
+                                                                    <label class="control-label"
+                                                                           style="width:65px;">民族：</label>
+                                                                    <div class="myText-content">
+                                                                        <p class="form-control-static"></p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="my-container">
+                                                                <div class="form-group draggable ui-draggable">
+                                                                    <label class="control-label">旅游景点：</label>
+                                                                    <div class="myText-content">
+                                                                        <p class="form-control-static"></p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="my-container">
+                                                                <div class="form-group draggable ui-draggable">
+                                                                    <label class="control-label">省市区县：</label>
+                                                                    <div class="myText-content">
+                                                                        <p class="form-control-static"></p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4" style="padding-left: 94px;">
+                                                        <div class="row">
+                                                            <div class="my-container">
+                                                                <div class="form-group draggable ui-draggable">
+                                                                    <label class="control-label">证件类型：</label>
+                                                                    <div class="myText-content">
+                                                                        <p class="form-control-static"></p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="my-container">
+                                                                <div class="form-group draggable ui-draggable">
+                                                                    <label class="control-label"
+                                                                           style="width:65px;">姓名：</label>
+                                                                    <div class="myText-content">
+                                                                        <p class="form-control-static"></p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="my-container">
+                                                                <div class="form-group draggable ui-draggable">
+                                                                    <label class="control-label">出生日期：</label>
+                                                                    <div class="myText-content">
+                                                                        <p class="form-control-static"></p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="my-container">
+                                                                <div class="form-group draggable ui-draggable">
+                                                                    <label class="control-label">管辖单位：</label>
+                                                                    <div class="myText-content">
+                                                                        <p class="form-control-static"></p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="my-container">
+                                                                <div class="form-group draggable ui-draggable">
+                                                                    <label class="control-label">入园时间：</label>
+                                                                    <div class="myText-content">
+                                                                        <p class="form-control-static"></p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4" style="padding-left: 127px;">
+                                                        <div class="text-center">
+                                                            <img alt="image" class="m-t-xs img-responsive"
+                                                                 src="../img/people.png" style="margin-top: 23px;">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="my-container">
+                                                        <div class="form-group draggable ui-draggable">
+                                                            <label class="control-label" style="padding-left: 53px;">详细地址：</label>
+                                                            <div class="myText-content">
+                                                                <p class="form-control-static"></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end弹出框内容 -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Panel Other -->
+</div>
+<!-- 全局js -->
+<script src="../js/jquery.min.js?v=2.1.4"></script>
+<script src="../js/bootstrap.min.js?v=3.3.6"></script>
+
+<!-- 自定义js -->
+<script src="../js/content.js?v=1.0.0"></script>
+<!-- Bootstrap table -->
+<script src="../js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="../js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+<script src="../js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+<script src="demestic_tourism-select.js"></script>
+<!-- layerDate plugin javascript -->
+<script src="../js/plugins/layer/laydate/laydate.js"></script>
+</body>
+</html>

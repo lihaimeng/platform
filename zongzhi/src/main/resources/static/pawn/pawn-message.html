@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table</title>
+    <meta name="keywords" content="Table">
+    <meta name="description" content="Table">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="../css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="../css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="../css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="../css/animate.css" rel="stylesheet">
+    <link href="../css/style.css?v=4.1.0" rel="stylesheet">
+    <link href="../css/search-criteria.css" rel="stylesheet">
+    <link href="../smoke-v3.1.1/css/smoke.css" rel="stylesheet">
+    <link href="../smoke-v3.1.1/css/smoke.min.css" rel="stylesheet">
+    <link href="../css/plugins/chosen/chosen.css" rel="stylesheet">
+    <style type="text/css">
+        .my-container {
+            display: inline-block;
+            margin-right: 30px;
+        }
+
+        .myLabel-content, .myText-content, .myBtn-content {
+            display: inline-block;
+            margin-left: 10px;
+        }
+
+        .control-label {
+            margin-left: -5px;
+        }
+
+        .myLabel-content, .myText-content input[type='text'], .myBtn-content .btn {
+            height: 30px;
+            font-size: 12px;
+        }
+
+        .myBtn-content .btn {
+            margin-bottom: 10px;
+        }
+
+        .modal {
+            width: 100%;
+            height: 100%;
+        }
+
+        .modal-header {
+            width: 100%;
+            height: 10%;
+        }
+
+        .modal-body {
+            width: 100%;
+            height: 1000px;
+        }
+
+        .pawnMsg1 .col-md-12 {
+            width: 100%;
+            height: 30%;
+        }
+
+        .modal-header .btn {
+            width: 47%;
+        }
+
+        .modal-header .btn span {
+            text-align: center;
+            font-size: 16px;
+            width: 100%;
+            height: 46px;
+            margin-top: -16px;
+        }
+
+        .col5 {
+            margin-left: -50px;
+        }
+
+        .col51 {
+            margin-left: -62px;
+        }
+
+        .col4 {
+            margin-left: -30px;
+        }
+        .myLabel-content{
+            float: left;
+            line-height: 30px;
+        }
+        .myLabel-content, .myText-content{
+            float: left;
+        }
+        input.companyName{
+            float: left;
+        }
+    </style>
+
+</head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <!-- Panel Other -->
+    <div class="ibox float-e-margins">
+        <div class="ibox-title">
+            <h5>典当行业>业务查询</h5>
+        </div>
+        <div class="ibox-content">
+            <div class="row row-lg">
+                <div class="col-sm-12">
+                    <!-- Example Events -->
+                    <div class="example-wrap">
+                        <div class="example">
+                            <div class="my-container">
+                                <label class="myLabel-content">管辖单位</label>
+                                <div class="myText-content">
+                                    <select class="chosen-select form-control" id="gxdw">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="my-container">
+                                <label class="myLabel-content">企业名称</label>
+                                <div class="myText-content">
+                                    <input id="qymc" type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="my-container">
+                                <label class="myLabel-content">当票号</label>
+                                <div class="myText-content">
+                                    <input id="dphm" type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="my-container">
+                                <label class="myLabel-content">典当状态</label>
+                                <div class="myText-content">
+                                    <select class="form-control" id="zt" name="">
+                                        <option value="">全部</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="my-container">
+                                <label class="myLabel-content">当户名称</label>
+                                <div class="myText-content">
+                                    <input id="dhxm" type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="my-container">
+                                <label class="myLabel-content">证件号</label>
+                                <div class="myText-content">
+                                    <input id="dhzjhm" type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="my-container">
+                                <label class="myLabel-content">出当时间</label>
+                                <div class="myText-content">
+                                    <input style="vertical-align:middle;" id="cdsj"
+                                           class="form-control layer-date"
+                                           onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+                                </div>
+                                <label class="myLabel-content" style="width:0px;">至</label>
+                                <div class="myText-content">
+                                    &nbsp;&nbsp;&nbsp;<input style="vertical-align:middle;" id="cdsjend"
+                                                             class="form-control layer-date"
+                                                             onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+                                </div>
+                            </div>
+                            <br/>
+                            <div class="my-container">
+                                <label class="myLabel-content">到期时间</label>
+                                <div class="myText-content">
+                                    <input style="vertical-align:middle;" id="dqsj"
+                                           class="form-control layer-date"
+                                           onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+                                </div>
+                                <label class="myLabel-content" style="width:0px;">至</label>
+                                <div class="myText-content">
+                                    &nbsp;&nbsp;&nbsp;<input style="vertical-align:middle;" id="dqsjend"
+                                                             class="form-control layer-date"
+                                                             onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+                                </div>
+                            </div>
+
+                            <div style="display:block;" class="btn-group">
+                                <div style="float:left;">
+                                    <button type="button" class="btn btn-default glyphicon " id="xq_btn"
+                                            data-toggle="modal"
+                                            data-target="" style="padding: 3px 13px 8px 14px;">
+                                        <span class="glyphicon glyphicon-search" style="margin-right: 3px;"></span>详情
+                                    </button>
+                                    <button style="margin-left: -2px;padding: 3px 13px 8px 14px;" type="button"
+                                            id="dcdd_btn"
+                                            class="btn btn-default glyphicon " data-toggle="modal"
+                                            data-target="" style="padding: 3px 13px 8px 14px;">
+                                        <span class="glyphicon glyphicon-search" style="margin-right: 3px;"></span>一人多次典当
+                                    </button>
+                                </div>
+                                <div style="float:right;">
+                                    <button id="search" type="button" class="btn btn-primary">
+                                        查&nbsp;&nbsp;&nbsp;&nbsp;询
+                                    </button>
+                                    <!--<button id="reset" type="button" class="btn btn-default">
+                                        导&nbsp;&nbsp;&nbsp;&nbsp;出
+                                    </button>-->
+                                </div>
+                            </div>
+                            <table id="table" class="table table-bordered" data-height="624"
+                                   data-mobile-responsive="true">
+                                <thead>
+                                <tr>
+                                    <th>序号</th>
+                                    <th></th>
+                                    <th>管辖单位</th>
+                                    <th>企业名称</th>
+                                    <th>当户名称</th>
+                                    <th>证件号</th>
+                                    <th>性别</th>
+                                    <th>当票号码</th>
+                                    <th>典当状态</th>
+                                    <th>出当时间</th>
+                                    <th>到期时间</th>
+                                    <th>典当次数</th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- End Example Events -->
+                    <!-- 弹出框内容 -->
+                    <div class="modal inmodal fade" id="xqmsg" tabindex="-1" role="dialog" aria-hidden="true"
+                         data-backdrop="static">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content" id="pawnMsg">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                                            class="sr-only">Close</span></button>
+                                    <br>
+                                    <button style="margin-left: 10px;" id="btn_pawnMsg1" type="button"
+                                            class="btn btn-default" data-toggle="modal" onclick="changeMsg1()">
+                                        <span class="" aria-hidden="true">典当基本信息</span>
+                                    </button>
+                                    <button id="btn_pawnMsg2" type="button" class="btn btn-default" data-toggle="modal"
+                                            onclick="changeMsg2()" style="margin-left: -5px;">
+                                        <span class="" aria-hidden="true">当物信息</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body" style="height: 850px;">
+                                    <div id="ddjbxx" class="col-md-12" style="margin-left: -24px;">
+                                        <div style="height:30%" class="ibox float-e-margins pawnMsg1">
+                                            <!--典当基本信息 -->
+                                            <div class="ibox-title">
+                                                <h5 class="">当户信息:</h5>
+                                                <h5 style="margin-left: -29px;" id="dhxx"></h5>
+                                                <div class="ibox-tools">
+                                                    <a class="collapse-link">
+                                                        <i class="fa fa-chevron-up"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <!-- 单位当户 -->
+                                            <div class="col-md-12" id="dwdetail" style="display: none">
+                                                <form role="form" class="form-horizontal m-t ">
+                                                    <div class="col-md-10">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group draggable ui-draggable">
+                                                                <label class="col-sm-5 control-label col5">单位名称</label>
+
+                                                                <div class="col-sm-7">
+                                                                    <p class="form-control-static" id="dwmc"></p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group draggable ui-draggable">
+                                                                <label class="col-sm-5 control-label col5">法人代表</label>
+
+                                                                <div class="col-sm-7">
+                                                                    <p class="form-control-static" id="frdb"></p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group draggable ui-draggable">
+                                                                <label class="col-sm-5 control-label col5">联系电话</label>
+
+                                                                <div class="col-sm-7">
+                                                                    <p class="form-control-static" id="lxdh"></p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group draggable ui-draggable">
+                                                                <label class="col-sm-5 control-label col5">授权委托事项</label>
+                                                                <div class="col-sm-7">
+                                                                    <p class="form-control-static" id="sqwtsx"></p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-10">
+                                                            <div class="form-group draggable ui-draggable">
+                                                                <label class="col-sm-5 control-label col5"
+                                                                       style="width: 127px;">详细地址</label>
+                                                                <div class="col-sm-7">
+                                                                    <p class="form-control-static" id="xxdz"></p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                                <form class="col-md-1" enctype="multipart/form-data">
+                                                    <img class="topimg" id="dwdhImg" style="width:100px;height:135px"
+                                                         onerror="this.src='../img/weichat.jpg;this.onerror=null'"/>
+                                                </form>
+                                                <div class="clearfix">
+                                                </div>
+                                            </div><!--单位当户end -->
+                                            <!-- 普通当户 -->
+                                            <div class="col-md-12 " id="ptdetail" style="display: none">
+                                                <form role="form" class="form-horizontal m-t ">
+                                                    <div class="col-md-10">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group draggable ui-draggable">
+                                                                <label class="col-sm-5 control-label col5">姓名</label>
+
+                                                                <div class="col-sm-7">
+                                                                    <p class="form-control-static"
+                                                                       id="dhxmForDetail"></p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group draggable ui-draggable">
+                                                                <label class="col-sm-5 control-label col5">证件类型</label>
+
+                                                                <div class="col-sm-7">
+                                                                    <p class="form-control-static"
+                                                                       id="dhcyzjlxdmForDetail"></p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group draggable ui-draggable">
+                                                                <label class="col-sm-5 control-label col5">证件号码</label>
+
+                                                                <div class="col-sm-7">
+                                                                    <p class="form-control-static"
+                                                                       id="dhzjhmForDetail"></p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group draggable ui-draggable">
+                                                                <label class="col-sm-5 control-label col5">行政划分</label>
+
+                                                                <div class="col-sm-7">
+                                                                    <p class="form-control-static"
+                                                                       id="dhxzqhForDetail"></p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group draggable ui-draggable">
+                                                                <label class="col-sm-5 control-label col5">性别</label>
+                                                                <div class="col-sm-7">
+                                                                    <p class="form-control-static"
+                                                                       id="dhxbForDetail"></p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group draggable ui-draggable">
+                                                                <label class="col-sm-5 control-label col5">联系电话</label>
+
+                                                                <div class="col-sm-7">
+                                                                    <p class="form-control-static"
+                                                                       id="dhdhcommonForDetail"></p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-10">
+                                                            <div class="form-group draggable ui-draggable">
+                                                                <label class="col-sm-5 control-label col5"
+                                                                       style="width: 127px;">详细地址</label>
+                                                                <div class="col-sm-7">
+                                                                    <p class="form-control-static"
+                                                                       id="dhgjdzcommonForDetail"></p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!--<div class="col-md-1" style="border:1px solid black;width: 100px;height:135px;">-->
+                                                    <!--</div>-->
+                                                </form>
+                                                <form class="col-md-1" enctype="multipart/form-data">
+                                                    <img class="topimg" id="ptdhImage"
+                                                         style="width: 100px;height:135px;"
+                                                         onerror="this.src='../img/weichat.jpg;this.onerror=null'"/>
+                                                </form>
+                                                <div class="clearfix">
+                                                </div>
+                                            </div><!-- 普通当户end -->
+                                            <!-- 外国当户 -->
+                                            <div class="col-md-12 " id="wgdetail" style="display: none">
+                                                <form role="form" class="form-horizontal m-t ">
+                                                    <div class="col-md-10">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group draggable ui-draggable">
+                                                                <label class="col-sm-5 control-label col5">英文名</label>
+
+                                                                <div class="col-sm-7">
+                                                                    <p class="form-control-static" id="ywm"></p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group draggable ui-draggable">
+                                                                <label class="col-sm-5 control-label col5">英文姓</label>
+
+                                                                <div class="col-sm-7">
+                                                                    <p class="form-control-static" id="ywx"></p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group draggable ui-draggable">
+                                                                <label class="col-sm-5 control-label col5">签证种类</label>
+                                                                <div class="col-sm-7">
+                                                                    <p class="form-control-static" id="qzzl"></p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group draggable ui-draggable">
+                                                                <label class="col-sm-5 control-label col5">签证号码</label>
+
+                                                                <div class="col-sm-7">
+                                                                    <p class="form-control-static" id="qzhm"></p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group draggable ui-draggable">
+                                                                <label class="col-sm-5 control-label col5">性别</label>
+                                                                <div class="col-sm-7">
+                                                                    <p class="form-control-static" id="xb"></p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group draggable ui-draggable">
+                                                                <label class="col-sm-5 control-label col5">国籍</label>
+
+                                                                <div class="col-sm-7">
+                                                                    <p class="form-control-static" id="gj"></p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group draggable ui-draggable">
+                                                                <label class="col-sm-5 control-label col5">联系电话</label>
+
+                                                                <div class="col-sm-7">
+                                                                    <p class="form-control-static" id="lxdhForeign"></p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-10">
+                                                            <div class="form-group draggable ui-draggable">
+                                                                <label class="col-sm-5 control-label col5"
+                                                                       style="width: 127px;">详细地址</label>
+                                                                <div class="col-sm-7">
+                                                                    <p class="form-control-static" id="xxdzForeign"></p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- <div class="col-md-1" style="border:1px solid black;width: 100px;height:135px;">-->
+                                                    <!--</div>-->
+                                                </form>
+                                                <form class="col-md-1" enctype="multipart/form-data">
+                                                    <img class="topimg" id="wgdhImage"
+                                                         style="width: 100px;height:135px;"
+                                                         onerror="this.src='../img/weichat.jpg;this.onerror=null'"/>
+                                                </form>
+                                                <div class="clearfix">
+                                                </div>
+                                            </div><!-- 外国当户end -->
+                                            <!--典当基本信息end -->
+                                        </div>
+                                        <div class="ibox float-e-margins pawnMsg1" id="wtrmsg">
+                                            <div class="ibox-title">
+                                                <h5>委托人信息:</h5>
+                                                <!--<div>
+                                                    <select name="" id="clientForDetail"  class="col-sm-3" onchange="changeClientForDetail()" style="margin-left: -39px;">
+                                                        <option style="height: 28px;">普通委托人</option>
+                                                        <option style="height: 28px;">外国委托人</option>
+                                                    </select>
+                                                </div>-->
+                                                <h5 style="margin-left: -29px;" id="wtrxx"></h5>
+                                                <div class="ibox-tools">
+                                                    <a class="collapse-link">
+                                                        <i class="fa fa-chevron-up"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <!-- 普通委托人 -->
+                                            <div class="col-md-12 " id="ptwtr" style="display: none">
+                                                <form role="form" class="form-horizontal m-t ">
+                                                    <div class="col-md-10">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group draggable ui-draggable">
+                                                                <label class="col-sm-5 control-label col5">姓名</label>
+
+                                                                <div class="col-sm-7">
+                                                                    <p class="form-control-static"
+                                                                       id="wtrxmForDetail"></p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group draggable ui-draggable">
+                                                                <label class="col-sm-5 control-label col5">证件类型</label>
+
+                                                                <div class="col-sm-7">
+                                                                    <p class="form-control-static"
+                                                                       id="wtrcyzjForDetail"></p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group draggable ui-draggable">
+                                                                <label class="col-sm-5 control-label col5">身份证号</label>
+
+                                                                <div class="col-sm-7">
+                                                                    <p class="form-control-static"
+                                                                       id="wtrzjhmForDetail"></p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group draggable ui-draggable">
+                                                                <label class="col-sm-5 control-label col5">行政划分</label>
+
+                                                                <div class="col-sm-7">
+                                                                    <p class="form-control-static"
+                                                                       id="wtrxzqhForDetail"></p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-6">
+                                                            <div class="form-group draggable ui-draggable">
+                                                                <label class="col-sm-5 control-label col5">性别</label>
+
+                                                                <div class="col-sm-7">
+                                                                    <p class="form-control-static"
+                                                                       id="wtrxbForDetail"></p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group draggable ui-draggable">
+                                                                <label class="col-sm-5 control-label col5">联系电话</label>
+
+                                                                <div class="col-sm-7">
+                                                                    <p class="form-control-static"
+                                                                       id="wtrdhForDetail"></p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-10">
+                                                            <div class="form-group draggable ui-draggable">
+                                                                <label class="col-sm-5 control-label col5"
+                                                                       style="width: 127px;">详细地址</label>
+                                                                <div class="col-sm-7">
+                                                                    <p class="form-control-static"
+                                                                       id="wtrhjdzForDetail"></p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!--<div class="col-md-1" style="border:1px solid black;width: 100px;height:135px;">-->
+                                                    <!--</div>-->
+                                                </form>
+                                                <form class="col-md-1" enctype="multipart/form-data">
+                                                    <img class="centerimg" id="ptwtrImage"
+                                                         style="width: 100px;height:135px;"
+                                                         onerror="this.src='../img/weichat.jpg;this.onerror=null'"/>
+                                                </form>
+                                                <div class="clearfix">
+                                                </div>
+                                            </div>
+                                            <!-- 外国委托人 -->
+                                            <div class="col-md-12 " id="wgwtr" style="display: none">
+                                                <form role="form" class="form-horizontal m-t ">
+                                                    <div class="col-md-10">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group draggable ui-draggable">
+                                                                <label class="col-sm-5 control-label col5">英文名</label>
+
+                                                                <div class="col-sm-7">
+                                                                    <p class="form-control-static" id="ywmForergn"></p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group draggable ui-draggable">
+                                                                <label class="col-sm-5 control-label col5">英文姓</label>
+
+                                                                <div class="col-sm-7">
+                                                                    <p class="form-control-static" id="ywxForergn"></p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group draggable ui-draggable">
+                                                                <label class="col-sm-5 control-label col5">签证号码</label>
+
+                                                                <div class="col-sm-7">
+                                                                    <p class="form-control-static" id="qzhmForergn"></p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group draggable ui-draggable">
+                                                                <label class="col-sm-5 control-label col5">国 籍</label>
+
+                                                                <div class="col-sm-7">
+                                                                    <p class="form-control-static"
+                                                                       id="wtrgjForergn"></p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-6">
+                                                            <div class="form-group draggable ui-draggable">
+                                                                <label class="col-sm-5 control-label col5">性别</label>
+
+                                                                <div class="col-sm-7">
+                                                                    <p class="form-control-static"
+                                                                       id="wtrxbForergn"></p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group draggable ui-draggable">
+                                                                <label class="col-sm-5 control-label col5">签证种类</label>
+
+                                                                <div class="col-sm-7">
+                                                                    <p class="form-control-static" id="qzzlForergn"></p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group draggable ui-draggable">
+                                                                <label class="col-sm-5 control-label col5">联系电话</label>
+
+                                                                <div class="col-sm-7">
+                                                                    <p class="form-control-static"
+                                                                       id="wtrdhForergn"></p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-10">
+                                                            <div class="form-group draggable ui-draggable">
+                                                                <label class="col-sm-5 control-label col5"
+                                                                       style="width: 127px;">详细地址</label>
+                                                                <div class="col-sm-7">
+                                                                    <p class="form-control-static"
+                                                                       id="wtrhjdzForergn"></p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- <div class="col-md-1" style="border:1px solid black;width: 100px;height:135px;">-->
+                                                    <!--</div>-->
+                                                </form>
+                                                <form class="col-md-1" enctype="multipart/form-data">
+                                                    <img class="centerimg" id="wgwtrImage"
+                                                         style="width: 100px;height:135px;"
+                                                         onerror="this.src='../img/weichat.jpg;this.onerror=null'"/>
+                                                </form>
+                                                <div class="clearfix">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="ibox float-e-margins pawnMsg1" id="ddxxmsg">
+                                            <div class="ibox-title">
+                                                <h5>典当信息</h5>
+                                                <div class="ibox-tools">
+                                                    <a class="collapse-link">
+                                                        <i class="fa fa-chevron-up"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 ">
+                                                <form class="form-horizontal m-t">
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <div class="form-group draggable ui-draggable">
+                                                                <label class="col-sm-4 control-label">当票号</label>
+                                                                <div class="col-sm-7">
+                                                                    <p class="form-control-static"
+                                                                       id="dphmForDetail"></p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group draggable ui-draggable">
+                                                                <label class="col-sm-4 control-label">合同号</label>
+                                                                <div class="col-sm-7">
+                                                                    <p class="form-control-static"
+                                                                       id="hthForDetail"></p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group draggable ui-draggable">
+                                                                <label class="col-sm-4 control-label">受理人</label>
+                                                                <div class="col-sm-7">
+                                                                    <p class="form-control-static"
+                                                                       id="slrmcForDetail"></p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group draggable ui-draggable">
+                                                                <label class="col-sm-4 control-label">出当时间</label>
+                                                                <div class="col-sm-7">
+                                                                    <p class="form-control-static"
+                                                                       id="cdsjForDetail"></p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group draggable ui-draggable">
+                                                                <label class="col-sm-4 control-label">典当类型</label>
+                                                                <div class="col-sm-7">
+                                                                    <p class="form-control-static"
+                                                                       id="ddlxForDetail"></p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group draggable ui-draggable">
+                                                                <label class="col-sm-4 control-label">到期时间</label>
+                                                                <div class="col-sm-7">
+                                                                    <p class="form-control-static"
+                                                                       id="dqsjForDetail"></p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group draggable ui-draggable">
+                                                                <label class="col-sm-4 control-label">当金数额</label>
+                                                                <span style="line-height:32px;margin-left: -168px;">(元)</span>
+                                                                <div class="col-sm-7">
+                                                                    <p class="form-control-static"
+                                                                       id="dpzzForDetail"></p>
+                                                                </div>
+                                                                <!--<span style="line-height:34px;margin-left: -11px;">元</span>-->
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group draggable ui-draggable">
+                                                                <label class="col-sm-4 control-label">月费率</label>
+                                                                <span style="line-height:30px;margin-left: -168px;">(%)</span>
+                                                                <div class="col-sm-7">
+                                                                    <p class="form-control-static"
+                                                                       id="yflForDetail"></p>
+                                                                </div>
+                                                                <!--<span style="line-height:34px;margin-left: -11px;">%</span>-->
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group draggable ui-draggable">
+                                                                <label class="col-sm-4 control-label">月利率</label>
+                                                                <span style="line-height:30px;margin-left: -168px;">(%)</span>
+                                                                <div class="col-sm-7">
+                                                                    <p class="form-control-static"
+                                                                       id="yllForDetail"></p>
+                                                                </div>
+                                                                <!--<span style="line-height:34px;margin-left: -11px;">%</span>-->
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group draggable ui-draggable">
+                                                                <label class="col-sm-4 control-label">金额合计</label>
+                                                                <span style="line-height:32px;margin-left: -168px;">(元)</span>
+                                                                <div class="col-sm-7">
+                                                                    <p class="form-control-static"
+                                                                       id="sfjeForDetail"></p>
+                                                                </div>
+                                                                <!--<span style="line-height:34px;margin-left: -11px;">元</span>-->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- <div class="form-group save">
+                                                        <div class="col-sm-8 col-sm-offset-10" style="padding-left: 46px;">
+                                                            <button class="btn btn-primary" type="button" id="addRoleSubmit">保&nbsp;&nbsp;&nbsp;&nbsp;存</button>
+                                                        </div>
+                                                    </div> -->
+                                                </form>
+                                                <div class="clearfix">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- 当物信息 -->
+                                    <div class="modal-body" id="pawn2" style="height: 744px;">
+                                        <div class="col-md-12" style="margin-left: -24px;">
+                                            <div class="ibox float-e-margins">
+                                                <div class="ibox-title">
+                                                    <h5>当物信息</h5>
+                                                    <a id="dwxxxq" style="float:right;margin-right: 7px;"
+                                                       data-toggle="modal" data-target="" id="wpxqButton">详情</a>
+                                                </div>
+                                                <div style="margin-top: 10px;" class="col-md-12 ">
+                                                    <table id="dwxxtb" class="table table-bordered"
+                                                           data-mobile-responsive="true">
+
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div><!-- 当物信息end -->
+
+                                </div>
+                            </div>
+
+                            <!--多次典当表-->
+                            <div class="modal inmodal fade" id="dcddtable" tabindex="1" role="dialog" aria-hidden="true"
+                                 data-backdrop="static">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal"><span
+                                                    aria-hidden="true">&times;</span><span
+                                                    class="sr-only">Close</span></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <table id="dcddtb" class="table table-bordered"
+                                                   data-mobile-responsive="true">
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!--多次典当表结束 -->
+
+                            <!-- 当物信息详情BEGIN -->
+                            <div class="modal inmodal fade" id="myModalForDetail" tabindex="-1" role="dialog"
+                                 aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content thumbnail">
+                                        <div class="modal-body">
+                                            <button type="button" class="close" data-dismiss="modal"
+                                                    style="margin-right: 11px;margin-top: 6px;"><span
+                                                    aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                                            </button>
+                                            <!-- 当物信息 -->
+                                            <div class="col-md-12" style="margin-left: -24px;margin-top: 35px;">
+                                                <div class="ibox float-e-margins">
+                                                    <div class="ibox-title">
+                                                        <h5>当物种类</h5>
+                                                        <div class="ibox-tools">
+                                                            <a class="collapse-link">
+                                                                <i class="fa fa-chevron-up"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12 ">
+                                                        <form role="form" class="form-horizontal m-t">
+                                                            <div class="col-md-4">
+                                                                <div class="form-group draggable ui-draggable">
+                                                                    <label class="col-sm-4 control-label">当物大类</label>
+                                                                    <div class="col-sm-7">
+                                                                        <p class="form-control-static"
+                                                                           id="wpdlForDetail"></p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                        <div class="clearfix">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="ibox float-e-margins">
+                                                    <div class="ibox-title">
+                                                        <h5>当物基本信息</h5>
+                                                        <div class="ibox-tools">
+                                                            <a class="collapse-link">
+                                                                <i class="fa fa-chevron-up"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12 ">
+                                                        <form class="form-horizontal m-t">
+                                                            <div class="col-md-4">
+                                                                <div class="form-group draggable ui-draggable">
+                                                                    <label class="col-sm-4 control-label">当物名称</label>
+                                                                    <div class="col-sm-7">
+                                                                        <p class="form-control-static"
+                                                                           id="wpmcForDetail"></p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="form-group draggable ui-draggable">
+                                                                    <label class="col-sm-4 control-label">数量</label>
+                                                                    <div class="col-sm-7">
+                                                                        <p class="form-control-static"
+                                                                           id="slForDetail"></p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="form-group draggable ui-draggable">
+                                                                    <label class="col-sm-4 control-label">重量</label>
+                                                                    <div class="col-sm-7">
+                                                                        <p class="form-control-static"
+                                                                           id="zlForDetail"></p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="form-group draggable ui-draggable">
+                                                                    <label class="col-sm-4 control-label">唯一标志</label>
+                                                                    <div class="col-sm-7">
+                                                                        <p class="form-control-static"
+                                                                           id="bzForDetail"></p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="form-group draggable ui-draggable">
+                                                                    <label class="col-sm-4 control-label">当物特征</label>
+                                                                    <div class="col-sm-7">
+                                                                        <p class="form-control-static"
+                                                                           id="dwtzForDetail"></p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="form-group draggable ui-draggable">
+                                                                    <label class="col-sm-4 control-label">品牌</label>
+                                                                    <div class="col-sm-7">
+                                                                        <p class="form-control-static"
+                                                                           id="ppForDetail"></p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="form-group draggable ui-draggable">
+                                                                    <label class="col-sm-4 control-label">型号</label>
+                                                                    <div class="col-sm-7">
+                                                                        <p class="form-control-static"
+                                                                           id="xhForDetail"></p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="form-group draggable ui-draggable">
+                                                                    <label class="col-sm-4 control-label">规格</label>
+                                                                    <div class="col-sm-7">
+                                                                        <p class="form-control-static"
+                                                                           id="ggForDetail"></p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="form-group draggable ui-draggable">
+                                                                    <label class="col-sm-4 control-label">估价</label>
+                                                                    <span style="line-height:34px;margin-left: -164px;">(元)</span>
+                                                                    <div class="col-sm-7">
+                                                                        <p class="form-control-static"
+                                                                           id="gjForDetail"></p>
+                                                                    </div>
+                                                                    <!--<span style="line-height:34px;margin-left: -11px;">元</span>-->
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="form-group draggable ui-draggable">
+                                                                    <label class="col-sm-4 control-label">折当率</label>
+                                                                    <span style="line-height:34px;margin-left: -164px;">(%)</span>
+                                                                    <div class="col-sm-7">
+                                                                        <p class="form-control-static"
+                                                                           id="zdlForDetail"></p>
+                                                                    </div>
+                                                                    <!-- <span style="line-height:34px;margin-left: -11px;">%</span>-->
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="form-group draggable ui-draggable">
+                                                                    <label class="col-sm-4 control-label">典当金额</label>
+                                                                    <span style="line-height:34px;margin-left: -164px;">(元)</span>
+                                                                    <div class="col-sm-7">
+                                                                        <p class="form-control-static"
+                                                                           id="djseForDetail"></p>
+                                                                    </div>
+                                                                    <!-- <span style="line-height:34px;margin-left: -11px;">元</span>-->
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="form-group draggable ui-draggable">
+                                                                    <label class="col-sm-4 control-label">当物类型</label>
+                                                                    <div class="col-sm-7">
+                                                                        <p class="form-control-static"
+                                                                           id="dwlxForDetail"></p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="form-group draggable ui-draggable">
+                                                                    <label class="col-sm-4 control-label">归属类型</label>
+                                                                    <div class="col-sm-7">
+                                                                        <p class="form-control-static"
+                                                                           id="dwgslxForDetail"></p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                        <div class="clearfix">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="ibox float-e-margins">
+                                                    <div class="ibox-title">
+                                                        <h5>当物来源说明</h5>
+                                                        <div class="ibox-tools">
+                                                            <a class="collapse-link">
+                                                                <i class="fa fa-chevron-up"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12 ">
+                                                        <div class="my-container">
+                                                            <p class="form-control-static" id="dwlyForDetail"
+                                                               style="margin-top: 26px;margin-bottom: 26px;"></p>
+                                                        </div>
+                                                        <div class="clearfix">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="ibox float-e-margins">
+                                                    <div class="ibox-title">
+                                                        <h5>产权证明材料</h5>
+                                                        <div class="ibox-tools">
+                                                            <a class="collapse-link">
+                                                                <i class="fa fa-chevron-up"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12 " style="margin-bottom: 87px;">
+                                                        <form role="form" class="form-horizontal m-t col-md-10"
+                                                              id="downloadForm" method="post"
+                                                              enctype="multipart/form-data"
+                                                              action="../common/attachmentDownload">
+                                                            <!--<div class="row">
+                                                                <a style="float:left;">上传证明材料</a> <a style="padding-left: 30px;">拍摄</a>
+                                                            </div>-->
+                                                            <input type="hidden" id="tableId" name="tableId">
+                                                            <input type="hidden" id="tableName" name="tableName">
+                                                            <input type="hidden" id="mark" name="mark">
+                                                            <div class="my-container">
+                                                                <p class="form-control-static" id="zmclForDetail"></p>
+                                                            </div>
+                                                            <a id="download">下载</a>
+                                                            <div class="clearfix">
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- 详情弹出框内容END -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Panel Other -->
+    </div>
+</div>
+<!-- 全局js -->
+<script src="../js/jquery.min.js?v=2.1.4"></script>
+<script src="../js/bootstrap.min.js?v=3.3.6"></script>
+
+<!-- 自定义js -->
+<script src="../js/content.js?v=1.0.0"></script>
+<!-- Bootstrap table -->
+<script src="../js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="../js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+<script src="../js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+
+<!-- layerDate plugin javascript -->
+<script src="../js/plugins/layer/laydate/laydate.js"></script>
+<!-- Smoke alert -->
+<script src="../smoke-v3.1.1/js/smoke.js"></script>
+<script src="../smoke-v3.1.1/js/smoke.min.js"></script>
+
+<script src="pawn-message.js"></script>
+<script src="../js/plugins/chosen/chosen.jquery.js"></script>
+<script src="../js/demo/form-advanced-demo.js"></script>
+
+</body>
+</html>

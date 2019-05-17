@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table</title>
+    <meta name="keywords" content="Table">
+    <meta name="description" content="Table">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="../../css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="../../css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="../../css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="../../css/style.css?v=4.1.0" rel="stylesheet">
+    <!-- 模态框 -->
+    <link href="../../css/animate.css" rel="stylesheet">
+    <!-- 输入框、弹出框css（自定义） -->
+    <link href="../../css/search-criteria.css" rel="stylesheet">
+    <link href="../../smoke-v3.1.1/css/smoke.css" rel="stylesheet">
+    <link href="../../smoke-v3.1.1/css/smoke.min.css" rel="stylesheet">
+    <style type="text/css">
+        .my-container {
+            display: inline-block;
+            margin-right: 30px;
+        }
+
+        .myLabel-content, .myText-content, .myBtn-content {
+            display: inline-block;
+            margin-left: 10px;
+        }
+
+        .control-label {
+            margin-left: -5px;
+        }
+
+        .myLabel-content, .myText-content input[type='text'], .myBtn-content .btn {
+            height: 30px;
+            font-size: 12px;
+        }
+
+        .myBtn-content .btn {
+            margin-bottom: 10px;
+        }
+
+        .modal {
+            width: 100%;
+            height: 100%;
+        }
+
+        .modal-header {
+            width: 100%;
+            height: 10%;
+        }
+
+        .modal-body {
+            width: 100%;
+            height: 1000px;
+        }
+
+        .modal-header .btn {
+            width: 47%;
+        }
+
+        .modal-header .btn span {
+            text-align: center;
+            font-size: 16px;
+            width: 100%;
+            height: 46px;
+            margin-top: -16px;
+        }
+
+        .dataMsg {
+            width: 14.2%;
+        }
+
+        .myText-content .form-control option:hover {
+            background-color: #1AB394;
+        }
+        .ibox-content {
+            width: 100%;
+            /*height: 800px;*/
+        }
+        .ibox-content .example {
+            height: 100%;
+        }
+
+
+    </style>
+
+</head>
+<body class="gray-bg" style="height: 895px;">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <!-- Panel Other -->
+    <div class="ibox float-e-margins">
+        <div class="ibox-title">
+            <h5>系统管理>日志管理</h5>
+        </div>
+        <div class="ibox-content">
+            <div class="row row-lg">
+                <div class="col-sm-12">
+                    <!-- Example Events -->
+                    <div class="example-wrap">
+                        <div class="example">
+                            <div class="my-container">
+                                <label class="myLabel-content">参数名称</label>
+                                <div class="myText-content">
+                                    <div class="myText-content">
+                                        <input id="paramName" type="text" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="my-container">
+                                <label class="myLabel-content">参数路径</label>
+                                <div class="myText-content">
+                                    <input id="paramValue" type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="my-container">
+                                <label class="myLabel-content">日志描述</label>
+                                <div class="myText-content">
+                                    <input type="text" class="form-control" id="description">
+                                </div>
+                            </div>
+                            <div class="my-container">
+                                <label class="myLabel-content">操作时间</label>
+                                <div class="myText-content">
+                                    <input style="vertical-align:middle;" id="loginDateStart"
+                                           class="form-control layer-date"
+                                           onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+                                </div>
+                                <label style="margin-left: 10px;">至</label>
+                                <div class="myText-content">
+                                    <input style="vertical-align:middle;" id="loginDateEnd"
+                                           class="form-control layer-date"
+                                           onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+                                </div>
+                            </div>
+                            <div style="display:block;" class="btn-group">
+                                <div style="float:right;">
+                                    <button id="search" type="button" class="btn btn-primary">
+                                        查&nbsp;&nbsp;&nbsp;&nbsp;询
+                                    </button>
+                                </div>
+                            </div>
+                            <table id="exampleTableEvents" class="table table-bordered"
+                                   data-mobile-responsive="true">
+                                <thead>
+                                <tr>
+                                    <th>序号</th>
+                                    <th>参数名称</th>
+                                    <th>参数路径</th>
+                                    <th>参数ip</th>
+                                    <th>日志描述</th>
+                                    <th>操作时间</th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 全局js -->
+<script src="../../js/jquery.min.js?v=2.1.4"></script>
+<script src="../../js/bootstrap.min.js?v=3.3.6"></script>
+<!-- 自定义js -->
+<script src="../../js/content.js?v=1.0.0"></script>
+<!-- Bootstrap table -->
+<script src="../../js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="../../js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+<script src="../../js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+<!-- jQuery Validation plugin javascript-->
+<script src="../../js/plugins/validate/jquery.validate.min.js"></script>
+<script src="../../js/plugins/validate/messages_zh.min.js"></script>
+<script src="../../js/demo/form-validate-demo.js"></script>
+<script src="../../smoke-v3.1.1/js/smoke.js"></script>
+<script src="../../smoke-v3.1.1/js/smoke.min.js"></script>
+<!-- layerDate plugin javascript -->
+<script src="../../js/plugins/layer/laydate/laydate.js"></script>
+<script src="log-messageJs.js"></script>
+</body>
+</html>

@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yuxin.platform.zongzhi.mapper.DmXctbMapper">
+    <resultMap id="BaseResultMap" type="com.yuxin.platform.zongzhi.pojo.DmXctb">
+        <id column="TBID" property="tbid" jdbcType="INTEGER"/>
+        <result column="BT" property="bt" jdbcType="VARCHAR"/>
+        <result column="FBSJ" property="fbsj" jdbcType="TIMESTAMP"/>
+        <result column="FBNR" property="fbnr" jdbcType="VARCHAR"/>
+        <result column="FBR" property="fbr" jdbcType="VARCHAR"/>
+        <result column="FBDWBM" property="fbdwbm" jdbcType="VARCHAR"/>
+        <result column="FBDW" property="fbdw" jdbcType="VARCHAR"/>
+        <result column="JZRQ" property="jzrq" jdbcType="TIMESTAMP"/>
+        <result column="GQBS" property="gqbs" jdbcType="VARCHAR"/>
+        <result column="SXHYLBDM" property="sxhylbdm" jdbcType="VARCHAR"/>
+        <result column="SXHYLBMC" property="sxhylbmc" jdbcType="VARCHAR"/>
+        <result column="YTBID" property="ytbid" jdbcType="DECIMAL"/>
+        <result column="SBZT" property="sbzt" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        TBID, BT, FBSJ, FBNR, FBR, FBDWBM, FBDW, JZRQ, GQBS, SXHYLBDM, SXHYLBMC, YTBID, SBZT
+    </sql>
+    <select id="selectByExample" resultMap="BaseResultMap"
+            parameterType="com.yuxin.platform.zongzhi.pojo.DmXctbExample">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from dm_xctb
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from dm_xctb
+        where TBID = #{tbid,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectXctg" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from dm_xctb
+        where rownum <![CDATA[<=]]> 10  ORDER BY FBSJ DESC
+    </select><!--WHERE date_format(FBSJ,'%Y-%m')=date_format(now(),'%Y-%m')-->
+
+    <select id="selectLastid" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from dm_xctb
+        where rownum <![CDATA[<=]]> 1
+        ORDER BY TBID DESC
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from dm_xctb
+        where TBID = #{tbid,jdbcType=INTEGER}
+    </delete>
+    <delete id="deleteByExample" parameterType="com.yuxin.platform.zongzhi.pojo.DmXctbExample">
+        delete from dm_xctb
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.yuxin.platform.zongzhi.pojo.DmXctb">
+        <selectKey  keyProperty="tbid" resultType="int" order="BEFORE">
+            select nvl(max(tbid),0)+1 from dm_xctb
+        </selectKey>
+        insert into dm_xctb (TBID, BT, FBSJ,
+        FBNR, FBR, FBDWBM,
+        FBDW, JZRQ, GQBS,
+        SXHYLBDM, SXHYLBMC, YTBID,
+        SBZT)
+        values (#{tbid,jdbcType=INTEGER}, #{bt,jdbcType=VARCHAR}, #{fbsj,jdbcType=TIMESTAMP},
+        #{fbnr,jdbcType=VARCHAR}, #{fbr,jdbcType=VARCHAR}, #{fbdwbm,jdbcType=VARCHAR},
+        #{fbdw,jdbcType=VARCHAR}, #{jzrq,jdbcType=TIMESTAMP}, #{gqbs,jdbcType=VARCHAR},
+        #{sxhylbdm,jdbcType=VARCHAR}, #{sxhylbmc,jdbcType=VARCHAR}, #{ytbid,jdbcType=DECIMAL},
+        #{sbzt,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.yuxin.platform.zongzhi.pojo.DmXctb">
+        <selectKey  keyProperty="tbid" resultType="int" order="BEFORE">
+            select nvl(max(tbid),0)+1 from dm_xctb
+        </selectKey>
+        insert into dm_xctb
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="tbid != null">
+                TBID,
+            </if>
+            <if test="bt != null">
+                BT,
+            </if>
+            <if test="fbsj != null">
+                FBSJ,
+            </if>
+            <if test="fbnr != null">
+                FBNR,
+            </if>
+            <if test="fbr != null">
+                FBR,
+            </if>
+            <if test="fbdwbm != null">
+                FBDWBM,
+            </if>
+            <if test="fbdw != null">
+                FBDW,
+            </if>
+            <if test="jzrq != null">
+                JZRQ,
+            </if>
+            <if test="gqbs != null">
+                GQBS,
+            </if>
+            <if test="sxhylbdm != null">
+                SXHYLBDM,
+            </if>
+            <if test="sxhylbmc != null">
+                SXHYLBMC,
+            </if>
+            <if test="ytbid != null">
+                YTBID,
+            </if>
+            <if test="sbzt != null">
+                SBZT,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="tbid != null">
+                #{tbid,jdbcType=INTEGER},
+            </if>
+            <if test="bt != null">
+                #{bt,jdbcType=VARCHAR},
+            </if>
+            <if test="fbsj != null">
+                #{fbsj,jdbcType=TIMESTAMP},
+            </if>
+            <if test="fbnr != null">
+                #{fbnr,jdbcType=VARCHAR},
+            </if>
+            <if test="fbr != null">
+                #{fbr,jdbcType=VARCHAR},
+            </if>
+            <if test="fbdwbm != null">
+                #{fbdwbm,jdbcType=VARCHAR},
+            </if>
+            <if test="fbdw != null">
+                #{fbdw,jdbcType=VARCHAR},
+            </if>
+            <if test="jzrq != null">
+                #{jzrq,jdbcType=TIMESTAMP},
+            </if>
+            <if test="gqbs != null">
+                #{gqbs,jdbcType=VARCHAR},
+            </if>
+            <if test="sxhylbdm != null">
+                #{sxhylbdm,jdbcType=VARCHAR},
+            </if>
+            <if test="sxhylbmc != null">
+                #{sxhylbmc,jdbcType=VARCHAR},
+            </if>
+            <if test="ytbid != null">
+                #{ytbid,jdbcType=DECIMAL},
+            </if>
+            <if test="sbzt != null">
+                #{sbzt,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.yuxin.platform.zongzhi.pojo.DmXctbExample"
+            resultType="java.lang.Integer">
+        select count(*) from dm_xctb
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update dm_xctb
+        <set>
+            <if test="record.tbid != null">
+                TBID = #{record.tbid,jdbcType=INTEGER},
+            </if>
+            <if test="record.bt != null">
+                BT = #{record.bt,jdbcType=VARCHAR},
+            </if>
+            <if test="record.fbsj != null">
+                FBSJ = #{record.fbsj,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.fbnr != null">
+                FBNR = #{record.fbnr,jdbcType=VARCHAR},
+            </if>
+            <if test="record.fbr != null">
+                FBR = #{record.fbr,jdbcType=VARCHAR},
+            </if>
+            <if test="record.fbdwbm != null">
+                FBDWBM = #{record.fbdwbm,jdbcType=VARCHAR},
+            </if>
+            <if test="record.fbdw != null">
+                FBDW = #{record.fbdw,jdbcType=VARCHAR},
+            </if>
+            <if test="record.jzrq != null">
+                JZRQ = #{record.jzrq,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.gqbs != null">
+                GQBS = #{record.gqbs,jdbcType=VARCHAR},
+            </if>
+            <if test="record.sxhylbdm != null">
+                SXHYLBDM = #{record.sxhylbdm,jdbcType=VARCHAR},
+            </if>
+            <if test="record.sxhylbmc != null">
+                SXHYLBMC = #{record.sxhylbmc,jdbcType=VARCHAR},
+            </if>
+            <if test="record.ytbid != null">
+                YTBID = #{record.ytbid,jdbcType=DECIMAL},
+            </if>
+            <if test="record.sbzt != null">
+                SBZT = #{record.sbzt,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update dm_xctb
+        set TBID = #{record.tbid,jdbcType=INTEGER},
+        BT = #{record.bt,jdbcType=VARCHAR},
+        FBSJ = #{record.fbsj,jdbcType=TIMESTAMP},
+        FBNR = #{record.fbnr,jdbcType=VARCHAR},
+        FBR = #{record.fbr,jdbcType=VARCHAR},
+        FBDWBM = #{record.fbdwbm,jdbcType=VARCHAR},
+        FBDW = #{record.fbdw,jdbcType=VARCHAR},
+        JZRQ = #{record.jzrq,jdbcType=TIMESTAMP},
+        GQBS = #{record.gqbs,jdbcType=VARCHAR},
+        SXHYLBDM = #{record.sxhylbdm,jdbcType=VARCHAR},
+        SXHYLBMC = #{record.sxhylbmc,jdbcType=VARCHAR},
+        YTBID = #{record.ytbid,jdbcType=DECIMAL},
+        SBZT = #{record.sbzt,jdbcType=VARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.yuxin.platform.zongzhi.pojo.DmXctb">
+        update dm_xctb
+        <set>
+            <if test="bt != null">
+                BT = #{bt,jdbcType=VARCHAR},
+            </if>
+            <if test="fbsj != null">
+                FBSJ = #{fbsj,jdbcType=TIMESTAMP},
+            </if>
+            <if test="fbnr != null">
+                FBNR = #{fbnr,jdbcType=VARCHAR},
+            </if>
+            <if test="fbr != null">
+                FBR = #{fbr,jdbcType=VARCHAR},
+            </if>
+            <if test="fbdwbm != null">
+                FBDWBM = #{fbdwbm,jdbcType=VARCHAR},
+            </if>
+            <if test="fbdw != null">
+                FBDW = #{fbdw,jdbcType=VARCHAR},
+            </if>
+            <if test="jzrq != null">
+                JZRQ = #{jzrq,jdbcType=TIMESTAMP},
+            </if>
+            <if test="gqbs != null">
+                GQBS = #{gqbs,jdbcType=VARCHAR},
+            </if>
+            <if test="sxhylbdm != null">
+                SXHYLBDM = #{sxhylbdm,jdbcType=VARCHAR},
+            </if>
+            <if test="sxhylbmc != null">
+                SXHYLBMC = #{sxhylbmc,jdbcType=VARCHAR},
+            </if>
+            <if test="ytbid != null">
+                YTBID = #{ytbid,jdbcType=DECIMAL},
+            </if>
+            <if test="sbzt != null">
+                SBZT = #{sbzt,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where TBID = #{tbid,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.yuxin.platform.zongzhi.pojo.DmXctb">
+        update dm_xctb
+        set BT = #{bt,jdbcType=VARCHAR},
+        FBSJ = #{fbsj,jdbcType=TIMESTAMP},
+        FBNR = #{fbnr,jdbcType=VARCHAR},
+        FBR = #{fbr,jdbcType=VARCHAR},
+        FBDWBM = #{fbdwbm,jdbcType=VARCHAR},
+        FBDW = #{fbdw,jdbcType=VARCHAR},
+        JZRQ = #{jzrq,jdbcType=TIMESTAMP},
+        GQBS = #{gqbs,jdbcType=VARCHAR},
+        SXHYLBDM = #{sxhylbdm,jdbcType=VARCHAR},
+        SXHYLBMC = #{sxhylbmc,jdbcType=VARCHAR},
+        YTBID = #{ytbid,jdbcType=DECIMAL},
+        SBZT = #{sbzt,jdbcType=VARCHAR}
+        where TBID = #{tbid,jdbcType=INTEGER}
+    </update>
+</mapper>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yuxin.platform.subpublic.mapper.JfsbxxMapper">
+    <resultMap id="BaseResultMap" type="com.yuxin.platform.subpublic.pojo.Jfsbxx">
+        <id column="JFSBXXID" property="jfsbxxid" jdbcType="INTEGER"/>
+        <result column="QYID" property="qyid" jdbcType="INTEGER"/>
+        <result column="SBMC" property="sbmc" jdbcType="VARCHAR"/>
+        <result column="GGXH" property="ggxh" jdbcType="VARCHAR"/>
+        <result column="ZL" property="zl" jdbcType="VARCHAR"/>
+        <result column="SL" property="sl" jdbcType="VARCHAR"/>
+        <result column="ZT" property="zt" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        QYID, SBMC, GGXH, ZL, SL,JFSBXXID,ZT
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from pub_jfsbxx
+        where QYID = #{qyid,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectJfsbxx" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from pub_jfsbxx
+        where QYID = #{qyid,jdbcType=INTEGER} and ZT = '0'
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from pub_jfsbxx
+        where JFSBXXID = #{jfsbxxid,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.yuxin.platform.subpublic.pojo.Jfsbxx">
+        <selectKey  keyProperty="qyid" resultType="int" order="BEFORE">
+            select nvl(max(qyid),0)+1 from pub_jfsbxx
+        </selectKey>
+        insert into pub_jfsbxx (QYID, SBMC, GGXH,
+        ZL, SL,JFSBXXID,ZT)
+        values (#{qyid,jdbcType=INTEGER}, #{sbmc,jdbcType=VARCHAR}, #{ggxh,jdbcType=VARCHAR},
+        #{zl,jdbcType=VARCHAR}, #{sl,jdbcType=VARCHAR},#{jfsbxxid,jdbcType=INTEGER},#{zt,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.yuxin.platform.subpublic.pojo.Jfsbxx">
+        <selectKey  keyProperty="jfsbxxid" resultType="int" order="BEFORE">
+            select nvl(max(jfsbxxid),0)+1 from pub_jfsbxx
+        </selectKey>
+        insert into pub_jfsbxx
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="qyid != null">
+                QYID,
+            </if>
+            <if test="sbmc != null">
+                SBMC,
+            </if>
+            <if test="ggxh != null">
+                GGXH,
+            </if>
+            <if test="zl != null">
+                ZL,
+            </if>
+            <if test="sl != null">
+                SL,
+            </if>
+            <if test="zt != null">
+                ZT,
+            </if>
+            <if test="jfsbxxid != null">
+                JFSBXXID
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="qyid != null">
+                #{qyid,jdbcType=INTEGER},
+            </if>
+            <if test="sbmc != null">
+                #{sbmc,jdbcType=VARCHAR},
+            </if>
+            <if test="ggxh != null">
+                #{ggxh,jdbcType=VARCHAR},
+            </if>
+            <if test="zl != null">
+                #{zl,jdbcType=VARCHAR},
+            </if>
+            <if test="sl != null">
+                #{sl,jdbcType=VARCHAR},
+            </if>
+            <if test="zt != null">
+                #{zt,jdbcType=VARCHAR},
+            </if>
+            <if test="jfsbxxid != null">
+                #{jfsbxxid,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.yuxin.platform.subpublic.pojo.Jfsbxx">
+        update pub_jfsbxx
+        <set>
+            <if test="sbmc != null">
+                SBMC = #{sbmc,jdbcType=VARCHAR},
+            </if>
+            <if test="ggxh != null">
+                GGXH = #{ggxh,jdbcType=VARCHAR},
+            </if>
+            <if test="zl != null">
+                ZL = #{zl,jdbcType=VARCHAR},
+            </if>
+            <if test="sl != null">
+                SL = #{sl,jdbcType=VARCHAR},
+            </if>
+            <if test="zt != null">
+                ZT = #{zt,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where JFSBXXID = #{jfsbxxid,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.yuxin.platform.subpublic.pojo.Jfsbxx">
+        update pub_jfsbxx
+        set SBMC = #{sbmc,jdbcType=VARCHAR},
+        GGXH = #{ggxh,jdbcType=VARCHAR},
+        ZL = #{zl,jdbcType=VARCHAR},
+        SL = #{sl,jdbcType=VARCHAR},
+        ZT = #{zt,jdbcType=VARCHAR}
+        where JFSBXXID = #{jfsbxxid,jdbcType=INTEGER}
+    </update>
+</mapper>
