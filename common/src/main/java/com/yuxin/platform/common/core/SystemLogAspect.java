@@ -25,7 +25,6 @@ import java.util.Date;
 @Component
 public class SystemLogAspect {
 
-
     @Autowired
     private LogService logService;
 
